@@ -6,6 +6,7 @@ A blocked or unrendered page is a failure, never a successful visual check.
 """
 from __future__ import annotations
 import argparse
+import hashlib
 import json
 from pathlib import Path
 import re
@@ -30,9 +31,19 @@ SNAPSHOT = r'''() => {
   const all = elements(article);
   const markers = all.filter(x => x.localName === 'math-renderer');
   const errors = all.filter(x => x.matches('mjx-merror,merror,.MathJax_Error,.flash-error,[data-mjx-error],[data-mml-node="merror"]'));
+  // MathML Core does not support the legacy mlabeledtr numbering element.
+  // Its presence can stack every token vertically without a parse error.
+  const nativeLayoutErrors = all.filter(x =>
+    x.namespaceURI === 'http://www.w3.org/1998/Math/MathML' &&
+    (x.localName === 'mlabeledtr' ||
+     (x.localName === 'mtd' && x.parentElement?.localName !== 'mtr'))
+  ).map(x => ({element:x.localName, parent:x.parentElement?.localName,
+               text:(x.textContent || '').trim().slice(0,180)}));
   const nodes = markers.map(x => {
     const inner = elements(x.shadowRoot || x);
+    const rectangle = x.getBoundingClientRect();
     return {markup: x.outerHTML.slice(0,1800), shadow: x.shadowRoot?.innerHTML.slice(0,1800), ready: inner.some(y => y.matches('mjx-container,svg,math,img')),
+      width:rectangle.width, height:rectangle.height,
       error: /Math rendering failed|Undefined control sequence|ParseError|Unable to render expression|macros are not allowed|Missing (open|close) brace/i.test(x.textContent || '')};
   });
   const copy = article.cloneNode(true);
@@ -42,7 +53,8 @@ SNAPSHOT = r'''() => {
     literal_math_lines: literal, article: true, heading: article.querySelector('h1')?.textContent?.trim(),
     markers: markers.length, ready: nodes.filter(x => x.ready).length,
     errors: errors.map(x => (x.getAttribute('data-mjx-error') || x.textContent || '').slice(0,180)),
-    marker_errors: nodes.filter(x => x.error).length,
+    marker_errors: nodes.filter(x => x.error).length, native_layout_errors:nativeLayoutErrors,
+    equation_geometry:nodes.map(x => ({width:x.width,height:x.height})),
     rendered_containers: all.filter(x => x.localName === 'mjx-container').length,
     page_width: document.documentElement.scrollWidth, viewport: window.innerWidth,
     table_columns: [...article.querySelectorAll('table')].map(t => [...t.rows].map(row => row.cells.length))};
@@ -57,6 +69,25 @@ def source_math_count(text: str) -> int:
     return math_fences + len(displays) + len(re.findall(r'(?<!\\)\$(?:\\.|[^$])+?(?<!\\)\$', text))
 
 
+def snapshot_problems(state: dict, expected: int, title: str, width: int) -> list[str]:
+    problems = []
+    if state.get('heading') != title:
+        problems.append('missing expected document title')
+    if state.get('markers') != expected or state.get('ready', 0) < expected:
+        problems.append('missing or unfinished mathematics')
+    if state.get('literal_math_lines'):
+        problems.append('unprocessed math delimiters')
+    if state.get('errors') or state.get('marker_errors'):
+        problems.append('mathematical rendering error')
+    if state.get('native_layout_errors'):
+        problems.append('unsupported native MathML equation layout')
+    if state.get('page_width', 0) > width+3:
+        problems.append('page-level horizontal overflow')
+    if any(len(set(cols)) > 1 for cols in state.get('table_columns', [])):
+        problems.append('inconsistent rendered table cells')
+    return [f'{width}px: {x}' for x in problems]
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--ref', required=True)
@@ -69,7 +100,15 @@ def main() -> None:
     args.output.mkdir(parents=True, exist_ok=True)
     report = {'repository': REPOSITORY, 'ref': args.ref,
               'scope': 'Actual public GitHub rendering; automated DOM/layout checks and screenshot evidence, not scientific review.',
-              'pages': []}
+              'source_sha256': {}, 'pages': []}
+    # Keep the exact public source associated with each inspected page alongside
+    # the screenshots. No authentication data or private repository is included.
+    for name in PAGES:
+        raw = (root/name).read_bytes()
+        destination = args.output/'sources'/name
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes(raw)
+        report['source_sha256'][name] = hashlib.sha256(raw).hexdigest()
     with sync_playwright() as p:
         browser = p.chromium.launch()
         context = browser.new_context(viewport={'width': 1180, 'height': 900}, color_scheme='light')
@@ -92,7 +131,6 @@ def main() -> None:
                     for i in range(markers.count()):
                         markers.nth(i).scroll_into_view_if_needed(timeout=5000)
                         page.wait_for_timeout(50)
-                    # Give lazy MathJax rendering a bounded final settling period.
                     for _ in range(20):
                         state = page.evaluate(SNAPSHOT)
                         if state.get('ready', 0) >= expected:
@@ -100,18 +138,7 @@ def main() -> None:
                         page.wait_for_timeout(250)
                     state = page.evaluate(SNAPSHOT)
                     title = (root/name).read_text().splitlines()[0].removeprefix('# ')
-                    if state.get('heading') != title:
-                        row['problems'].append(f'{width}px: missing expected document title')
-                    if state.get('markers') != expected or state.get('ready', 0) < expected:
-                        row['problems'].append(f'{width}px: missing or unfinished mathematics')
-                    if state.get('literal_math_lines'):
-                        row['problems'].append(f'{width}px: unprocessed math delimiters')
-                    if state.get('errors') or state.get('marker_errors'):
-                        row['problems'].append(f'{width}px: mathematical rendering error')
-                    if state.get('page_width', 0) > width+3:
-                        row['problems'].append(f'{width}px: page-level horizontal overflow')
-                    if any(len(set(cols)) > 1 for cols in state.get('table_columns', [])):
-                        row['problems'].append(f'{width}px: inconsistent rendered table cells')
+                    row['problems'].extend(snapshot_problems(state, expected, title, width))
                     row['checks'].append(state)
                     page.evaluate('window.scrollTo(0,0)')
                     page.screenshot(path=str(args.output/f'{name.replace("/", "_")}-{width}.png'), full_page=True)
@@ -121,8 +148,6 @@ def main() -> None:
             report['pages'].append(row)
             print(json.dumps(row), flush=True)
             if row.get('http_status') in (403, 429) or any('ERR_' in x for x in row['problems']):
-                # A transport or access failure cannot be repaired by repeatedly
-                # requesting all the other pages from the same inaccessible host.
                 break
         context.close(); browser.close()
     report['all_passed'] = len(report['pages']) == len(PAGES) and all(x['passed'] for x in report['pages'])
