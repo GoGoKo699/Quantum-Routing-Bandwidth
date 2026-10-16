@@ -26,11 +26,27 @@ The constants are independent of $n$ and $s$. Initialization therefore changes t
 
 These are **interaction-time laws with free internal controls**. The contact budget is per pair, rather than a fixed total Hamiltonian norm. Preparation of the clean helpers is an input resource. The exact constructions can have long control lists; the separately analyzed bounded-strength compiler has linear total duration at fixed internal/contact strength ratio.
 
+## Imperfect initialization
+
+For helpers independently prepared in the known state $\rho_p=(1-p)|0\rangle\langle0|+p|1\rangle\langle1|$, with $0\le p\le1/2$, the matching fixed-error law is
+
+$$
+T_{\epsilon,p}(n,s)
+=\Theta_\epsilon\!\left(
+\frac{n}{J\sqrt{(n+s)\{1+s[1-h_2(p)]\}}}
+\right).
+$$
+
+For every fixed $0<\epsilon\le0.1$, the constants are uniform in $n,s,p$. The error is a complete-operation half diamond distance including the bus, helpers, and their inaccessible preparation references. Compression, routing, and decompression return the physical helper density matrix exactly; remaining correlations are included in the error budget. Preparation error does not accumulate gate by gate because the entire operation is exact on one common high-probability subspace.
+
+The [mixed-helper theorem](docs/mixed-helpers.md) also distinguishes zero error from fixed nonzero error and gives a correlated-state counterexample: entropy deficit alone does not characterize achievable bandwidth for arbitrary helper states. This is a preparation-robustness result under ideal controls, not robustness to ongoing decoherence or finite-speed gate errors.
+
 ## Read the work
 
 | Question | Resource |
 |---|---|
 | What is the precise task, and why do the bounds match? | [Initialization and routing bandwidth](docs/bandwidth.md) |
+| What survives imperfect initialization at fixed complete-operation error? | [Mixed helpers and reusable bandwidth](docs/mixed-helpers.md) |
 | Why can rapid internal processing not remove the bottleneck? | [Conditional entropy and weighted information flow](docs/entropy-flow.md) |
 | How do coherent averaging, control count, and finite gate speed differ? | [Control models and implementations](docs/control-models.md) |
 | Which results and techniques are established prior work? | [Related work](docs/related-work.md) and [BibTeX references](references.bib) |
@@ -49,7 +65,7 @@ python check_repository.py
 python verify.py
 ```
 
-The verifier runs eight deterministic suites in an isolated temporary directory. Full results and logs are written to `build/verification/`; tracked reference results are not overwritten. The tests include full allowed-input isometries, optimized entropy-rate interactions, noncommuting entropy-deficit tests, and an explicit bounded-strength compiler. Numerical residuals check finite identities; the proofs establish the universal scaling statements.
+The verifier runs nine deterministic suites in an isolated temporary directory. Full results and logs are written to `build/verification/`; tracked reference results are not overwritten. The tests include full allowed-input isometries, optimized entropy-rate interactions, noncommuting entropy-deficit tests, mixed-helper spectral and reference-preserving operator checks, and an explicit bounded-strength compiler. Numerical residuals check finite identities; the proofs establish the universal scaling statements.
 
 ## Purpose and contact
 

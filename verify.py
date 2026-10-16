@@ -22,12 +22,15 @@ SUITES = (
     ('recursive_three.py', 'recursive_three.json'),
     ('verify_finite_control.py', 'finite_control_results.json'),
     ('verify_full_nine.py', 'verify_full_nine.json'),
+    ('verify_mixed_helpers.py', 'verify_mixed_helpers.json'),
 )
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, default=ROOT/'build'/'verification')
     args = parser.parse_args()
+    if not __debug__ or os.environ.get('PYTHONOPTIMIZE'):
+        parser.error('Assertions are part of verification; do not enable Python optimization.')
     output = args.output.resolve()
     if output == ROOT or output == ROOT/'checks':
         parser.error('Use a dedicated output directory.')
@@ -64,6 +67,9 @@ def main() -> None:
                 brief['max_swap_isometry_error'] = max(x['isometry_operator_error'] for x in data['gate'])
                 brief['max_route_isometry_error'] = max(x['isometry_operator_error'] for x in data['route'])
                 brief['largest_route'] = max(data['route'], key=lambda x:x['physical_qubits'])
+            if script == 'verify_mixed_helpers.py':
+                brief['max_good_subspace_error'] = max(x['maximum_good_subspace_error'] for x in data['complete_routes'])
+                brief['max_helper_block_leakage'] = max(x['maximum_helper_block_leakage'] for x in data['complete_routes'])
             report['suites'].append({'script': script, 'elapsed_seconds': round(time.monotonic()-started,3),
                                      'output_sha256': hashlib.sha256((output/filename).read_bytes()).hexdigest(),
                                      'summary': brief})

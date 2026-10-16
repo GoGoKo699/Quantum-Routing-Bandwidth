@@ -5,7 +5,7 @@
   "suites": [
     {
       "script": "verify_workspace_construction.py",
-      "elapsed_seconds": 7.021,
+      "elapsed_seconds": 8.782,
       "output_sha256": "6f978d63b3f13894b0436f34203ff9a801c8072aebf34e3d0e940ff2659849b1",
       "summary": {
         "model": "Free internal controls, J=1 per contact, s initialized helpers per module, arbitrary bus",
@@ -31,7 +31,7 @@
     },
     {
       "script": "verify_entropy_budget.py",
-      "elapsed_seconds": 1.643,
+      "elapsed_seconds": 2.295,
       "output_sha256": "c3353e0598cce58e22ad2a65423ebece6bb07073b5ca18794fb8b505f8002098",
       "summary": {
         "seed": 2026101607,
@@ -54,7 +54,7 @@
     },
     {
       "script": "audit_conditional_rate.py",
-      "elapsed_seconds": 1.111,
+      "elapsed_seconds": 1.558,
       "output_sha256": "5aa826199704fad562539b276d5a9526c9249a8fed329738e84fff8c11687c5a",
       "summary": {
         "all_assertions_passed": true,
@@ -71,7 +71,7 @@
     },
     {
       "script": "audit_ensemble_cut.py",
-      "elapsed_seconds": 1.295,
+      "elapsed_seconds": 1.613,
       "output_sha256": "f964a263505649b72ef5ea5ba827de56cef7e8a49f09dd0111f0969a705f651d",
       "summary": {
         "all_assertions_passed": true,
@@ -94,7 +94,7 @@
     },
     {
       "script": "audit_translation_approximation.py",
-      "elapsed_seconds": 0.69,
+      "elapsed_seconds": 1.016,
       "output_sha256": "9de84e02911247a9ab54a736d0a98c5562396ac8e839ed823703262af94b26c5",
       "summary": {
         "all_assertions_passed": true,
@@ -110,7 +110,7 @@
     },
     {
       "script": "recursive_three.py",
-      "elapsed_seconds": 0.878,
+      "elapsed_seconds": 0.987,
       "output_sha256": "4000ad570b792060da3a22050aef5cfd4e524ad056237aefb60268ce688629de",
       "summary": {
         "all_passed": true,
@@ -121,7 +121,7 @@
     },
     {
       "script": "verify_finite_control.py",
-      "elapsed_seconds": 0.868,
+      "elapsed_seconds": 0.99,
       "output_sha256": "f664a6fea3ef22ff7b2f415474330578f97a4fd3593820d1fef5618c5ee1ded2",
       "summary": {
         "all_passed": true,
@@ -140,8 +140,8 @@
     },
     {
       "script": "verify_full_nine.py",
-      "elapsed_seconds": 3.505,
-      "output_sha256": "68655a36d32fcb8b4146e4dfef84294f0b5827bfd1ae6895cfb1ecc13ac19696",
+      "elapsed_seconds": 4.48,
+      "output_sha256": "54917e1dbe027d4728f3da9678bba4afb51ce6bac488a3a99943e23d9e60a151",
       "summary": {
         "data_qubits": 9,
         "bus_qubits": 1,
@@ -149,8 +149,25 @@
         "explicit_two_qubit_control_gates": 390,
         "operator_error_upper_bound_by_unnormalized_Frobenius": 6.639096555949766e-15,
         "maximum_entry_error": 3.510833468576701e-16,
-        "runtime_seconds": 2.847479000000021,
+        "runtime_seconds": 3.483804530000043,
         "all_passed": true
+      }
+    },
+    {
+      "script": "verify_mixed_helpers.py",
+      "elapsed_seconds": 3.722,
+      "output_sha256": "856d451d2a674e59d4d0604c62ecc05ff798eb7dce9dcb42e8585797e15e4d53",
+      "summary": {
+        "all_passed": true,
+        "scope": "Analytical spectral sums and full helper-block operator checks; not physical noise simulation or independent proof review.",
+        "spectral_checks": 546,
+        "uniform_compression_checks": 216,
+        "largest_full_physical_qubits": 11,
+        "complete_routes_count": 6,
+        "finite_examples_count": 9,
+        "same_entropy_counterexamples_count": 3,
+        "max_good_subspace_error": 1.0614506371007826e-14,
+        "max_helper_block_leakage": 0.0
       }
     }
   ],
@@ -163,6 +180,7 @@
     "checks/verify_entropy_budget.py": "6e6d514c73822f88f8c34f1ffa7d797d616b6706ac353492a625fbd8b80db7a5",
     "checks/verify_finite_control.py": "a51ecda7a4433bab18931ece1932e7fa6274c49bc4b6c02e1e4b6a9bf2806642",
     "checks/verify_full_nine.py": "5921e758407b8ca5e10329b9b5136853aa4f4b7a354f660a800cb0cde341c362",
+    "checks/verify_mixed_helpers.py": "106277889eeacc211804b4a233e32d35aa7a9aa768d9adc480ed2f892a5e31a1",
     "checks/verify_workspace_construction.py": "ed907a14acddc9b6f73b71a8bea50f2376a61cf6b8de26a872a27b0232e69b48"
   },
   "numpy": "2.3.5",
