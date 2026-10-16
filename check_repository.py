@@ -1,0 +1,59 @@
+"""Check local navigation, mathematical delimiters, source provenance and syntax."""
+from __future__ import annotations
+import ast
+import hashlib
+import json
+from pathlib import Path
+import re
+from urllib.parse import unquote, urlsplit
+
+ROOT = Path(__file__).resolve().parent
+CONTACT = 'This repository serves as a record of the work and a guide for the author’s self-directed learning. For discussion or potential collaboration, please contact Ruge Lin at [gogoko699@gmail.com](mailto:gogoko699@gmail.com).'
+
+def anchors(text: str) -> set[str]:
+    found = set()
+    for line in text.splitlines():
+        if re.match(r'^#{1,6} ', line):
+            title = re.sub(r'^#{1,6} ', '', line).lower()
+            found.add(re.sub(r'[^\w\- ]', '', title).replace(' ', '-'))
+    return found
+
+def main() -> None:
+    markdown = [ROOT/'README.md', ROOT/'AGENTS.md', *sorted((ROOT/'docs').glob('*.md'))]
+    link_count = 0
+    for path in markdown:
+        text = path.read_text()
+        clean = re.sub(r'```.*?```', '', text, flags=re.S)
+        assert '\\[' not in clean and '\\]' not in clean, f'Use dollar math: {path}'
+        assert len(re.findall(r'^\$\$$', clean, flags=re.M)) % 2 == 0, f'Unclosed display math: {path}'
+        inline = re.sub(r'\$\$.*?\$\$', '', clean, flags=re.S)
+        assert len(re.findall(r'(?<!\\)\$', inline)) % 2 == 0, f'Unclosed inline math: {path}'
+        assert '/mnt/data/' not in text and 'sandbox:' not in text, f'Local runtime path in {path}'
+        for target in re.findall(r'\[[^\]\n]+\]\(([^\s)]+)\)', clean):
+            parsed = urlsplit(target)
+            if parsed.scheme or parsed.netloc:
+                continue
+            resolved = (path.parent/unquote(parsed.path)).resolve() if parsed.path else path
+            assert resolved.is_relative_to(ROOT), f'Link leaves repository: {path}: {target}'
+            assert resolved.exists(), f'Missing link: {path}: {target}'
+            if parsed.fragment and resolved.suffix == '.md':
+                assert unquote(parsed.fragment) in anchors(resolved.read_text()), f'Missing anchor: {target}'
+            link_count += 1
+    sources = [ROOT/'verify.py', ROOT/'check_repository.py', *sorted((ROOT/'checks').glob('*.py'))]
+    for path in sources:
+        ast.parse(path.read_text(), filename=str(path))
+    result = json.loads((ROOT/'results/verification.json').read_text())
+    assert result['all_passed'] and len(result['suites']) == 8
+    for name, expected in result['source_sha256'].items():
+        assert hashlib.sha256((ROOT/name).read_bytes()).hexdigest() == expected, f'Stale result: {name}'
+    license_bytes = (ROOT/'LICENSE').read_bytes()
+    blob = b'blob '+str(len(license_bytes)).encode()+b'\0'+license_bytes
+    assert hashlib.sha1(blob).hexdigest() == 'e17a781bf47c4aadf18b68fc593846a1193b86c1'
+    assert CONTACT in (ROOT/'README.md').read_text()
+    keys = re.findall(r'@\w+\{([^,]+),', (ROOT/'references.bib').read_text())
+    assert len(keys) == len(set(keys)) == 8
+    assert set(keys).issubset({x.upper() for x in anchors((ROOT/'docs/related-work.md').read_text())})
+    print(f'PASS: {len(markdown)} Markdown files, {link_count} local links, {len(sources)} Python files, eight reference entries and source hashes.')
+
+if __name__ == '__main__':
+    main()
