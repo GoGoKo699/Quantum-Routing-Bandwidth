@@ -1,116 +1,81 @@
-# Self-study guide
+# Learning from Watrous to routing bandwidth
 
-Start with the physical model in the [README](../README.md), then follow the three bridges below. For research context, read the architecture and routing question in [D26](related-work.md#d26). For the entropy ingredient, use [DF19](related-work.md#df19), Corollary III.5, alongside the explicit proof in [Entropy flow](entropy-flow.md). A claim about an unknown quantum register must include inputs entangled with an inaccessible reference.
+**Educational anchor: John Watrous, *The Theory of Quantum Information* (Cambridge University Press, 2018).** This is the single textbook foundation. The primary papers in [Related work](related-work.md) remain research citations, not additional prerequisite courses.
 
-## 1. The resource comparison
+| Purpose | Route |
+|---|---|
+| Understand the project as a whole | [30 milestones](milestones.md), from local objects to the full result |
+| Connect the textbook to the mechanism | [Three worked bridges](learning-bridges.md) |
+| Receive guided instruction | [Coaching protocol](coaching.md), following the same milestone map |
+| Read the research directly | [Theorem map](theorem-map.md) → linked canonical proofs |
 
-### Revise
+The map is project-defined, not a judgment about a learner's current knowledge. A tutor supplies explanations in the conversation; reading an entire chapter is not an admission requirement. Adapt the explanation, examples, and remediation, not the number of milestones. Learning the project's conceptual story is distinct from checking every specialist lemma.
 
-A qubit can store unknown information even when no one knows its state. A correct routing channel preserves superpositions and reference entanglement, not merely computational-basis labels.
+## Anchor and access
 
-### Learn
+Use the [author's book page](https://jhwatrous.github.io/books-and-courses.html), its [standard-layout manuscript](https://jhwatrous.github.io/TQI.pdf), and its [errata](https://jhwatrous.github.io/TQI.errata.pdf). Section numbers below refer to that manuscript. Printed page labels and a PDF viewer's page counter differ; use the section identifiers. The author supplies the manuscript for personal use and prohibits redistribution. Link to it; do not add a copy, extracted chapters, or textbook figures to this repository.
 
-Both modules have $n+s$ physical qubits and the same bounded contacts. Clean helpers begin in a specified pure state and return there. Unknown helpers may already carry data and must preserve it. The word “free” applies only to the duration of internal controls in the interaction-time theorem; it does not mean that initialization or physical gates have no cost in an apparatus.
+The available errata is dated July 23, 2025 and refers to the published edition. In the part of §3.3.3 containing Theorem 3.56 (printed pages 183–184), the corrected conclusion has $2\sqrt\epsilon$, not $\sqrt{2\epsilon}$. Consult the errata alongside a passage rather than treating an uncorrected printed formula as authoritative.
 
-### Test
+## Selected sections
 
-What changes between the two matching bandwidth laws? Open one answer.
+The order follows the project. Chapter 1 is a reference when a mathematical definition is needed, not a separate preliminary course.
 
-<details><summary>A. The clean case receives more contacts.</summary>
+| Project question | Watrous sections | Local connection |
+|---|---|---|
+| What information does an unknown register carry? | §§2.1.1–2.1.3 | States, reductions, and inaccessible purifications; M01–M03 |
+| What operation must routing implement? | §§2.2.1–2.2.2 | Channels, isometries, and normalized Choi tests; M04 |
+| What counts as a small state or channel error? | §3.1.1, §3.2, §§3.3.1–3.3.3 | Trace distance, fidelity conventions, and reference-aware accuracy; M05–M06 |
+| How is initialization quantified? | §§5.1.1–5.1.2 and §§5.2.1–5.2.3 | Entropy deficit, relative entropy, mutual information, and continuity; M07–M09 |
+| Which strength and clock are being charged? | §1.1.3 for norms | The dynamical model is supplied locally; M10–M11 |
+| What can a reversible rearrangement change? | §4.1.1 and §§4.3.1–4.3.2 | Spectral background, not an identification of mixed channels with coherent control; M12 |
+| How is a high-probability subspace found? | §1.2.2 and §§5.3.1–5.3.2 | Concentration and compression intuition; M13 |
 
-No. The comparison fixes the number and strengths of all contacts. Revisit the definition of $N=n+s$.
+M14 assembles this background into the actual routing task. M15–M30 build the research argument using the canonical project proofs. The book is not being credited with the routing theorem, its conditional-variance input, or its contact-simulation construction. In particular, the dynamical rate argument is a project-specific bridge from static quantum-information tools.
 
-</details>
-<details><summary>B. Only the initial-state promise on the helpers changes.</summary>
+## Notation and normalization
 
-Correct. The payload, hardware, allowed controls, and helper-return requirement are held fixed.
+Keep the physics notation of this repository. Translate the anchor, rather than silently changing either source's definitions.
 
-</details>
-<details><summary>C. The unknown-helper case may discard its helpers.</summary>
+| In Watrous | Here | Check before substituting |
+|---|---|---|
+| A vector $u$ and outer product $uu^*$ | $\lvert\psi\rangle$ and $\lvert\psi\rangle\langle\psi\rvert$ | The asterisk on an operator is the adjoint, written $\dagger$ here. |
+| Register spaces and density operators | $L,R,C$ and $\omega,\rho$ | Inaccessible reference systems are not controllable workspace. |
+| Schatten two-norm $\lVert A\rVert_2$ | Normalized Frobenius norm $\lVert A\rVert_F$ in the proofs | Divide the Schatten norm by the square root of the full operator dimension. |
+| Choi operator $J(\Phi)$ in §2.2.2 | A normalized Choi state when testing fidelity | Divide by input dimension. The bare $J$ in a contact bound denotes coupling strength, not a Choi operator. |
+| Fidelity $F$ in Definition 3.11 | Squared pure-target overlap $F_e$ in the process tests | Root fidelity and squared overlap are not interchangeable. |
+| Completely bounded trace norm in §3.3.2 | Diamond norm $\lVert\cdot\rVert_\diamond$ | The main error convention includes the factor $1/2$. |
+| Entropic functions and relative entropy in Chapter 5 | $S$, $h_2$, and $\mathcal I$ | Entropies are in bits; moment-generating estimates explicitly use natural logarithms. |
 
-No. Unknown helper information must be restored, including its correlations with references.
+For an operator on a $D$-dimensional space,
 
-</details>
-<details><summary>D. The clean case uses measurement and resetting after each gate.</summary>
+$$
+\|A\|_F^2=\frac{\operatorname{Tr}(A^\dagger A)}D,
+\qquad \|A\|_F=\frac{\|A\|_2}{\sqrt D}.
+$$
 
-No. The construction is coherent and returns the helpers without resets.
+Thus the identity has normalized Frobenius norm one, whatever its dimension. Neither norm is the contact's operator norm. A statement proved for one must not be used as a bound for another without its dimension factor.
 
-</details>
+For a trace-preserving channel with input dimension $d_{\mathrm{in}}$, Watrous's Choi operator has trace $d_{\mathrm{in}}$. Set $\tau_\Phi=J(\Phi)/d_{\mathrm{in}}$. For a unitary target with normalized Choi vector $|\Psi_*\rangle$,
 
-## 2. Why the bottleneck survives internal processing
+$$
+F_e=\langle\Psi_*|\tau_\Phi|\Psi_*\rangle
+=F\!\left(\tau_\Phi,|\Psi_*\rangle\langle\Psi_*|\right)^2.
+$$
 
-### Revise
+The right-hand $F$ is Watrous's root fidelity. High Choi fidelity alone is not the same statement as a dimension-independent worst-case diamond guarantee.
 
-For a physical state on dimension $D$, the entropy deficit is $\mathcal I=\log_2 D-S(\omega)$. Any unitary preserves its eigenvalues and therefore preserves this deficit. A pure reference-assisted test can nevertheless have a mixed accessible physical state.
+The initialization budget is a familiar relative entropy:
 
-### Learn
+$$
+\mathcal I(\omega)=\log_2D-S(\omega)
+=D\!\left(\omega\,\middle\|\,I/D\right).
+$$
 
-The contacts have a large extreme eigenvalue but a much smaller typical squared magnitude. Their collective Pauli coefficients have sub-Gaussian spectral moments. The entropy deficit limits how much weight the evolving physical state can concentrate in the large-eigenvalue tail. A conditional entropy-rate inequality converts this second-moment limit into a speed limit across a cut. Internal controls can reorganize the state but cannot change the conserved budget or directly generate entropy across that cut.
+On the right $D(\cdot\|\cdot)$ is relative entropy; inside $I/D$, $D$ is the Hilbert-space dimension. This budget measures lack of entropy, not work, temperature, or quadratic purity.
 
-With $n$ payload Bell pairs on each side, $2s$ initialized helpers and a pure bus, the accessible physical deficit is $2s+1$ bits. Exchanging the payload creates $2n$ bits across the reference-assisted left cut. Dividing the required entropy change by the maximum rate gives the lower bound.
+## From foundations to the project
 
-### Test
+The [worked bridges](learning-bridges.md) connect (i) references to the information-flow requirement, (ii) reversible rearrangement to spectator-preserving contact amplification, and (iii) compression to complete-operation preparation error. The [milestone map](milestones.md) integrates them with the theorem's boundaries and resource budgets. The [specialist map](theorem-map.md) retains the exact proof chain and primary attribution.
 
-Why is the square-root bound compatible with much faster entropy growth on a specially prepared collective state?
-
-<details><summary>A. Such a state has a different physical-state entropy budget.</summary>
-
-Correct. A selected collective state can have root-mean-square interaction of order $nJ$. The flat-data or common-ensemble hypothesis cannot be silently applied to it.
-
-</details>
-<details><summary>B. Entropy of an average state always equals average entropy.</summary>
-
-No. That equality is false. The ensemble proof instead uses the linearity of the second moment and the concavity of the square root.
-
-</details>
-<details><summary>C. The proof restricts internal operations to slow switching.</summary>
-
-No. The direct rate proof allows arbitrary well-defined switching and internal processing.
-
-</details>
-<details><summary>D. Reference systems are physically transmitted through the bus.</summary>
-
-No. References are inaccessible and never acted on. They test whether all quantum information has been preserved.
-
-</details>
-
-## 3. How the upper bound preserves occupied data
-
-### Revise
-
-For three data qubits, an encoding maps the collective magnetization to $Z_q\operatorname{diag}(3,1,1,1)$. Four spectator translations average the diagonal coefficient to $3/2$.
-
-### Learn
-
-Every translation is part of a fixed coherent unitary sequence. The conjugated diagonal interactions commute, so the identity is exact at finite interval length. Decoding removes spectator dependence instead of measuring it. Larger occupied blocks give gain $\mu_b\sim\sqrt{2b/\pi}$.
-
-With $s$ clean helpers, split the module into $s+1$ balanced blocks. Let the target lead one block and the clean helpers lead the others. Reversible CNOT fanout makes the leader contributions add during the contact operation; undoing it restores the clean helpers. The gain is of order $\sqrt{(n+s)(s+1)}$. Three rotated Ising operations form a SWAP, and $2n+1$ bus SWAPs exchange the payload and return the bus.
-
-### Test
-
-What follows from the exact square-root interaction-time construction alone?
-
-<details><summary>A. A fixed-strength processor executes the full route in square-root time.</summary>
-
-No. The interaction-time result does not charge internal gate duration. The finite-strength compiler is a separate calculation.
-
-</details>
-<details><summary>B. Every helper state, clean or unknown, obeys the clean-helper identity.</summary>
-
-No. The clean-helper identity is restricted to the initialized-helper input subspace. Unknown helpers have their own full-data construction.
-
-</details>
-<details><summary>C. The stated coherent protocol attains the scaling under free internal controls.</summary>
-
-Correct. The exact or sampled control-list length and the cost of executing internal gates must be assessed separately.
-
-</details>
-<details><summary>D. Fanout produces independent copies of the unknown target state.</summary>
-
-No. It produces correlations that are later removed; it does not clone a quantum state.
-
-</details>
-
-## Readiness criterion
-
-Explain the same-hardware comparison, construct the Bell-reference entropy test, identify where conditional variance and entropy deficit enter, derive the balanced-block gain, and distinguish contact time from total duration. For coaching, work one selection question at a time and revisit the relevant bridge after an incorrect response. Opening these answer panels provides feedback; it does not record or certify learner progress.
+Progress and attempted answers belong to the learner's session, not these public source files. Merely reading or opening this guide does not pass a milestone.

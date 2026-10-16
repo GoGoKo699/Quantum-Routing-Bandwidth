@@ -4,7 +4,18 @@
 
 Two internally controllable modules exchange arbitrary quantum data through one bus qubit. Occupied qubits strengthen a selected contact while retaining their information. Independently prepared helpers supply an additional, quantifiable improvement even when their initialization is imperfect.
 
-Start with the [theorem and proof map](docs/theorem-map.md). The [accuracy and resource analysis](docs/accuracy-and-resources.md) supplies finite-size certificates, short exact interaction lists, and the dependence on the interaction budget.
+## Start here
+
+| Purpose | Route |
+|---|---|
+| Learn the project | [30-milestone map](docs/milestones.md) and [Watrous anchor and notation](docs/learning.md) |
+| Connect foundations to the result | [Three worked bridges](docs/learning-bridges.md); [coaching protocol](docs/coaching.md) |
+| Read the science directly | [Theorem map](docs/theorem-map.md) → [fixed-error law](docs/mixed-helpers.md) |
+| Check implementation and resources | [Accuracy and resources](docs/accuracy-and-resources.md); [control models](docs/control-models.md) |
+| Inspect attribution | [Related work](docs/related-work.md) and [references](references.bib) |
+| Reproduce the checks | [Verification](docs/verification.md) and [recorded results](results/verification.json) |
+
+The single educational anchor is **John Watrous, *The Theory of Quantum Information* (2018)**. The common map has 14 background milestones and 16 research milestones; its sections, notation translations, and local examples provide the bridge to the result. Specialist proofs remain directly accessible. [LLM reading guide](llms.txt).
 
 ## Main result
 
@@ -52,20 +63,6 @@ exact interaction intervals per Ising gate. Synchronizing each block's translati
 Exact rational spectral certificates demonstrate finite-size advantages over every allowed unknown-helper protocol at the same complete-operation accuracy, not just over one selected implementation. The [resource analysis](docs/accuracy-and-resources.md) also shows that a fixed sum of contact norms removes the parametric initialization advantage, while a fixed quadratic contact budget retains it.
 
 The main normalization is **per contact**, not a fixed total Hamiltonian norm. Helper preparation is an input resource. The displayed finite-strength compiler has linear total duration at fixed internal/contact strength ratio. Preparation robustness is not robustness to ongoing decoherence or noisy pulses; their errors have a separate composition bound.
-
-## Read the work
-
-| Question | Resource |
-|---|---|
-| What is the central theorem and proof structure? | [Theorem map](docs/theorem-map.md) |
-| What survives imperfect initialization? | [Mixed helpers](docs/mixed-helpers.md) |
-| Why do the exact endpoint bounds match? | [Bandwidth and initialization](docs/bandwidth.md) |
-| What bounds information flow through the interface? | [Entropy flow](docs/entropy-flow.md) |
-| What are the finite certificates and resource qualifications? | [Accuracy and resources](docs/accuracy-and-resources.md) |
-| What does finite internal-control speed cost? | [Control models](docs/control-models.md) |
-| What is established prior work? | [Related work](docs/related-work.md) and [references](references.bib) |
-| How are the calculations checked? | [Verification](docs/verification.md) and [recorded results](results/verification.json) |
-| How should the material be learned? | [Self-study guide](docs/learning.md) |
 
 ## Reproduce
 
