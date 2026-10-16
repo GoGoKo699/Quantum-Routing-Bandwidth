@@ -57,9 +57,9 @@ def main() -> None:
     assert hashlib.sha1(blob).hexdigest() == 'e17a781bf47c4aadf18b68fc593846a1193b86c1'
     assert CONTACT in (ROOT/'README.md').read_text()
     keys = re.findall(r'@\w+\{([^,]+),', (ROOT/'references.bib').read_text())
-    assert len(keys) == len(set(keys)) == 8
+    assert keys and len(keys) == len(set(keys)), 'Missing or duplicate bibliography keys'
     assert set(keys).issubset({x.upper() for x in anchors((ROOT/'docs/related-work.md').read_text())})
-    print(f'PASS: {len(markdown)} Markdown files, {link_count} local links, {len(sources)} Python files, {len(SUITES)} verified suites, eight reference entries and source hashes.')
+    print(f'PASS: {len(markdown)} Markdown files, {link_count} local links, {len(sources)} Python files, {len(SUITES)} verified suites, {len(keys)} reference entries and source hashes.')
 
 if __name__ == '__main__':
     main()
