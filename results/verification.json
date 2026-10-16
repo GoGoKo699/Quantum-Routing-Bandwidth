@@ -1,0 +1,171 @@
+{
+  "scope": "Deterministic numerical consistency checks; not independent proof review or hardware data.",
+  "python": "3.13.5",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "suites": [
+    {
+      "script": "verify_workspace_construction.py",
+      "elapsed_seconds": 7.021,
+      "output_sha256": "6f978d63b3f13894b0436f34203ff9a801c8072aebf34e3d0e940ff2659849b1",
+      "summary": {
+        "model": "Free internal controls, J=1 per contact, s initialized helpers per module, arbitrary bus",
+        "all_passed": true,
+        "spectral_count": 40,
+        "gate_count": 12,
+        "route_count": 8,
+        "scaling_count": 16,
+        "max_swap_isometry_error": 1.853256759500777e-15,
+        "max_route_isometry_error": 8.99933488754697e-15,
+        "largest_route": {
+          "n": 3,
+          "s": 2,
+          "physical_qubits": 11,
+          "input_columns": 128,
+          "bus_swaps": 7,
+          "time": 5.497787143782138,
+          "isometry_operator_error": 7.307276409743338e-15,
+          "full_data_and_bus_process_fidelity": 0.9999999999999873,
+          "helpers_returned": true
+        }
+      }
+    },
+    {
+      "script": "verify_entropy_budget.py",
+      "elapsed_seconds": 1.643,
+      "output_sha256": "c3353e0598cce58e22ad2a65423ebece6bb07073b5ca18794fb8b505f8002098",
+      "summary": {
+        "seed": 2026101607,
+        "group_scaling_tests": 16512,
+        "summary": {
+          "gibbs_states": 120,
+          "fixed_spectrum_orbit_maxima": 100,
+          "noncommuting_states": 60,
+          "scalar_mgfs": 54,
+          "balanced_partitions": 16512,
+          "min_operator_square_difference_eigenvalue": 0.0,
+          "max_conditional_rate_ratio": 0.20993163216153346,
+          "all_passed": true
+        },
+        "gibbs_tests_count": 120,
+        "orbit_tests_count": 100,
+        "random_state_tests_count": 60,
+        "scalar_mgf_tests_count": 54
+      }
+    },
+    {
+      "script": "audit_conditional_rate.py",
+      "elapsed_seconds": 1.111,
+      "output_sha256": "5aa826199704fad562539b276d5a9526c9249a8fed329738e84fff8c11687c5a",
+      "summary": {
+        "all_assertions_passed": true,
+        "states_tested": 204,
+        "qubit_bus_states_tested": 114,
+        "max_qubit_bus_optimized_rate_nats": 1.6151941802831211,
+        "max_ratio_to_elementary_bound": 0.5710573789056209,
+        "max_spectral_formula_residual": 3.419486915845482e-14,
+        "max_dual_optimum_residual": 1.887379141862766e-15,
+        "scope": "For every sampled state, optimize over all Hermitian h with Tr(rho h^2)=1. Not a global state optimization.",
+        "seed": 2026101601,
+        "cases_count": 204
+      }
+    },
+    {
+      "script": "audit_ensemble_cut.py",
+      "elapsed_seconds": 1.295,
+      "output_sha256": "f964a263505649b72ef5ea5ba827de56cef7e8a49f09dd0111f0969a705f651d",
+      "summary": {
+        "all_assertions_passed": true,
+        "segments": 18,
+        "pure_states_checked": 1152,
+        "maximum_finite_difference_residual": 1.554406963227839e-06,
+        "maximum_flat_moment_residual": 6.661338147750939e-16,
+        "maximum_observed_bound_ratio": 0.08755567546472029,
+        "selected_GHZ_state": {
+          "n": 64,
+          "p": 0.1,
+          "actual_entropy_rate_bits": 121.7251200553848,
+          "incorrect_1design_bound_for_a_single_state": 32.64446229109727,
+          "rejects_incorrect_uniform_bound": true
+        },
+        "scope": "A common input-independent unitary and nonuniform pairwise contacts; two bus qubits. Not a theorem inferred from numerics.",
+        "seed": 2026101602,
+        "cases_count": 18
+      }
+    },
+    {
+      "script": "audit_translation_approximation.py",
+      "elapsed_seconds": 0.69,
+      "output_sha256": "9de84e02911247a9ab54a736d0a98c5562396ac8e839ed823703262af94b26c5",
+      "summary": {
+        "all_assertions_passed": true,
+        "uniform_small_n_checks": 33,
+        "maximum_operator_error_bound_violation": -9.782376756937994e-07,
+        "asymptotic_samples_per_Ising": "O(n^4 / error^2) at fixed offline failure probability",
+        "asymptotic_total_contact_intervals": "O(n^5 / error^2)",
+        "caution": "The concentration constants are large. This does not give finite-speed efficiency or an elementary compilation of the global encoding.",
+        "seed": 2026101603,
+        "guaranteed_counts_count": 4,
+        "cases_count": 33
+      }
+    },
+    {
+      "script": "recursive_three.py",
+      "elapsed_seconds": 0.878,
+      "output_sha256": "4000ad570b792060da3a22050aef5cfd4e524ad056237aefb60268ce688629de",
+      "summary": {
+        "all_passed": true,
+        "routing_time_scaling_exponent": 0.6309297535714574,
+        "note": "All durations of local X/CNOT/Toffoli are excluded; this is not a wall-clock speedup theorem.",
+        "checks_count": 3
+      }
+    },
+    {
+      "script": "verify_finite_control.py",
+      "elapsed_seconds": 0.868,
+      "output_sha256": "f664a6fea3ef22ff7b2f415474330578f97a4fd3593820d1fef5618c5ee1ded2",
+      "summary": {
+        "all_passed": true,
+        "scope": "Analytical construction and numerical consistency checks, not optimal-control or hardware certification.",
+        "toffoli_operator_error": 0.0,
+        "first_compiled_speedup_threshold_R": 1092.0,
+        "control_speed_exponent_nu": 0.22629438553091683,
+        "full_size_recursive_control_rate_exponent": 1.6309297535714573,
+        "transition_checks_count": 3,
+        "bounded_generator_checks_count": 4,
+        "cost_rows_count": 4,
+        "full_operator_checks_count": 2,
+        "buffered_route_checks_count": 5,
+        "clock_sweep_count": 8
+      }
+    },
+    {
+      "script": "verify_full_nine.py",
+      "elapsed_seconds": 3.505,
+      "output_sha256": "68655a36d32fcb8b4146e4dfef84294f0b5827bfd1ae6895cfb1ecc13ac19696",
+      "summary": {
+        "data_qubits": 9,
+        "bus_qubits": 1,
+        "full_input_columns": 1024,
+        "explicit_two_qubit_control_gates": 390,
+        "operator_error_upper_bound_by_unnormalized_Frobenius": 6.639096555949766e-15,
+        "maximum_entry_error": 3.510833468576701e-16,
+        "runtime_seconds": 2.847479000000021,
+        "all_passed": true
+      }
+    }
+  ],
+  "source_sha256": {
+    "checks/audit_conditional_rate.py": "e855c858fd9074c0565d3b51e6a8fc1177e31b2ee737e5fd3e3619c155c953e7",
+    "checks/audit_ensemble_cut.py": "cc562292fb567f23285e622d930b5a382996a6128e9bf6f612d14b7c568cadd5",
+    "checks/audit_translation_approximation.py": "9eecaf60ef95dd145020bb4bf7b6256d1b85748ddd98f0c5c5b4951cedf828aa",
+    "checks/finite_control.py": "d2dd789a8172b3fbd1b1fb7641e0fcdd5a87fe5b182992a3a984a5e16a550226",
+    "checks/recursive_three.py": "f4577aca7fad831b5e3628c662a13d0c75caec6759a10effec4f68143e180149",
+    "checks/verify_entropy_budget.py": "6e6d514c73822f88f8c34f1ffa7d797d616b6706ac353492a625fbd8b80db7a5",
+    "checks/verify_finite_control.py": "a51ecda7a4433bab18931ece1932e7fa6274c49bc4b6c02e1e4b6a9bf2806642",
+    "checks/verify_full_nine.py": "5921e758407b8ca5e10329b9b5136853aa4f4b7a354f660a800cb0cde341c362",
+    "checks/verify_workspace_construction.py": "ed907a14acddc9b6f73b71a8bea50f2376a61cf6b8de26a872a27b0232e69b48"
+  },
+  "numpy": "2.3.5",
+  "scipy": "1.17.0",
+  "all_passed": true
+}
