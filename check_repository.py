@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 import re
 from urllib.parse import unquote, urlsplit
+from verify import SUITES
 
 ROOT = Path(__file__).resolve().parent
 CONTACT = 'This repository serves as a record of the work and a guide for the author’s self-directed learning. For discussion or potential collaboration, please contact Ruge Lin at [gogoko699@gmail.com](mailto:gogoko699@gmail.com).'
@@ -19,6 +20,8 @@ def anchors(text: str) -> set[str]:
     return found
 
 def main() -> None:
+    if not __debug__:
+        raise RuntimeError('Repository checks require Python assertions.')
     markdown = [ROOT/'README.md', ROOT/'AGENTS.md', *sorted((ROOT/'docs').glob('*.md'))]
     link_count = 0
     for path in markdown:
@@ -43,7 +46,10 @@ def main() -> None:
     for path in sources:
         ast.parse(path.read_text(), filename=str(path))
     result = json.loads((ROOT/'results/verification.json').read_text())
-    assert result['all_passed'] and len(result['suites']) == 8
+    assert result['all_passed']
+    assert [x['script'] for x in result['suites']] == [x[0] for x in SUITES]
+    expected_sources = {str(p.relative_to(ROOT)) for p in (ROOT/'checks').glob('*.py')}
+    assert set(result['source_sha256']) == expected_sources, 'Unrecorded or removed check source'
     for name, expected in result['source_sha256'].items():
         assert hashlib.sha256((ROOT/name).read_bytes()).hexdigest() == expected, f'Stale result: {name}'
     license_bytes = (ROOT/'LICENSE').read_bytes()
@@ -53,7 +59,7 @@ def main() -> None:
     keys = re.findall(r'@\w+\{([^,]+),', (ROOT/'references.bib').read_text())
     assert len(keys) == len(set(keys)) == 8
     assert set(keys).issubset({x.upper() for x in anchors((ROOT/'docs/related-work.md').read_text())})
-    print(f'PASS: {len(markdown)} Markdown files, {link_count} local links, {len(sources)} Python files, eight reference entries and source hashes.')
+    print(f'PASS: {len(markdown)} Markdown files, {link_count} local links, {len(sources)} Python files, {len(SUITES)} verified suites, eight reference entries and source hashes.')
 
 if __name__ == '__main__':
     main()
