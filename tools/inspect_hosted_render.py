@@ -30,10 +30,14 @@ SNAPSHOT = r'''() => {
   const errors = all.filter(x => x.matches('mjx-merror,merror,.MathJax_Error,[data-mjx-error],[data-mml-node="merror"]'));
   const nodes = markers.map(x => {
     const inner = elements(x.shadowRoot || x);
-    return {ready: inner.some(y => y.matches('mjx-container,svg,math,img')),
+    return {markup: x.outerHTML.slice(0,1800), shadow: x.shadowRoot?.innerHTML.slice(0,1800), ready: inner.some(y => y.matches('mjx-container,svg,math,img')),
       error: /Math rendering failed|Undefined control sequence|ParseError|Unable to render expression/i.test(x.textContent || '')};
   });
-  return {article: true, heading: article.querySelector('h1')?.textContent?.trim(),
+  const copy = article.cloneNode(true);
+  copy.querySelectorAll('math-renderer,pre,code').forEach(x => x.remove());
+  const literal = (copy.textContent || '').split('\n').filter(x => x.includes('$'));
+  return {unready_details: nodes.filter(x => !x.ready), sample_ready: nodes.find(x => x.ready),
+    literal_math_lines: literal, article: true, heading: article.querySelector('h1')?.textContent?.trim(),
     markers: markers.length, ready: nodes.filter(x => x.ready).length,
     errors: errors.map(x => (x.getAttribute('data-mjx-error') || x.textContent || '').slice(0,180)),
     marker_errors: nodes.filter(x => x.error).length,
