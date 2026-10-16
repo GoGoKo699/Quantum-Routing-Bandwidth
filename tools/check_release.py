@@ -11,6 +11,7 @@ def check_reading_text(text: str, label: str) -> int:
     fenced = re.compile(r'^([`~]{3,}).*$', re.M)
     lines = text.splitlines()
     in_fence = None
+    math_fence = False
     display = False
     table_width = None
     tables = 0
@@ -22,11 +23,15 @@ def check_reading_text(text: str, label: str) -> int:
             mark = match[1]
             if in_fence is None:
                 in_fence = mark[0]
+                math_fence = stripped[len(mark):].strip() == 'math'
             elif mark[0] == in_fence:
                 in_fence = None
+                math_fence = False
             table_width = None
             continue
         if in_fence:
+            if math_fence:
+                tags.extend(re.findall(r'\\tag\{([^}]+)\}', line))
             continue
         if stripped == '$$':
             display = not display

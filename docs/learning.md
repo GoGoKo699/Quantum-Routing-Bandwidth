@@ -15,7 +15,7 @@ The map is project-defined, not a judgment about a learner's current knowledge. 
 
 Use the [author's book page](https://jhwatrous.github.io/books-and-courses.html), its [standard-layout manuscript](https://jhwatrous.github.io/TQI.pdf), and its [errata](https://jhwatrous.github.io/TQI.errata.pdf). Section numbers below refer to that manuscript. Printed page labels and a PDF viewer's page counter differ; use the section identifiers. The author supplies the manuscript for personal use and prohibits redistribution. Link to it; do not add a copy, extracted chapters, or textbook figures to this repository.
 
-The available errata is dated July 23, 2025 and refers to the published edition. In the part of §3.3.3 containing Theorem 3.56 (printed pages 183–184), the corrected conclusion has $2\sqrt\epsilon$, not $\sqrt{2\epsilon}$. Consult the errata alongside a passage rather than treating an uncorrected printed formula as authoritative.
+The available errata is dated July 23, 2025 and refers to the published edition. In the part of §3.3.3 containing Theorem 3.56 (printed pages 183–184), the corrected conclusion has $`2\sqrt\epsilon`$, not $`\sqrt{2\epsilon}`$. Consult the errata alongside a passage rather than treating an uncorrected printed formula as authoritative.
 
 ## Selected sections
 
@@ -39,40 +39,40 @@ Keep the physics notation of this repository. Translate the anchor, rather than 
 
 | In Watrous | Here | Check before substituting |
 |---|---|---|
-| A vector $u$ and outer product $uu^*$ | $\lvert\psi\rangle$ and $\lvert\psi\rangle\langle\psi\rvert$ | The asterisk on an operator is the adjoint, written $\dagger$ here. |
-| Register spaces and density operators | $L,R,C$ and $\omega,\rho$ | Inaccessible reference systems are not controllable workspace. |
-| Schatten two-norm $\lVert A\rVert_2$ | Normalized Frobenius norm $\lVert A\rVert_F$ in the proofs | Divide the Schatten norm by the square root of the full operator dimension. |
-| Choi operator $J(\Phi)$ in §2.2.2 | A normalized Choi state when testing fidelity | Divide by input dimension. The bare $J$ in a contact bound denotes coupling strength, not a Choi operator. |
-| Fidelity $F$ in Definition 3.11 | Squared pure-target overlap $F_e$ in the process tests | Root fidelity and squared overlap are not interchangeable. |
-| Completely bounded trace norm in §3.3.2 | Diamond norm $\lVert\cdot\rVert_\diamond$ | The main error convention includes the factor $1/2$. |
-| Entropic functions and relative entropy in Chapter 5 | $S$, $h_2$, and $\mathcal I$ | Entropies are in bits; moment-generating estimates explicitly use natural logarithms. |
+| A vector $`u`$ and outer product $`uu^*`$ | $`\lvert\psi\rangle`$ and $`\lvert\psi\rangle\langle\psi\rvert`$ | The asterisk on an operator is the adjoint, written $`\dagger`$ here. |
+| Register spaces and density operators | $`L,R,C`$ and $`\omega,\rho`$ | Inaccessible reference systems are not controllable workspace. |
+| Schatten two-norm $`\lVert A\rVert_2`$ | Normalized Frobenius norm $`\lVert A\rVert_F`$ in the proofs | Divide the Schatten norm by the square root of the full operator dimension. |
+| Choi operator $`J(\Phi)`$ in §2.2.2 | A normalized Choi state when testing fidelity | Divide by input dimension. The bare $`J`$ in a contact bound denotes coupling strength, not a Choi operator. |
+| Fidelity $`F`$ in Definition 3.11 | Squared pure-target overlap $`F_e`$ in the process tests | Root fidelity and squared overlap are not interchangeable. |
+| Completely bounded trace norm in §3.3.2 | Diamond norm $`\lVert\cdot\rVert_\diamond`$ | The main error convention includes the factor $`1/2`$. |
+| Entropic functions and relative entropy in Chapter 5 | $`S`$, $`h_2`$, and $`\mathcal I`$ | Entropies are in bits; moment-generating estimates explicitly use natural logarithms. |
 
-For an operator on a $D$-dimensional space,
+For an operator on a $`D`$-dimensional space,
 
-$$
-\|A\|_F^2=\frac{\operatorname{Tr}(A^\dagger A)}D,
+```math
+\|A\|_F^2=\frac{\mathrm{Tr}(A^\dagger A)}D,
 \qquad \|A\|_F=\frac{\|A\|_2}{\sqrt D}.
-$$
+```
 
 Thus the identity has normalized Frobenius norm one, whatever its dimension. Neither norm is the contact's operator norm. A statement proved for one must not be used as a bound for another without its dimension factor.
 
-For a trace-preserving channel with input dimension $d_{\mathrm{in}}$, Watrous's Choi operator has trace $d_{\mathrm{in}}$. Set $\tau_\Phi=J(\Phi)/d_{\mathrm{in}}$. For a unitary target with normalized Choi vector $|\Psi_*\rangle$,
+For a trace-preserving channel with input dimension $`d_{\mathrm{in}}`$, Watrous's Choi operator has trace $`d_{\mathrm{in}}`$. Set $`\tau_\Phi=J(\Phi)/d_{\mathrm{in}}`$. For a unitary target with normalized Choi vector $`|\Psi_{\ast}\rangle`$,
 
-$$
-F_e=\langle\Psi_*|\tau_\Phi|\Psi_*\rangle
-=F\!\left(\tau_\Phi,|\Psi_*\rangle\langle\Psi_*|\right)^2.
-$$
+```math
+F_e=\langle\Psi_{\ast}|\tau_\Phi|\Psi_{\ast}\rangle
+=F\!\left(\tau_\Phi,|\Psi_{\ast}\rangle\langle\Psi_{\ast}|\right)^2.
+```
 
-The right-hand $F$ is Watrous's root fidelity. High Choi fidelity alone is not the same statement as a dimension-independent worst-case diamond guarantee.
+The right-hand $`F`$ is Watrous's root fidelity. High Choi fidelity alone is not the same statement as a dimension-independent worst-case diamond guarantee.
 
 The initialization budget is a familiar relative entropy:
 
-$$
+```math
 \mathcal I(\omega)=\log_2D-S(\omega)
 =D\!\left(\omega\,\middle\|\,I/D\right).
-$$
+```
 
-On the right $D(\cdot\|\cdot)$ is relative entropy; inside $I/D$, $D$ is the Hilbert-space dimension. This budget measures lack of entropy, not work, temperature, or quadratic purity.
+On the right $`D(\cdot\|\cdot)`$ is relative entropy; inside $`I/D`$, $`D`$ is the Hilbert-space dimension. This budget measures lack of entropy, not work, temperature, or quadratic purity.
 
 ## From foundations to the project
 

@@ -21,6 +21,10 @@ class ReadingChecks(unittest.TestCase):
         with self.assertRaisesRegex(AssertionError, 'repeated equation'):
             check_reading_text('$$\nx\\tag{1}\n$$\n\n$$\ny\\tag{1}\n$$\n', 'fixture')
 
+    def test_tags_in_math_fences(self):
+        with self.assertRaisesRegex(AssertionError, 'repeated equation'):
+            check_reading_text('```math\nx\\tag{1}\n```\n\n```math\ny\\tag{1}\n```\n', 'fixture')
+
     def test_fenced_examples_are_not_tables(self):
         self.assertEqual(check_reading_text('```text\n| a |\n| a | b |\n$$\n```\n', 'fixture'), 0)
 

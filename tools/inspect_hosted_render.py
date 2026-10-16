@@ -15,7 +15,9 @@ from urllib.parse import quote
 REPOSITORY = 'GoGoKo699/Quantum-Routing-Bandwidth'
 PAGES = ('README.md', 'docs/learning.md', 'docs/learning-bridges.md',
          'docs/milestones.md', 'docs/bandwidth.md', 'docs/mixed-helpers.md',
-         'docs/accuracy-and-resources.md', 'docs/theorem-map.md')
+         'docs/accuracy-and-resources.md', 'docs/theorem-map.md',
+         'docs/entropy-flow.md', 'docs/control-models.md', 'docs/coaching.md',
+         'docs/related-work.md', 'docs/verification.md')
 
 SNAPSHOT = r'''() => {
   const article = document.querySelector('article.markdown-body') || document.querySelector('.markdown-body');
@@ -27,11 +29,11 @@ SNAPSHOT = r'''() => {
   }
   const all = elements(article);
   const markers = all.filter(x => x.localName === 'math-renderer');
-  const errors = all.filter(x => x.matches('mjx-merror,merror,.MathJax_Error,[data-mjx-error],[data-mml-node="merror"]'));
+  const errors = all.filter(x => x.matches('mjx-merror,merror,.MathJax_Error,.flash-error,[data-mjx-error],[data-mml-node="merror"]'));
   const nodes = markers.map(x => {
     const inner = elements(x.shadowRoot || x);
     return {markup: x.outerHTML.slice(0,1800), shadow: x.shadowRoot?.innerHTML.slice(0,1800), ready: inner.some(y => y.matches('mjx-container,svg,math,img')),
-      error: /Math rendering failed|Undefined control sequence|ParseError|Unable to render expression/i.test(x.textContent || '')};
+      error: /Math rendering failed|Undefined control sequence|ParseError|Unable to render expression|macros are not allowed|Missing (open|close) brace/i.test(x.textContent || '')};
   });
   const copy = article.cloneNode(true);
   copy.querySelectorAll('math-renderer,pre,code').forEach(x => x.remove());
@@ -48,10 +50,11 @@ SNAPSHOT = r'''() => {
 
 
 def source_math_count(text: str) -> int:
+    math_fences = len(re.findall(r'^```math\s*\n.*?^```\s*$', text, flags=re.S|re.M))
     text = re.sub(r'```.*?```', '', text, flags=re.S)
     displays = re.findall(r'\$\$.*?\$\$', text, re.S)
     text = re.sub(r'\$\$.*?\$\$', '', text, flags=re.S)
-    return len(displays) + len(re.findall(r'(?<!\\)\$(?:\\.|[^$])+?(?<!\\)\$', text))
+    return math_fences + len(displays) + len(re.findall(r'(?<!\\)\$(?:\\.|[^$])+?(?<!\\)\$', text))
 
 
 def main() -> None:
@@ -101,6 +104,8 @@ def main() -> None:
                         row['problems'].append(f'{width}px: missing expected document title')
                     if state.get('markers') != expected or state.get('ready', 0) < expected:
                         row['problems'].append(f'{width}px: missing or unfinished mathematics')
+                    if state.get('literal_math_lines'):
+                        row['problems'].append(f'{width}px: unprocessed math delimiters')
                     if state.get('errors') or state.get('marker_errors'):
                         row['problems'].append(f'{width}px: mathematical rendering error')
                     if state.get('page_width', 0) > width+3:
