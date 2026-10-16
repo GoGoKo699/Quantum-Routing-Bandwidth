@@ -19,18 +19,18 @@ The single educational anchor is **John Watrous, *The Theory of Quantum Informat
 
 ## Main result
 
-Each module contains $n\ge1$ payload qubits and $s\ge0$ helpers. Every module-qubit–bus interaction has operator norm at most $J$; all contacts may act simultaneously. Internal operations confined to either module or the bus have zero charged duration. Both interfaces remain bounded. There are no measurements, resets, or extra initialized qubits.
+Each module contains $`n\ge1`$ payload qubits and $`s\ge0`$ helpers. Every module-qubit–bus interaction has operator norm at most $`J`$; all contacts may act simultaneously. Internal operations confined to either module or the bus have zero charged duration. Both interfaces remain bounded. There are no measurements, resets, or extra initialized qubits.
 
-For helpers independently prepared in the known state $\rho_p=(1-p)|0\rangle\langle0|+p|1\rangle\langle1|$, with $0\le p\le1/2$, the optimal fixed-error interaction time is
+For helpers independently prepared in the known state $`\rho_p=(1-p)|0\rangle\langle0|+p|1\rangle\langle1|`$, with $`0\le p\le1/2`$, the optimal fixed-error interaction time is
 
-$$
+```math
 T_{\epsilon,p}(n,s)
 =\Theta_\epsilon\!\left(
 \frac{n}{J\sqrt{(n+s)\{1+s[1-h_2(p)]\}}}
 \right).
-$$
+```
 
-For every fixed $0<\epsilon\le0.1$, the constants are uniform in $n,s,p$. The error is a complete-operation half diamond distance, including arbitrary reference-entangled payload/bus inputs and the fixed helpers' inaccessible preparation references. The physical helper density matrix returns exactly in the construction; remaining correlations and bus errors are included in the error budget. Compression, routing, and decompression share one invariant high-probability sector, so initial preparation error does not accumulate gate by gate.
+For every fixed $`0\lt \epsilon\le0.1`$, the constants are uniform in $`n,s,p`$. The error is a complete-operation half diamond distance, including arbitrary reference-entangled payload/bus inputs and the fixed helpers' inaccessible preparation references. The physical helper density matrix returns exactly in the construction; remaining correlations and bus errors are included in the error budget. Compression, routing, and decompression share one invariant high-probability sector, so initial preparation error does not accumulate gate by gate.
 
 The [full proof](docs/mixed-helpers.md) distinguishes zero error from fixed nonzero error. A correlated-state counterexample shows why entropy deficit alone is not a complete bandwidth invariant for arbitrary helper states.
 
@@ -38,27 +38,27 @@ The [full proof](docs/mixed-helpers.md) distinguishes zero error from fixed nonz
 
 On identical hardware with the same payload,
 
-$$
+```math
 T_{\mathrm{clean}}(n,s)
 =\Theta\!\left(\frac{n}{J\sqrt{(n+s)(s+1)}}\right),
-$$
+```
 
-$$
+```math
 T_{\mathrm{unknown}}(n,s)
 =\Theta\!\left(\frac{n}{J\sqrt{n+s}}\right).
-$$
+```
 
-These exact tasks restore helpers and an arbitrary bus, including reference correlations. The changed resource is the initial helper promise, not extra wiring. At $s=0$, the time is $\Theta(\sqrt n/J)$. Any full-rank mixed preparation has the unknown-helper scale at zero error; the fixed-error law is not uniform as $\epsilon\to0$.
+These exact tasks restore helpers and an arbitrary bus, including reference correlations. The changed resource is the initial helper promise, not extra wiring. At $`s=0`$, the time is $`\Theta(\sqrt n/J)`$. Any full-rank mixed preparation has the unknown-helper scale at zero error; the fixed-error law is not uniform as $`\epsilon\to0`$.
 
 ## Quantitative realization and scope
 
-After concentration into $r$ near-clean leader bits, balanced blocks need only
+After concentration into $`r`$ near-clean leader bits, balanced blocks need only
 
-$$
+```math
 K_{\mathrm{exact}}=2^{\lceil(n+s)/(r+1)\rceil-1}
-$$
+```
 
-exact interaction intervals per Ising gate. Synchronizing each block's translations suffices because the contact is an additive sum. For fixed nonzero polarization and $s=\Theta(n)$, this gives $O(n)$ total **exact contact intervals**. Global internal compression is still free in this theorem, and no efficient elementary implementation of every encoding is implied.
+exact interaction intervals per Ising gate. Synchronizing each block's translations suffices because the contact is an additive sum. For fixed nonzero polarization and $`s=\Theta(n)`$, this gives $`O(n)`$ total **exact contact intervals**. Global internal compression is still free in this theorem, and no efficient elementary implementation of every encoding is implied.
 
 Exact rational spectral certificates demonstrate finite-size advantages over every allowed unknown-helper protocol at the same complete-operation accuracy, not just over one selected implementation. The [resource analysis](docs/accuracy-and-resources.md) also shows that a fixed sum of contact norms removes the parametric initialization advantage, while a fixed quadratic contact budget retains it.
 

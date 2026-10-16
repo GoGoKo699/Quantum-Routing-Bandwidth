@@ -9,6 +9,7 @@ Use Python 3.13 with the pinned NumPy 2.3.5 and SciPy 1.17.0 dependencies:
 ```bash
 python -m pip install -r requirements.txt
 python check_repository.py
+python tools/test_release_checks.py
 python verify.py
 ```
 
@@ -31,14 +32,30 @@ The [finite certificates and full closure checks](../results/scientific-closure.
 | `verify_mixed_helpers.py` | 546 spectral checks, 216 compression bounds, six helper-block routes, purification-inclusive errors, correlated-state examples |
 | `verify_scientific_closure.py` | 260 integer spectral crosschecks, five finite universal-comparator certificates, 15 synchronized/random-list checks, three fresh-payload reuse checks, 12 perturbation checks |
 
-The largest clean-helper full route has 11 physical qubits and 128 allowed arbitrary-payload/bus input columns. The mixed-helper route tests separately propagate every helper sector and payload/bus column, through 11 physical qubits. The clean-helper isometry is not claimed on arbitrary helper inputs. Algebraic residuals below approximately $10^{-14}$ in these cases are floating-point consistency checks, not physical gate fidelities.
+The largest clean-helper full route has 11 physical qubits and 128 allowed arbitrary-payload/bus input columns. The mixed-helper route tests separately propagate every helper sector and payload/bus column, through 11 physical qubits. The clean-helper isometry is not claimed on arbitrary helper inputs. Algebraic residuals below approximately $`10^{-14}`$ in these cases are floating-point consistency checks, not physical gate fidelities.
 
 The closure suite's fresh-payload check uses two different payload pairs, a common bus, and all 64 helper sectors. It evaluates the complete fixed-purification Gram operator on all 32 payload/bus input columns. This tests the same initial preparation-error bound on fresh batches rather than only on repeated powers of one input gate. It does not test new physical noise.
 
-Large finite-size examples use integer binomial-shell weights for rational $p=1/10$, rational gains, and rational bounds on constants. The tail decisions and strict time comparisons are exact rational arithmetic. Approximate decimal fields display those results; no 2,049- or 8,193-qubit state-vector evolution is claimed. The finite certificate compares a mixed-helper upper bound with a lower bound for **every** admissible unknown-helper protocol at the same error, contacts, and payload.
+Large finite-size examples use integer binomial-shell weights for rational $`p=1/10`$, rational gains, and rational bounds on constants. The tail decisions and strict time comparisons are exact rational arithmetic. Approximate decimal fields display those results; no 2,049- or 8,193-qubit state-vector evolution is claimed. The finite certificate compares a mixed-helper upper bound with a lower bound for **every** admissible unknown-helper protocol at the same error, contacts, and payload.
 
 The ensemble suite includes a selected collective state that violates an incorrectly input-uniform square-root rate bound. Its finite-difference residual is a diagnostic, distinct from its asserted rate/moment comparisons. Hamiltonian optimization in the conditional suite is exact for each sampled state, not an optimization over all states.
 
 ## Maintenance
 
-`check_repository.py` checks syntax, local links and citation anchors, math delimiters, bibliography keys, the contact paragraph, the original license, exact suite coverage, and all check-source hashes. CI runs both the repository checker and complete numerical suite. Update the tracked result file only from a successful associated run after changing scientific check sources. Keep full generated cases in the ignored build directory or export them as a verification bundle.
+`check_repository.py` checks syntax, local links and citation anchors, math delimiters, bibliography keys, the contact paragraph, the original license, the 30-milestone map, exact suite coverage, and all check-source hashes. The release checker additionally checks table-cell consistency across every reading page, duplicate equation labels in dollar displays and math fences, unsafe legacy numbering syntax, explicit success flags, and the digest of the tracked finite-size certificate file against its executed-output record. Twelve regression tests exercise valid input and deliberately malformed material, including a ready-but-invalid native MathML layout; these are structural tests, not extra scientific suites. CI runs these checks and the ten numerical suites. Update tracked scientific results only from a successful associated run after changing scientific check sources. Keep generated cases in the ignored build directory or export them as a verification bundle.
+
+Use protected GitHub mathematical syntax for formulas that contain Markdown-sensitive characters. Fenced math blocks preserve backslashes in norm and spacing commands; backtick-protected inline math preserves starred subscripts and punctuation boundaries. Prefer supported upright commands and explicitly braced starred indices. Preserve equation numbers with ordinary `\qquad\text{(n)}` content rather than `\tag{n}`. The latter can emit legacy `mlabeledtr` rows that stack tokens in native browser MathML even when parsing succeeds; the source checker rejects that numbering syntax in mathematical blocks. The [official syntax reference](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions) and the hosted check are complementary to local source validation.
+
+## Hosted rendering
+
+The separate `Inspect hosted mathematics` workflow opens thirteen actual public GitHub pages at an immutable commit in Chromium. It checks entrypoint, learning, and scientific pages at desktop and mobile widths, verifies the expected mathematics has rendered, detects GitHub and MathJax error messages and unprocessed delimiters, checks table structure, rejects unsupported native MathML table rows, and records equation geometry and page-level overflow. Screenshots, the exact inspected public sources with SHA-256 hashes, and a JSON report are retained as workflow artifacts for 14 days. It needs network access and a separate Playwright installation; it is not a dependency of the offline scientific verifier.
+
+To invoke the same check in a network-enabled environment:
+
+```bash
+python -m pip install playwright==1.55.0
+python -m playwright install chromium
+python tools/inspect_hosted_render.py --ref COMMIT_SHA
+```
+
+Replace `COMMIT_SHA` with a full 40-character commit hash in this repository. The script uses no authentication and only reads this repository's public pages. A blocked host or unfinished render fails the check; it is not silently replaced by a local preview. A hosted-browser diagnostic and a screenshot review are different evidence from mathematical verification. Neither establishes independent scientific review or validates a different hosting renderer.

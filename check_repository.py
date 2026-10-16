@@ -8,6 +8,7 @@ import re
 from urllib.parse import unquote, urlsplit
 from verify import SUITES
 from tools.check_learning import check_learning
+from tools.check_release import check_release
 
 ROOT = Path(__file__).resolve().parent
 CONTACT = 'This repository serves as a record of the work and a guide for the author’s self-directed learning. For discussion or potential collaboration, please contact Ruge Lin at [gogoko699@gmail.com](mailto:gogoko699@gmail.com).'
@@ -61,6 +62,7 @@ def main() -> None:
     assert keys and len(keys) == len(set(keys)), 'Missing or duplicate bibliography keys'
     assert set(keys).issubset({x.upper() for x in anchors((ROOT/'docs/related-work.md').read_text())})
     learning = check_learning(ROOT)
+    check_release(ROOT)
     print(f'PASS: {len(markdown)} reading files, {link_count} local links, {len(sources)} Python files, {len(SUITES)} verified suites, {len(keys)} references and {learning["milestones"]} milestones.')
 
 if __name__ == '__main__':
