@@ -1,0 +1,29 @@
+# Quantum Routing Bandwidth
+
+> Reusable initialization and the optimal interaction-time bandwidth of a bounded qubit interface. One educational anchor, a common 30-milestone learning map, and canonical scientific proofs.
+
+## Learning
+
+- [Milestone map](docs/milestones.md): QRB-W18-30-v1; exactly M01–M30, with 14 background and 16 narrative targets. This is the shared project map, not a learner's progress record.
+- [Watrous anchor](docs/learning.md): The Theory of Quantum Information (2018), selected sections, notation/normalization translations, author access and errata. The only educational anchor.
+- [Worked bridges](docs/learning-bridges.md): Reference-assisted information flow, occupied-data amplification, and reversible mixed-helper preparation.
+- [Coaching](docs/coaching.md): Revise → Learn → Test, challenge retries, immediate learning feedback, answer-selection interface, and completion rules. Do not start or score a lesson during repository maintenance.
+
+## Authoritative research
+
+- [Theorem map](docs/theorem-map.md): Claims, assumptions, proof dependencies, and direct specialist route.
+- [Mixed helpers](docs/mixed-helpers.md): Matched fixed-error law and exact/full-rank and correlated-state boundaries.
+- [Bandwidth](docs/bandwidth.md): Exact clean/unknown endpoints, entropy-deficit converse, and coherent construction.
+- [Entropy flow](docs/entropy-flow.md): Conditional variance, supports, weighted interfaces, and input-ensemble requirements.
+- [Accuracy and resources](docs/accuracy-and-resources.md): Finite certificates, synchronized sequences, error composition, and changed strength budgets.
+- [Control models](docs/control-models.md): Separate finite-strength compiler and contact-count results.
+- [Related work](docs/related-work.md): Primary attribution; these papers are not additional prerequisite courses.
+- [Bibliography](references.bib): Source metadata, including W18 for the anchor.
+
+## Verification and editing
+
+- [Verification guide](docs/verification.md): Executed numerical checks, their scope, and reproduction.
+- [Recorded results](results/verification.json): Scientific check-source provenance. Numerical checks are not external scientific review.
+- [Agent guidance](AGENTS.md): Repository boundary, claim invariants, editing and teaching instructions.
+
+Preserve free internal-control interaction time versus total runtime, per-contact versus aggregate budgets, and exact helper marginal return versus approximate joint/reference restoration. The fixed inserted helper purification is not an arbitrary helper input. Do not infer progress from file access or from a request to continue. Do not redistribute the linked textbook or private records. This guide aids navigation; it does not guarantee indexing.

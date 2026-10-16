@@ -1,4 +1,4 @@
-"""Check local navigation, mathematical delimiters, source provenance and syntax."""
+"""Check navigation, math delimiters, source provenance, syntax and the learning map."""
 from __future__ import annotations
 import ast
 import hashlib
@@ -7,6 +7,7 @@ from pathlib import Path
 import re
 from urllib.parse import unquote, urlsplit
 from verify import SUITES
+from tools.check_learning import check_learning
 
 ROOT = Path(__file__).resolve().parent
 CONTACT = 'This repository serves as a record of the work and a guide for the author’s self-directed learning. For discussion or potential collaboration, please contact Ruge Lin at [gogoko699@gmail.com](mailto:gogoko699@gmail.com).'
@@ -22,7 +23,7 @@ def anchors(text: str) -> set[str]:
 def main() -> None:
     if not __debug__:
         raise RuntimeError('Repository checks require Python assertions.')
-    markdown = [ROOT/'README.md', ROOT/'AGENTS.md', *sorted((ROOT/'docs').glob('*.md'))]
+    markdown = [ROOT/'README.md', ROOT/'AGENTS.md', ROOT/'llms.txt', *sorted((ROOT/'docs').glob('*.md'))]
     link_count = 0
     for path in markdown:
         text = path.read_text()
@@ -42,7 +43,7 @@ def main() -> None:
             if parsed.fragment and resolved.suffix == '.md':
                 assert unquote(parsed.fragment) in anchors(resolved.read_text()), f'Missing anchor: {target}'
             link_count += 1
-    sources = [ROOT/'verify.py', ROOT/'check_repository.py', *sorted((ROOT/'checks').glob('*.py'))]
+    sources = [ROOT/'verify.py', ROOT/'check_repository.py', *sorted((ROOT/'checks').glob('*.py')), *sorted((ROOT/'tools').glob('*.py'))]
     for path in sources:
         ast.parse(path.read_text(), filename=str(path))
     result = json.loads((ROOT/'results/verification.json').read_text())
@@ -59,7 +60,8 @@ def main() -> None:
     keys = re.findall(r'@\w+\{([^,]+),', (ROOT/'references.bib').read_text())
     assert keys and len(keys) == len(set(keys)), 'Missing or duplicate bibliography keys'
     assert set(keys).issubset({x.upper() for x in anchors((ROOT/'docs/related-work.md').read_text())})
-    print(f'PASS: {len(markdown)} Markdown files, {link_count} local links, {len(sources)} Python files, {len(SUITES)} verified suites, {len(keys)} reference entries and source hashes.')
+    learning = check_learning(ROOT)
+    print(f'PASS: {len(markdown)} reading files, {link_count} local links, {len(sources)} Python files, {len(SUITES)} verified suites, {len(keys)} references and {learning["milestones"]} milestones.')
 
 if __name__ == '__main__':
     main()
