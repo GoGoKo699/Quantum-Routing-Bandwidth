@@ -15,12 +15,12 @@ Let T_clean(n,s) and T_unknown(n,s) be the infimum interaction times for the res
 
 ```math
 \boxed{T_{\mathrm{clean}}(n,s)=\Theta\!\left(\frac{n}{J\sqrt{(n+s)(s+1)}}\right),}
-\tag{1}
+\qquad\text{(1)}
 ```
 
 ```math
 \boxed{T_{\mathrm{unknown}}(n,s)=\Theta\!\left(\frac{n}{J\sqrt{n+s}}\right).}
-\tag{2}
+\qquad\text{(2)}
 ```
 
 The constants in these comparisons do not depend on n or s. Thus the optimal times at fixed n and s differ by Theta(sqrt(s+1)). This is not a comparison that gives the clean case more physical contacts.
@@ -37,7 +37,7 @@ For a physical density operator omega on a D-dimensional Hilbert space, write
 
 ```math
 \mathcal I(\omega)=\log_2D-S(\omega).
-\tag{3}
+\qquad\text{(3)}
 ```
 
 This is an entropy deficit in bits. It is invariant under any unitary on the physical system. It is not the quadratic purity Tr omega^2 and is not an energy, work, or temperature.
@@ -49,7 +49,7 @@ For one module-bus cut, expand the genuine two-sided part of the contacts as
 ```math
 H_{\mathrm{int}}=\sum_{\mu=x,y,z}A_\mu\otimes\sigma_C^\mu,
 \qquad A_\mu=\sum_{j,a}c_{ja\mu}\sigma_j^a.
-\tag{4}
+\qquad\text{(4)}
 ```
 
 Terms acting on only one side do not contribute to the entropy derivative and are absorbed into the internal terms. Let
@@ -62,7 +62,7 @@ Orthogonal projection onto the two-sided Pauli coefficients contracts the normal
 
 ```math
 v^2\le\sum_jJ_j^2.
-\tag{5}
+\qquad\text{(5)}
 ```
 
 This does NOT assume that subtracting the cut-local terms contracts the operator norm.
@@ -75,7 +75,7 @@ For fixed mu, the summands on distinct sites commute. With normalized trace tau 
 \tau(e^{uA_\mu})
 =\prod_j\cosh\!\left(u\sqrt{\sum_a c_{ja\mu}^2}\right)
 \le e^{u^2v_\mu^2/2}.
-\tag{6}
+\qquad\text{(6)}
 ```
 
 The scalar Gaussian integral identity e^{tx^2}=E_G exp(sqrt(2t)Gx), G standard normal, implies
@@ -83,7 +83,7 @@ The scalar Gaussian integral identity e^{tx^2}=E_G exp(sqrt(2t)Gx), G standard n
 ```math
 \tau(e^{tA_\mu^2})\le(1-2tv_\mu^2)^{-1/2},
 \quad 0\le t\lt 1/(2v_\mu^2).
-\tag{7}
+\qquad\text{(7)}
 ```
 
 These expressions are unchanged when A_mu is tensored with identities on the remaining physical qubits.
@@ -95,7 +95,7 @@ Apply nonnegativity of relative entropy to omega and the normalized state exp(t 
 ```math
 t\mathrm{Tr}(\omega A_\mu^2)
 \le\mathcal I(\omega)\ln2+\ln\tau(e^{tA_\mu^2}).
-\tag{8}
+\qquad\text{(8)}
 ```
 
 No commutation between omega and A_mu is required. Choose t=1/(4v_mu^2). Equations (7)-(8) yield
@@ -103,7 +103,7 @@ No commutation between omega and A_mu is required. Choose t=1/(4v_mu^2). Equatio
 ```math
 \mathrm{Tr}(\omega A_\mu^2)
 \le4\ln2\,[\mathcal I(\omega)+1/2]v_\mu^2.
-\tag{9}
+\qquad\text{(9)}
 ```
 
 The v_mu=0 case is trivial.
@@ -119,7 +119,7 @@ follows because the difference is the sum over i<j of (X_i-X_j)^2. Apply it to X
 ```math
 \boxed{\mathrm{Tr}(\omega H_{\mathrm{int}}^2)
 \le12\ln2\,[\mathcal I(\omega)+1/2]\sum_jJ_j^2.}
-\tag{10}
+\qquad\text{(10)}
 ```
 
 This is a state-dependent estimate. It interpolates between root-mean-square strength O(sqrt(sum J_j^2)) for bounded entropy deficit and a potentially collective O(sum J_j) strength when the deficit is extensive. No false input-uniform square-root limit is being asserted.
@@ -131,7 +131,7 @@ Let A include a module and any local inaccessible references, and let B=C be the
 ```math
 |\dot S_A|\le c_0\sqrt{\mathrm{Tr}(\rho_{AC}h^2)},
 \qquad c_0=2\sqrt2/\ln2.
-\tag{11}
+\qquad\text{(11)}
 ```
 
 Only the physical part of A is acted on by h; hence its second moment is the same when evaluated in the accessible physical density operator omega.
@@ -149,7 +149,7 @@ Centering the conditional logarithm K=log_2 rho_AC-log_2(rho_A tensor I_C), expr
 ```math
 |\dot S_A|\le2\sqrt{V(C|A)_\rho}\,\Delta_\rho h
 \le2\log_2 9\sqrt{\mathrm{Tr}\rho h^2}.
-\tag{12}
+\qquad\text{(12)}
 ```
 
 This published-lemma route gives the same n,s exponents with a different numerical constant.
@@ -166,7 +166,7 @@ Combining (10)-(11) gives
 \boxed{|\dot S_A|
 \le 4\sqrt{6/\ln2}\sqrt{\mathcal I(\omega)+1/2}
 \sqrt{\sum_jJ_j(t)^2}.}
-\tag{13}
+\qquad\text{(13)}
 ```
 
 All entropy units are bits. Internal Hamiltonians have zero entropy contribution across the chosen cut and preserve I. They may have arbitrary norm; they need not be estimated by (13). For singular reference tests, regularize the complete state, apply the differential bound, integrate, and take the limit using entropy continuity. Instantaneous internal pulses do not change cut entropy. More general controls follow by their well-defined propagators and continuity.
@@ -177,7 +177,7 @@ For several bus qubits, apply the estimate to each bus-site term and sum. For an
 \mathbb E|\dot S_L|
 \le4\sqrt{6/\ln2}\sqrt{\mathcal I(\bar\omega)+1/2}
 \sum_c\sqrt{\sum_jJ_{jc}(t)^2}.
-\tag{14}
+\qquad\text{(14)}
 ```
 
 The same unitary must act on every possible input. Otherwise bar omega need not evolve unitarily. At I=0, the sharper one-design constant in [Entropy flow](entropy-flow.md) applies, but (14) supplies a broader entropy-deficit dependence.
@@ -188,7 +188,7 @@ Prepare each payload qubit maximally entangled with a reference on its own side.
 
 ```math
 \mathcal I(\omega(t))=2s+1
-\tag{15}
+\qquad\text{(15)}
 ```
 
 at all times, despite intermediate correlations, purity concentration, or mixing inside the modules.
@@ -200,7 +200,7 @@ T\ge\frac{\sqrt{\ln2}}{2\sqrt6}
 \frac{n}{J\sqrt{(n+s)(2s+3/2)}}
 \ge\frac{\sqrt{\ln2}}{4\sqrt3}
 \frac{n}{J\sqrt{(n+s)(s+1)}}.
-\tag{16}
+\qquad\text{(16)}
 ```
 
 This uses no assumption that the control leaves the clean helpers pure at intermediate times. Indeed the construction below generally does not.
@@ -215,7 +215,7 @@ For the Bell-reference test above, let $`F_e\ge1-\eta`$ be the payload Choi over
 
 ```math
 S_A(T)\ge2n-4ne-\frac32h_2(e),\qquad e=\sqrt\eta.
-\tag{17}
+\qquad\text{(17)}
 ```
 
 Replace the required entropy change $`2n`$ in the rate integration by this expression. For fixed sufficiently small $`\eta`$ it is proportional to $`n`$, uniformly in $`s`$. High Choi fidelity here supplies a necessary test of routing accuracy; it is not identified with a worst-case diamond guarantee. The exact construction satisfies the stronger complete-operation specification.
@@ -233,7 +233,7 @@ J\mu_b Z_{q_i}Z_C\otimes I_{\mathrm{spectators}},
 \quad
 \mu_b=\mathbb E\left|\sum_{j=1}^{b}\epsilon_j\right|
 =\frac{b}{2^{b-1}}\binom{b-1}{\lfloor(b-1)/2\rfloor}.
-\tag{18}
+\qquad\text{(18)}
 ```
 
 Each epsilon_j is an independent uniform sign. Here identity on spectators is a full operator identity, not an average channel on random spectator inputs. To recall the encoding explicitly, write a block basis label as (q,r), with spectator Hamming weight w. Set f=1 if 2w>b and f=0 otherwise; output leader q'=q xor f and output spectators r'=r xor q'. The collective magnetization of the output is (-1)^q |b-2w|. Thus a reversible permutation E obeys E^dagger(sum Z_j)E=Z_q D_b. Averaging all spectator XOR translations gives the scalar mean mu_b.
@@ -242,7 +242,7 @@ All conjugated diagonal interactions commute. Equal-duration intervals therefore
 
 ```math
 H_{\mathrm{block}}=JZ_C\sum_{i=0}^{s}\mu_{b_i}Z_{q_i},
-\tag{19}
+\qquad\text{(19)}
 ```
 
 with identity on every unknown spectator.
@@ -263,14 +263,14 @@ F^\dagger e^{-itH_{\mathrm{block}}}F
 =
 \left(e^{-iJ\gamma_{n,s}tZ_{q_0}Z_C}|\psi\rangle\right)
 \otimes|0\rangle^{\otimes s},
-\tag{20}
+\qquad\text{(20)}
 ```
 
 where
 
 ```math
 \gamma_{n,s}=\sum_i\mu_{b_i}.
-\tag{21}
+\qquad\text{(21)}
 ```
 
 The fanout creates and later removes correlations; it does not clone an unknown state. Formula (20) is a code-subspace isometry identity for clean helpers, not an identity on arbitrary helper inputs. It preserves arbitrary spectator data and arbitrary reference entanglement and works for an arbitrary bus state.
@@ -287,7 +287,7 @@ Balanced block sizes obey b_i>=N/(2m). Cauchy-Schwarz supplies the upper bound. 
 
 ```math
 \boxed{\sqrt{(n+s)(s+1)/6}\le\gamma_{n,s}\le\sqrt{(n+s)(s+1)}.}
-\tag{22}
+\qquad\text{(22)}
 ```
 
 No optimal prefactor is claimed. The explicit block grouping need not maximize the gain at small n,s.
@@ -300,7 +300,7 @@ A buffered sequence uses 2n+1 target-bus SWAPs. For j=1,...,n, swap L_j with C, 
 
 ```math
 \boxed{T_{\mathrm{clean}}(n,s)\le\frac{3\pi(2n+1)}{4J\gamma_{n,s}}.}
-\tag{23}
+\qquad\text{(23)}
 ```
 
 Equations (16),(22),(23) prove (1). Synchronize the block translations using the same counter, restricted to the spectator bits of each block. Uniform marginal coverage of every block suffices because the contact is additive. The [exact synchronized schedule](accuracy-and-resources.md#3-short-exact-synchronized-block-schedules) uses
@@ -324,7 +324,7 @@ Only the payload must cross the cut, generating 2n bits. Equation (11) yields
 
 ```math
 T_{\mathrm{unknown}}(n,s)\ge\frac{\ln2}{2J}\frac{n}{\sqrt{n+s}}.
-\tag{24}
+\qquad\text{(24)}
 ```
 
 For the upper bound, use all N=n+s qubits in the occupied-data block amplifier. Its spectators, including the unknown helpers, are returned after each target-bus operation. Exchange only the n payload labels in the same buffered sequence:
@@ -332,7 +332,7 @@ For the upper bound, use all N=n+s qubits in the occupied-data block amplifier. 
 ```math
 T_{\mathrm{unknown}}(n,s)
 \le\frac{3\pi(2n+1)}{4J\mu_{n+s}}.
-\tag{25}
+\qquad\text{(25)}
 ```
 
 Since sqrt((n+s)/3)<=mu_(n+s)<=sqrt(n+s), (24)-(25) prove (2). Both cases have identical numbers and strengths of bus contacts, identical payloads, free internal controls, and helper return. The only altered promise is the initial helper state.

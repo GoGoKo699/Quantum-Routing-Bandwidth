@@ -23,7 +23,7 @@ Using [DF19](related-work.md#df19), Corollary III.5, yields
 \boxed{|\dot S_A|\le
 2\log_2(2d_B^2+1)\,\Delta_\rho h
 \le 2\log_2(2d_B^2+1)\sqrt{\mathrm{Tr}\rho h^2}.}
-\tag{1}
+\qquad\text{(1)}
 ```
 
 For a bus qubit, the coefficient is c_DF=2 log_2 9. This combines the cited conditional-variance inequality with a state-weighted commutator estimate.
@@ -61,7 +61,7 @@ Centering can only decrease this second moment. Therefore for a bus qubit,
 ```math
 \boxed{|\dot S_A|\le c_0\sqrt{\mathrm{Tr}\rho h^2},
 \qquad c_0=\frac{2\sqrt2}{\ln2}.}
-\tag{2}
+\qquad\text{(2)}
 ```
 
 This is a sharper qubit coefficient than (1), but does not change the exponent. The d_B dependence of this elementary bound is worse for large d_B than the published logarithmic estimate, so it is not an improved general-dimensional SIE theorem.
@@ -89,7 +89,7 @@ Terms acting on only one side are absorbed into internal controls. If the origin
 ```math
 \|H_{Lc}^{\rm int}(t)\|_F^2
 \le\sum_{j\in L}J_{jc}(t)^2.
-\tag{3}
+\qquad\text{(3)}
 ```
 
 This step does NOT claim that removal of local terms contracts the operator norm.
@@ -110,7 +110,7 @@ Every input is acted on by the SAME input-independent controlled unitary. Its en
 &\le c_0\sum_{c\in C}\|H_{Lc}^{\rm int}(t)\|_F\\
 &\le c_0\sum_{c\in C}\sqrt{\sum_{j\in L}J_{jc}(t)^2}.
 \end{aligned}
-\tag{4}
+\qquad\text{(4)}
 ```
 
 The same theorem follows using published bound (1) with c_0 replaced by c_DF. Integrating proves
@@ -119,7 +119,7 @@ The same theorem follows using published bound (1) with c_0 replaced by c_DF. In
 \boxed{\mathbb E_\psi|S_L(\psi_T)-S_L(\psi_0)|
 \le c_0\int_0^T\sum_{c\in C}
 \sqrt{\sum_{j\in L}J_{jc}(t)^2}\,dt.}
-\tag{5}
+\qquad\text{(5)}
 ```
 
 For uniform contacts, this is at most c_0 J |C| sqrt(|L|) T. There is no additive constant, factor n^delta, minimum segment length, or derivative condition. Compare the restricted-time-dependence average-input bound of [D26](related-work.md#d26).

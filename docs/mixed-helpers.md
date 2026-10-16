@@ -26,7 +26,7 @@ Let $`\Phi_U`$ insert these fixed purifications and apply the physical protocol 
 
 ```math
 \frac12\|\Phi_U-\Phi_{\ast}\|_\diamond\le\epsilon.
-\tag{1}
+\qquad\text{(1)}
 ```
 
 The supremum includes all payload/bus inputs and all their reference extensions. The helper purifications are fixed input resources, not additional freely chosen input qubits or controllable workspace. Different purifications of the same helper states give the same guarantee by an isometry on the inaccessible reference.
@@ -40,7 +40,7 @@ T_{\epsilon,p}(n,s)
 \frac{n}{J\sqrt{(n+s)\{1+s[1-h_2(p)]\}}}
 \right).
 }
-\tag{2}
+\qquad\text{(2)}
 ```
 
 The constants may depend on $`\epsilon`$, but not on $`n,s,p`$. The statement is uniform even when $`p`$ varies with system size. In particular, it includes $`p=0`$, $`p=1/2`$, and arbitrarily weak polarization. It applies to all $`s\ge0`$, not only $`s\le n`$.
@@ -55,7 +55,7 @@ Purify the helpers locally as above. Put every payload qubit in a Bell pair with
 
 ```math
 \mathcal I(\omega)=\log_2D-S(\omega)=1+2s\,d(p).
-\tag{3}
+\qquad\text{(3)}
 ```
 
 This entropy deficit is conserved by every admissible physical unitary, even while the helpers become correlated or locally more polarized. The [entropy-deficit cut bound](bandwidth.md#32-entropy-deficit-cut-rate) therefore gives
@@ -63,7 +63,7 @@ This entropy deficit is conserved by every admissible physical unitary, even whi
 ```math
 |\dot S_A|
 \le 4\sqrt{6/\ln2}\,J\sqrt{N\{3/2+2s\,d(p)\}},
-\tag{4}
+\qquad\text{(4)}
 ```
 
 where $`A`$ includes the entire physical left module, its payload references, and its helper-preparation references. Initially $`S_A=0`$. The underlying conditional entropy-rate estimate may equivalently use the published conditional-variance bound [DF19](related-work.md#df19), changing only a universal constant.
@@ -86,7 +86,7 @@ Consequently
 
 ```math
 S_A(T)\ge2n-4n\epsilon-\tfrac32h_2(\epsilon).
-\tag{5}
+\qquad\text{(5)}
 ```
 
 For $`0\lt \epsilon\le0.1`$ the right-hand side is at least $`b_\epsilon n`$, where
@@ -101,7 +101,7 @@ Equations (4)-(5), using $`3/2+2sd(p)\le2[1+sd(p)]`$, imply the explicit lower b
 T_{\epsilon,p}\ge
 \frac{b_\epsilon}{4\sqrt{12/\ln2}}
 \frac{n}{J\sqrt{N[1+sd(p)]}}.
-\tag{6}
+\qquad\text{(6)}
 ```
 
 This converse actually needs only the corresponding accuracy of the payload channel on its Bell-reference test, not helper return. The matching construction meets the stronger preparation-inclusive condition (1). The use of $`a,b`$ rather than the full helper-bearing cut removes the restriction $`s\le n`$ in the earlier direct entropy-continuity estimate. Singular states and instantaneous internal pulses are handled as in [Entropy flow](entropy-flow.md#3-supports-and-admissible-controls).
@@ -114,7 +114,7 @@ Let $`\lambda_1\ge\cdots\ge\lambda_{2^s}`$ be the helper eigenvalues. A unitary 
 
 ```math
 \sum_{i=1}^{2^{s-r}}\lambda_i\ge1-\delta.
-\tag{7}
+\qquad\text{(7)}
 ```
 
 Necessity is the variational characterization of the sum of the largest eigenvalues; sufficiency maps their eigenvectors into the zero-prefix subspace. For the product state above, decreasing eigenvalue order is increasing Hamming weight. A fixed permutation of the $`s`$ helper bits' full computational-basis labels implements this mapping. It uses no measured label, extra Hilbert-space dimension, or reset.
@@ -129,7 +129,7 @@ Write $`\beta=1-2p`$ and $`x=s\beta^2`$. The binary entropy series gives
 
 ```math
 \frac{\beta^2}{2\ln2}\le d(p)\le\beta^2.
-\tag{8}
+\qquad\text{(8)}
 ```
 
 Consider the helper labels with Hamming weight at most $`s(1/2-\beta/4)`$. Hoeffding's inequality applied first to the actual Bernoulli distribution and then to the uniform counting distribution gives
@@ -138,7 +138,7 @@ Consider the helper labels with Hamming weight at most $`s(1/2-\beta/4)`$. Hoeff
 \Pr_p(\text{outside})\le e^{-x/8},
 \qquad
 |\text{inside}|\le2^s e^{-x/8}.
-\tag{9}
+\qquad\text{(9)}
 ```
 
 The noninteger threshold is interpreted by its floor; the bounds remain valid. If $`x\ge8\ln(1/\delta)`$, choose
@@ -155,7 +155,7 @@ For $`0\lt \delta\le1/4`$, these choices satisfy the simple conservative bound
 r+1\ge c_\delta[1+sd(p)],
 \qquad
 c_\delta=\frac1{2+8\ln(1/\delta)+8\ln2}.
-\tag{10}
+\qquad\text{(10)}
 ```
 
 For small $`x`$, (8) and the fallback prove (10). For large $`x`$, use $`r+1\gt x/(8\ln2)`$ and $`sd(p)\le x`$. Thus no fixed-$`p`$ asymptotic assumption or unproved substitution of entropy for a helper count is needed. For finite examples, criterion (7) is much sharper than (9).
@@ -170,14 +170,14 @@ The [balanced-block construction](bandwidth.md#5-matching-exact-construction-wit
 \gamma_{N,r}=\sum_{i=0}^r\mu_{b_i},
 \qquad
 \sqrt{N(r+1)/6}\le\gamma_{N,r}\le\sqrt{N(r+1)}.
-\tag{11}
+\qquad\text{(11)}
 ```
 
 Exchange only the $`n`$ payloads with the buffered $`2n+1`$-SWAP schedule. On the subspace where both modules' prefix bits are zero, the complete operation is exactly the payload exchange tensored with identity on every helper and the bus, up to a common global phase. It costs
 
 ```math
 T\le\frac{3\pi(2n+1)}{4J\gamma_{N,r}}.
-\tag{12}
+\qquad\text{(12)}
 ```
 
 Compression and decompression are each applied once around the whole route. Their duration is free only because internal operations are free in this model. The interaction sequence is finite, but can be exponentially long. This does not supply a new efficient bounded-strength compiler.
@@ -196,14 +196,14 @@ The actual and ideal full unitaries agree on every payload/bus input tensored wi
 \|(U-U_{\ast})|\Psi\rangle\|
 \le2\|(I-P_G)|\Psi\rangle\|
 =2\sqrt\Delta.
-\tag{13}
+\qquad\text{(13)}
 ```
 
 The pure-output trace distance is no larger than this vector norm, and mixed payload inputs follow by purification. Equivalently the fixed-preparation isometries differ in operator norm by at most $`2\sqrt\Delta`$, which bounds their half diamond distance. Set
 
 ```math
 \delta=\epsilon^2/8.
-\tag{14}
+\qquad\text{(14)}
 ```
 
 Then (13) proves (1), including the inaccessible helper references. There is no multiplication of $`\delta`$ by $`n`$ or by the number of elementary gates. The failure is one fixed low-weight input sector, not a fresh preparation failure sampled at every gate.
@@ -217,7 +217,7 @@ After exact spectator averaging, conjugating by the fanout gives, for a target-b
 ```math
 JZ_qZ_C\left(\mu_{b_0}+\sum_{i=1}^r\mu_{b_i}Z_{h_i}\right)
 \otimes I_{\rm spectators}.
-\tag{15}
+\qquad\text{(15)}
 ```
 
 This is diagonal in every helper bit even outside the good subspace. The target/bus basis rotations do not act on those bits. The full route followed by decompression therefore has the form
@@ -243,7 +243,7 @@ Thus for the exact version of (1), a full-rank preparation requires the same ope
 T_{0,p}(n,s)=\Theta\!\left(\frac{n}{J\sqrt{n+s}}\right),
 \qquad 0\lt p\le1/2.
 }
-\tag{16}
+\qquad\text{(16)}
 ```
 
 This exact/full-rank obstruction is already explicitly noted in the Outlook of [UHMG26](related-work.md#uhmg26), which identifies approximate transfer with thermal ancillas as a further direction. Equation (2) supplies a matched answer for this modular routing problem, not a claim to have first noticed the obstruction.

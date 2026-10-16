@@ -21,7 +21,7 @@ The payload-sized mutual-information argument in [Mixed helpers, Section 2](mixe
 
 ```math
 \boxed{T_{\mathrm{unknown},e}\ge\frac{B_e(n)}{c_0J\sqrt N},
-\qquad c_0=2\sqrt2/\ln2.}\tag{1}
+\qquad c_0=2\sqrt2/\ln2.}\qquad\text{(1)}
 ```
 
 The published [DF19](related-work.md#df19) route proves the same inequality with $`c_0`$ replaced by $`c_{\mathrm{DF}}=2\log_2 9`$. At $`e=0`$, (1) has coefficient $`\ln2/\sqrt2`$. The maximally mixed bus is a legitimate reference test because this comparator must work on an arbitrary bus. This coefficient must not be silently used for a task that promises one fixed pure bus input.
@@ -46,7 +46,7 @@ All required spectral decisions can be made with integers. At Hamming weight $`k
 
 ```math
 q=\frac{\displaystyle\sum_{k\gt k_{\ast}}\binom sk9^{s-k}
-+(\binom{s}{k_{\ast}}-u)9^{s-k_{\ast}}}{10^s}.\tag{2}
++(\binom{s}{k_{\ast}}-u)9^{s-k_{\ast}}}{10^s}.\qquad\text{(2)}
 ```
 
 The inequalities $`q\le1/80000`$ and failure of the next prefix length are checked by integer cross multiplication, not floating-point tail evaluation. Gains are rational because every $`\mu_b`$ is rational.
@@ -80,7 +80,7 @@ Suppose the $`m=r+1`$ blocks have sizes $`b_i`$, and write $`w_i=b_i-1`$, $`w_{\
 
 ```math
 K_{\mathrm{exact}}=2^{w_{\max}}
-=2^{\lceil N/(r+1)\rceil-1}\tag{3}
+=2^{\lceil N/(r+1)\rceil-1}\qquad\text{(3)}
 ```
 
 intervals. In interval $`\ell=0,\ldots,K_{\mathrm{exact}}-1`$, translate block $`i`$ by the low $`w_i`$ bits of $`\ell`$. Each of that block's $`2^{w_i}`$ translations occurs equally often. Thus
@@ -88,7 +88,7 @@ intervals. In interval $`\ell=0,\ldots,K_{\mathrm{exact}}-1`$, translate block $
 ```math
 \frac1{K_{\mathrm{exact}}}\sum_\ell
 \sum_i Z_{q_i}D_{b_i}(x_i\oplus\ell_{[w_i]})
-=\sum_i\mu_{b_i}Z_{q_i}\otimes I_{\mathrm{spectators}}.\tag{4}
+=\sum_i\mu_{b_i}Z_{q_i}\otimes I_{\mathrm{spectators}}.\qquad\text{(4)}
 ```
 
 Cross-block independence is not required because there are no products of the block coefficients in this Hamiltonian average. All conjugated contacts commute. Equal-duration evolution intervals therefore realize (4) exactly, not as a first-order approximation. Fanout conjugation preserves that identity on the whole helper basis, including the unfavorable sector. The physical helper marginal-return and common-sector arguments remain intact.
@@ -103,7 +103,7 @@ A polynomial alternative is available even where (3) is long. Choose $`K`$ indep
 
 ```math
 \Pr\!\left(\|\overline F_K-F_{\ast}\|\gt a\right)
-\le2^{N+1}\exp[-Ka^2/(2N^2)].\tag{5}
+\le2^{N+1}\exp[-Ka^2/(2N^2)].\qquad\text{(5)}
 ```
 
 With $`M=3(2n+1)`$, $`\theta=\pi/4`$, and gain $`\gamma=\gamma_{N,r}`$, the intended contact duration is $`\theta/(J\gamma)`$. Diagonal exponentiation gives one-gate operator error at most $`\theta a/\gamma`$. A telescoping product bound gives full-unitary error at most $`M\theta a/\gamma`$. Reusing a good list under the fixed target relabelings and basis conjugations leaves this guarantee unchanged.
@@ -112,7 +112,7 @@ For full-route operator error at most $`\eta`$ and offline failure probability a
 
 ```math
 K\ge\frac{2N^2M^2\theta^2}{\eta^2\gamma^2}
-\left[(N+1)\ln2+\ln(1/q_{\mathrm{off}})\right].\tag{6}
+\left[(N+1)\ln2+\ln(1/q_{\mathrm{off}})\right].\qquad\text{(6)}
 ```
 
 Using $`\gamma^2\ge N(r+1)/6`$, this is $`O(n^2N^2/[(r+1)\eta^2])`$ per gate and $`O(n^3N^2/[(r+1)\eta^2])`$ over the route at fixed offline confidence. The better of this bound and (3) may be used. In the explicit finite certificates, the short **exact** list is vastly better than this conservative concentration estimate.
@@ -132,7 +132,7 @@ Synthesis and dynamical errors are different. For a specified finite circuit wit
 ```math
 \frac12\|\Phi_{\mathrm{actual}}-\Phi_{\ast}\|_\diamond
 \le2\sqrt\Delta+\eta_{\mathrm{list}}
-+\sum_\ell\eta_\ell+\int_0^T\|E(t)\|\,dt.\tag{7}
++\sum_\ell\eta_\ell+\int_0^T\|E(t)\|\,dt.\qquad\text{(7)}
 ```
 
 This bound is for unitary control imperfections. A contact perturbation bounded by $`e_j(t)`$ per edge has the conservative contribution $`\int\sum_j e_j(t)dt`$. No cancellation of such errors is assumed. Under repeated uses, the new synthesis/dynamical contributions generally accumulate, unlike the initial common-sector error. Equation (7) is a stability statement, not a fault-tolerance threshold, a Markovian-noise model, or evidence of practical control accuracy.
@@ -148,7 +148,7 @@ If instead one imposes $`\sum_j\|h_{jc}(t)\|^2\le\Lambda_2^2`$ per module cut an
 ```math
 T_{\epsilon,p}^{(2)}
 =\Theta_\epsilon\!\left(\frac{n}{\Lambda_2\sqrt{1+sd(p)}}\right).
-\tag{8}
+\qquad\text{(8)}
 ```
 
 Unknown helpers have $`\Theta_\epsilon(n/\Lambda_2)`$ time. The relative initialization advantage survives this quadratic-budget comparison. The constraint is on the sum of **edge** squared norms, not necessarily on the Frobenius norm of a total Hamiltonian containing local terms.
@@ -160,7 +160,7 @@ Under $`\sum_j\|h_{jc}(t)\|\le\Lambda_1`$ per cut, let $`h`$ be the entire cross
 Sequential direct SWAPs at strength $`\Lambda_1`$, with $`2n+1`$ contacts and the free final internal permutation, give $`O(n/\Lambda_1)`$ independently of helper preparation. Therefore
 
 ```math
-\boxed{T^{(1)}=\Theta_\epsilon(n/\Lambda_1)}\tag{9}
+\boxed{T^{(1)}=\Theta_\epsilon(n/\Lambda_1)}\qquad\text{(9)}
 ```
 
 for clean, unknown, and independent mixed helpers in the corresponding exact/fixed-error tasks. This is an optimum over permitted allocations, not merely a uniform-rescaling example. Under this budget there is no parametrically growing initialization speedup. A norm bound on the total crossing interaction itself gives the same conclusion; a bound on the full Hamiltonian would additionally conflict with the free-internal-control convention.

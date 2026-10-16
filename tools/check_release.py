@@ -6,17 +6,23 @@ from pathlib import Path
 import re
 
 
+def equation_labels(line: str, label: str, index: int) -> list[str]:
+    """Use inline number text, not legacy MathML table rows, for equation labels."""
+    if re.search(r'\\tag\*?\s*\{', line):
+        raise AssertionError(f'{label}:{index}: legacy equation tag is unsafe in native MathML')
+    return re.findall(r'\\qquad\s*\\text\{\(([^(){}]+)\)\}', line)
+
+
 def check_reading_text(text: str, label: str) -> int:
     """Check Markdown structures that can silently change mathematical meaning."""
-    fenced = re.compile(r'^([`~]{3,}).*$', re.M)
-    lines = text.splitlines()
+    fenced = re.compile(r'^([`~]{3,}).*$')
     in_fence = None
     math_fence = False
     display = False
     table_width = None
     tables = 0
     tags = []
-    for index, line in enumerate(lines, 1):
+    for index, line in enumerate(text.splitlines(), 1):
         stripped = line.strip()
         match = fenced.fullmatch(stripped)
         if match:
@@ -31,18 +37,16 @@ def check_reading_text(text: str, label: str) -> int:
             continue
         if in_fence:
             if math_fence:
-                tags.extend(re.findall(r'\\tag\{([^}]+)\}', line))
+                tags.extend(equation_labels(line, label, index))
             continue
         if stripped == '$$':
             display = not display
             table_width = None
             continue
         if display:
-            tags.extend(re.findall(r'\\tag\{([^}]+)\}', line))
+            tags.extend(equation_labels(line, label, index))
             continue
         if stripped.startswith('|'):
-            # Unescaped vertical bars are GFM cell separators, including inside
-            # TeX. Use \lvert/\rvert in a cell rather than bare ket delimiters.
             width = len(re.findall(r'(?<!\\)\|', stripped))
             if table_width is None:
                 table_width = width
@@ -56,7 +60,7 @@ def check_reading_text(text: str, label: str) -> int:
     if display:
         raise AssertionError(f'{label}: unclosed display mathematics')
     if len(tags) != len(set(tags)):
-        raise AssertionError(f'{label}: repeated equation tag on one page')
+        raise AssertionError(f'{label}: repeated equation label on one page')
     return tables
 
 

@@ -11,7 +11,7 @@ An exact exchange uses $`2n+1`$ bus SWAPs: for each $`j`$, swap $`L_j`$ with $`C
 The norm-$`J`$ Hamiltonian $`J\mathrm{SWAP}`$ implements a bus SWAP in $`\pi/(2J)`$ up to global phase. The final internal permutation costs at most $`2\delta`$, so a feasible sequential comparator is
 
 ```math
-T_{\mathrm{seq}}=\frac{(2n+1)\pi}{2J}+\frac\pi G\qquad(n\gt 1).\tag{1}
+T_{\mathrm{seq}}=\frac{(2n+1)\pi}{2J}+\frac\pi G\qquad(n\gt 1).\qquad\text{(1)}
 ```
 
 The final permutation is unnecessary at $`n=1`$. Comparing only with an unamplified three-Ising SWAP would give the amplified compiler an artificially weak comparator.
@@ -57,7 +57,7 @@ For m=3^k data qubits assisting a designated target, the gain is a_k=(3/2)^k. Le
 ```math
 D_0=0,\qquad D_k=4D_{k-1}+24,
 \qquad D_k=8(4^k-1).
-\tag{2}
+\qquad\text{(2)}
 ```
 
 There are 4^k raw contact intervals. The total number of elementary local gates (not depth) is
@@ -71,14 +71,14 @@ For a target-bus SWAP, three Ising operations and four layers of single-qubit ba
 ```math
 t_k=\frac{3\pi}{4J(3/2)^k}+
 \bigl[24\,4^k-20\bigr]\frac\pi{2G},\qquad k\ge1.
-\tag{3}
+\qquad\text{(3)}
 ```
 
 With m<=n, a suitable set of m data qubits can assist each target in turn; they are restored after each completed operation. All within-register pair connectivity has been granted, so no extra movement to arrange triples is silently required. The full route takes
 
 ```math
 \boxed{T_k=(2n+1)t_k+\pi/G\quad(n\gt 1).}
-\tag{4}
+\qquad\text{(4)}
 ```
 
 The sequential option (1) is always included in optimization. The construction still preserves all unknown data, cross-register correlations, and an arbitrary bus state. Controls are fixed in advance, not selected from unknown input amplitudes.
@@ -89,7 +89,7 @@ Set R=G/J. Relative to the direct norm-J target-bus SWAP, Equation (3) becomes
 
 ```math
 \boxed{s_k(R)=(3/2)^{1-k}+\frac{24\,4^k-20}{R}.}
-\tag{5}
+\qquad\text{(5)}
 ```
 
 The k=1 primitive has s_1=1+76/R. It never beats the stronger direct-SWAP comparator under this compiler, even though its Ising coupling gain is 3/2.
@@ -154,7 +154,7 @@ Every summand lies in [0,n] and has mean mu_n. Hoeffding's inequality followed b
 ```math
 \Pr\left(\|\bar D_K-\mu_nI\|\gt a\right)
 \le2\,2^{n-1}\exp(-2Ka^2/n^2).
-\tag{6}
+\qquad\text{(6)}
 ```
 
 All interval Hamiltonians commute exactly. An intended Ising angle theta=pi/4 therefore has full operator error at most theta a/mu_n. The entire route uses M=3(2n+1) such gates. Reusing a good list under target relabelings and basis conjugations, telescoping the product of unitaries bounds the final operator error by M theta a/mu_n, uniformly over all data and bus states.
@@ -164,7 +164,7 @@ To obtain operator error at most eta with offline-list failure probability at mo
 ```math
 K\ge \frac{n^2M^2\theta^2}{2\eta^2\mu_n^2}
 \left[(n-1)\ln2+\ln(2/p)\right].
-\tag{7}
+\qquad\text{(7)}
 ```
 
 For fixed p and eta, K=O(n^4/eta^2) per Ising gate and the total contact count is O(n^5/eta^2). The charged contact duration is unchanged. A full-unitary operator error eta implies channel diamond distance at most 2 eta.
