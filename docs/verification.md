@@ -1,10 +1,10 @@
 # Verification and reproduction
 
-The mathematical proofs are in [Bandwidth](bandwidth.md), [Mixed helpers](mixed-helpers.md), [Entropy flow](entropy-flow.md), and [Control models](control-models.md). The programs check finite identities, numerical inequalities, support bookkeeping, and a specified compiler. They are not experiments, independent review, or numerical proofs of asymptotic theorems.
+Proofs are in [Bandwidth](bandwidth.md), [Mixed helpers](mixed-helpers.md), [Entropy flow](entropy-flow.md), [Accuracy and resources](accuracy-and-resources.md), and [Control models](control-models.md). Programs check finite identities and stated numerical inequalities. They are not experiments, independent review, or numerical proofs of asymptotic theorems.
 
 ## Run
 
-From the repository root, using Python 3.13:
+Use Python 3.13 with the pinned NumPy 2.3.5 and SciPy 1.17.0 dependencies:
 
 ```bash
 python -m pip install -r requirements.txt
@@ -12,32 +12,33 @@ python check_repository.py
 python verify.py
 ```
 
-The pinned dependencies match the recorded run: NumPy 2.3.5 and SciPy 1.17.0. `verify.py` copies the check programs into a temporary directory, runs each with one BLAS thread, and writes logs, complete JSON cases, and a summary into `build/verification/`. It fails on a nonzero exit status, missing success flag, or timeout. Use `--output PATH` for another output directory. Assertions are part of the tests; the runner rejects optimization mode.
+The verifier copies check sources into a temporary directory, runs each with one BLAS thread and assertions enabled, and writes complete JSON outputs, logs, and a summary under `build/verification/`. Use `--output PATH` for another directory. A failed assertion, nonzero exit, missing success flag, or timeout fails the run. Optimization mode is rejected.
 
-The compact [recorded summary](../results/verification.json) includes the source SHA-256 hashes, environment, counts, output hashes, and diagnostic residuals. It is never silently replaced by a normal verification run. Floating-point values can differ slightly across platforms, and timing fields are not reproducibility targets. Raw generated output hashes identify that particular run; they are not expected to be byte-identical across hardware.
+The [finite certificates and full closure checks](../results/scientific-closure.json) retain the quantitative examples. The [tracked summary](../results/verification.json) records source hashes, output hashes, environment, counts, and diagnostic residuals from an executed run. Timing and raw-output hashes can differ between runs; they are provenance, not portable numerical targets. Normal verification never replaces this tracked record.
 
 ## Coverage
 
-| Suite | What it checks |
+| Suite | Coverage |
 |---|---|
-| `verify_workspace_construction.py` | 40 spectral checks, 12 target–bus isometries, eight complete exchanges, clean-helper return and arbitrary bus restoration |
-| `verify_entropy_budget.py` | 120 Gibbs states, 100 fixed-spectrum orbit maxima, 60 noncommuting states, 54 scalar moment bounds, 16,512 balanced partitions |
-| `audit_conditional_rate.py` | 204 states; exact optimization over Hermitian interactions at fixed state and unit second moment, including singular-state support handling |
-| `audit_ensemble_cut.py` | 1,152 states over 18 switched segments of a six-qubit, two-bus system; unequal contacts and strong internal controls |
-| `audit_translation_approximation.py` | 33 uniform-label checks of coherent sampled-list operator bounds and explicit sufficient sample counts |
+| `verify_workspace_construction.py` | 40 spectral checks, 12 target–bus isometries, eight complete routes; synchronized exact block averaging |
+| `verify_entropy_budget.py` | 120 Gibbs states, 100 fixed-spectrum orbit maxima, 60 noncommuting states, 54 moment-generating bounds, 16,512 partitions |
+| `audit_conditional_rate.py` | 204 states with exact Hamiltonian optimization at fixed weighted second moment; support handling included |
+| `audit_ensemble_cut.py` | 1,152 states in 18 switched segments of a six-qubit/two-bus system with unequal contacts |
+| `audit_translation_approximation.py` | 33 no-helper uniform-label approximation checks |
 | `recursive_three.py` | Complete monomial operators for one, three, and nine occupied data qubits |
-| `verify_finite_control.py` | Ancilla-free Toffoli decomposition, bounded generators, frame transitions, recursive costs and 100 buffered wire permutations |
-| `verify_full_nine.py` | All 1,024 input columns of the nine-data-qubit plus bus compiled operation, using 390 internal gates |
-| `verify_mixed_helpers.py` | 546 exact spectral checks, 216 uniform compression checks, six complete helper-block routes, purified-input operator errors, reuse, and three same-entropy counterexamples |
+| `verify_finite_control.py` | Toffoli decomposition, bounded generators, frame changes, costs, and 100 buffered permutations |
+| `verify_full_nine.py` | All 1,024 columns of the nine-data-qubit plus bus compiler, using 390 internal gates |
+| `verify_mixed_helpers.py` | 546 spectral checks, 216 compression bounds, six helper-block routes, purification-inclusive errors, correlated-state examples |
+| `verify_scientific_closure.py` | 260 integer spectral crosschecks, five finite universal-comparator certificates, 15 synchronized/random-list checks, three fresh-payload reuse checks, 12 perturbation checks |
 
-The largest clean-helper exchange has three payload qubits and two helpers per module plus one bus: 11 physical qubits. Its allowed data-and-bus subspace has 128 input columns, all checked. The theorem does not claim the clean-helper isometry on all 2,048 arbitrary-helper inputs. The largest complete-routing residual across the clean-helper examples is below $9\times10^{-15}$. The nine-data-qubit compiler's unnormalized Frobenius residual is below $7\times10^{-15}$; this bounds the spectral error above. These values are algebraic floating-point residuals, not projected hardware fidelities.
+The largest clean-helper full route has 11 physical qubits and 128 allowed arbitrary-payload/bus input columns. The mixed-helper route tests separately propagate every helper sector and payload/bus column, through 11 physical qubits. The clean-helper isometry is not claimed on arbitrary helper inputs. Algebraic residuals below approximately $10^{-14}$ in these cases are floating-point consistency checks, not physical gate fidelities.
 
-The mixed-helper suite checks every helper sector and every payload/bus input column in its small-system examples, with at most 11 physical qubits. It uses the existing raw-contact and encoding-permutation implementation. Its good-subspace discrepancy is below $1.1\times10^{-14}$ and helper-block leakage is zero in the executed checks. The complete fixed-purification isometry error is computed from its weighted Gram operator, not by sampling payload states. Reuse checks compare one, two, and seven routes against the same preparation-error bound. Large helper-count examples use exact binomial-shell formulas, not exponentially large circuit simulations.
+The closure suite's fresh-payload check uses two different payload pairs, a common bus, and all 64 helper sectors. It evaluates the complete fixed-purification Gram operator on all 32 payload/bus input columns. This tests the same initial preparation-error bound on fresh batches rather than only on repeated powers of one input gate. It does not test new physical noise.
 
-The ensemble suite includes a selected collective input that violates an incorrectly input-uniform square-root bound. It separately verifies the common-ensemble bound. Its finite-difference derivative residual is a recorded diagnostic, distinct from the asserted analytic rate and second-moment comparisons. The conditional-rate optimization is over interactions for each sampled state, not over all possible states or architectures.
+Large finite-size examples use integer binomial-shell weights for rational $p=1/10$, rational gains, and rational bounds on constants. The tail decisions and strict time comparisons are exact rational arithmetic. Approximate decimal fields display those results; no 2,049- or 8,193-qubit state-vector evolution is claimed. The finite certificate compares a mixed-helper upper bound with a lower bound for **every** admissible unknown-helper protocol at the same error, contacts, and payload.
 
-## Inspection and maintenance
+The ensemble suite includes a selected collective state that violates an incorrectly input-uniform square-root rate bound. Its finite-difference residual is a diagnostic, distinct from its asserted rate/moment comparisons. Hamiltonian optimization in the conditional suite is exact for each sampled state, not an optimization over all states.
 
-`check_repository.py` parses Python syntax, checks local Markdown links and citation anchors, checks math delimiters, verifies the MIT license blob and contact paragraph, and confirms that all check sources and suites are represented by current recorded hashes. Display math uses GitHub dollar delimiters with blank surrounding lines. The CI workflow runs both checks and the complete numerical suite with read-only repository permissions.
+## Maintenance
 
-Update `results/verification.json` only by copying a successfully generated `summary.json` after the associated source changes. Keep raw cases under the ignored build directory or export them as a separate verification bundle. Adding more numerical examples does not change the stated analytical scope.
+`check_repository.py` checks syntax, local links and citation anchors, math delimiters, bibliography keys, the contact paragraph, the original license, exact suite coverage, and all check-source hashes. CI runs both the repository checker and complete numerical suite. Update the tracked result file only from a successful associated run after changing scientific check sources. Keep full generated cases in the ignored build directory or export them as a verification bundle.

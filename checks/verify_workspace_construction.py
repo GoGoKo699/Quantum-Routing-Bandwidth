@@ -50,7 +50,7 @@ def encode_block(bits:list[int],group:list[int])->None:
 def compiled_zz(n:int,s:int,theta:float,dense:bool=True)->tuple[np.ndarray,float,dict]:
     N=n+s;d=1<<N;gs=blocks(n,s);gain=sum(mu(len(g)) for g in gs)
     mags=np.array([N-2*x.bit_count() for x in range(d)],float)
-    K=1<<(n-1);phase=np.ones(2*d,complex);av=np.zeros(d)
+    K=1<<max(len(g)-1 for g in gs);phase=np.ones(2*d,complex);av=np.zeros(d)
     t=theta/gain
     for u in range(K):
         frame=[]
@@ -58,8 +58,11 @@ def compiled_zz(n:int,s:int,theta:float,dense:bool=True)->tuple[np.ndarray,float
             bits=[(x>>(N-1-i))&1 for i in range(N)]
             # Fan the target's Z value into clean leaders, not cloned states.
             for i in range(n,N): bits[i]^=bits[0]
-            # Coherent translation of unknown spectator labels.
-            for k in range(n-1): bits[k+1]^=(u>>(n-2-k))&1
+            # Synchronize block translations; uniform marginals suffice because
+            # the contact is an additive sum, not a product across blocks.
+            for g in gs:
+                width=len(g)-1
+                for k,i in enumerate(g[1:]): bits[i]^=(u>>(width-1-k))&1
             for g in gs: encode_block(bits,g)
             frame.append(sum(z<<(N-1-i) for i,z in enumerate(bits)))
         assert len(set(frame))==d, 'Every control frame must be a unitary permutation'

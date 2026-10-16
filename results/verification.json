@@ -5,8 +5,8 @@
   "suites": [
     {
       "script": "verify_workspace_construction.py",
-      "elapsed_seconds": 8.782,
-      "output_sha256": "6f978d63b3f13894b0436f34203ff9a801c8072aebf34e3d0e940ff2659849b1",
+      "elapsed_seconds": 1.23,
+      "output_sha256": "1732f227f519b6f47eccfee696b9a8ffbc8c59e589acd9af8d97c72a620706f1",
       "summary": {
         "model": "Free internal controls, J=1 per contact, s initialized helpers per module, arbitrary bus",
         "all_passed": true,
@@ -14,7 +14,7 @@
         "gate_count": 12,
         "route_count": 8,
         "scaling_count": 16,
-        "max_swap_isometry_error": 1.853256759500777e-15,
+        "max_swap_isometry_error": 1.3071221847431714e-15,
         "max_route_isometry_error": 8.99933488754697e-15,
         "largest_route": {
           "n": 3,
@@ -23,15 +23,15 @@
           "input_columns": 128,
           "bus_swaps": 7,
           "time": 5.497787143782138,
-          "isometry_operator_error": 7.307276409743338e-15,
-          "full_data_and_bus_process_fidelity": 0.9999999999999873,
+          "isometry_operator_error": 5.5857234926833385e-15,
+          "full_data_and_bus_process_fidelity": 0.9999999999999905,
           "helpers_returned": true
         }
       }
     },
     {
       "script": "verify_entropy_budget.py",
-      "elapsed_seconds": 2.295,
+      "elapsed_seconds": 1.359,
       "output_sha256": "c3353e0598cce58e22ad2a65423ebece6bb07073b5ca18794fb8b505f8002098",
       "summary": {
         "seed": 2026101607,
@@ -54,7 +54,7 @@
     },
     {
       "script": "audit_conditional_rate.py",
-      "elapsed_seconds": 1.558,
+      "elapsed_seconds": 0.945,
       "output_sha256": "5aa826199704fad562539b276d5a9526c9249a8fed329738e84fff8c11687c5a",
       "summary": {
         "all_assertions_passed": true,
@@ -71,7 +71,7 @@
     },
     {
       "script": "audit_ensemble_cut.py",
-      "elapsed_seconds": 1.613,
+      "elapsed_seconds": 1.225,
       "output_sha256": "f964a263505649b72ef5ea5ba827de56cef7e8a49f09dd0111f0969a705f651d",
       "summary": {
         "all_assertions_passed": true,
@@ -94,7 +94,7 @@
     },
     {
       "script": "audit_translation_approximation.py",
-      "elapsed_seconds": 1.016,
+      "elapsed_seconds": 0.694,
       "output_sha256": "9de84e02911247a9ab54a736d0a98c5562396ac8e839ed823703262af94b26c5",
       "summary": {
         "all_assertions_passed": true,
@@ -110,7 +110,7 @@
     },
     {
       "script": "recursive_three.py",
-      "elapsed_seconds": 0.987,
+      "elapsed_seconds": 0.682,
       "output_sha256": "4000ad570b792060da3a22050aef5cfd4e524ad056237aefb60268ce688629de",
       "summary": {
         "all_passed": true,
@@ -121,7 +121,7 @@
     },
     {
       "script": "verify_finite_control.py",
-      "elapsed_seconds": 0.99,
+      "elapsed_seconds": 0.793,
       "output_sha256": "f664a6fea3ef22ff7b2f415474330578f97a4fd3593820d1fef5618c5ee1ded2",
       "summary": {
         "all_passed": true,
@@ -140,8 +140,8 @@
     },
     {
       "script": "verify_full_nine.py",
-      "elapsed_seconds": 4.48,
-      "output_sha256": "54917e1dbe027d4728f3da9678bba4afb51ce6bac488a3a99943e23d9e60a151",
+      "elapsed_seconds": 2.956,
+      "output_sha256": "479dffb9c24d659344c2b34c36b9afa35a594a73b8d452ae62f6b3af4c06a01e",
       "summary": {
         "data_qubits": 9,
         "bus_qubits": 1,
@@ -149,14 +149,14 @@
         "explicit_two_qubit_control_gates": 390,
         "operator_error_upper_bound_by_unnormalized_Frobenius": 6.639096555949766e-15,
         "maximum_entry_error": 3.510833468576701e-16,
-        "runtime_seconds": 3.483804530000043,
+        "runtime_seconds": 2.3003544910000073,
         "all_passed": true
       }
     },
     {
       "script": "verify_mixed_helpers.py",
-      "elapsed_seconds": 3.722,
-      "output_sha256": "856d451d2a674e59d4d0604c62ecc05ff798eb7dce9dcb42e8585797e15e4d53",
+      "elapsed_seconds": 2.118,
+      "output_sha256": "b9043d5748f4b025c0cb5d127543e599891b2b5184cbe5af576091fcfffcf1d5",
       "summary": {
         "all_passed": true,
         "scope": "Analytical spectral sums and full helper-block operator checks; not physical noise simulation or independent proof review.",
@@ -166,8 +166,23 @@
         "complete_routes_count": 6,
         "finite_examples_count": 9,
         "same_entropy_counterexamples_count": 3,
-        "max_good_subspace_error": 1.0614506371007826e-14,
+        "max_good_subspace_error": 9.154722157333965e-15,
         "max_helper_block_leakage": 0.0
+      }
+    },
+    {
+      "script": "verify_scientific_closure.py",
+      "elapsed_seconds": 1.57,
+      "output_sha256": "1069745656f8c44f6d30b12457df83babd566e9d7fcdc73124939af12e136d3e",
+      "summary": {
+        "all_passed": true,
+        "scope": "Exact rational spectral certification, finite operator checks and analytical timing bounds; no external review or hardware performance claim.",
+        "exact_spectral_crosschecks": 260,
+        "finite_certificates_count": 5,
+        "uniform_list_checks_count": 15,
+        "fresh_payload_reuse_count": 3,
+        "perturbation_checks_count": 12,
+        "sample_count_examples_count": 3
       }
     }
   ],
@@ -181,7 +196,8 @@
     "checks/verify_finite_control.py": "a51ecda7a4433bab18931ece1932e7fa6274c49bc4b6c02e1e4b6a9bf2806642",
     "checks/verify_full_nine.py": "5921e758407b8ca5e10329b9b5136853aa4f4b7a354f660a800cb0cde341c362",
     "checks/verify_mixed_helpers.py": "106277889eeacc211804b4a233e32d35aa7a9aa768d9adc480ed2f892a5e31a1",
-    "checks/verify_workspace_construction.py": "ed907a14acddc9b6f73b71a8bea50f2376a61cf6b8de26a872a27b0232e69b48"
+    "checks/verify_scientific_closure.py": "7836c6a751d9a07eb9462ce9d5eea12a979f47b60b7035fca7923de8923bc4d9",
+    "checks/verify_workspace_construction.py": "7553585f54782505ec513df840c1ed6d8b3a1c359dc6b8bfa239ce6b120c3698"
   },
   "numpy": "2.3.5",
   "scipy": "1.17.0",
