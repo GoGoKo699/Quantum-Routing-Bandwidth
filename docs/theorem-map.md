@@ -121,7 +121,7 @@ This is not a per-gate error estimate. Exact helper marginal return follows from
 
 **Marginal return versus decoupling.** For the mixed preparation, the constructed physical helper marginal returns exactly; joint restoration, bus accuracy, and preparation-reference correlations satisfy the specified error bound. They are not exact identities on arbitrary helper inputs.
 
-**Contact time versus total time.** The matching construction can have exponentially many contact intervals and free global internal encodings. The [bounded-strength compiler](control-models.md#24-finite-control-consequence) has linear total duration at fixed $G/J$. That is a limitation of the displayed compiler, not a universal finite-speed impossibility theorem.
+**Contact time versus total time.** The synchronized exact construction uses $2^{\lceil N/(r+1)\rceil-1}$ intervals per Ising gate, linear total contact count for extensive polarization, and potentially long lists in other regimes. Global internal encodings remain free. The [bounded-strength compiler](control-models.md#24-finite-control-consequence) has linear total duration at fixed $G/J$. That is a limitation of the displayed compiler, not a universal finite-speed impossibility theorem.
 
 ## 6. Theorem-level reading and scrutiny
 
@@ -129,8 +129,12 @@ A focused technical reading can proceed from the [main task](mixed-helpers.md#1-
 
 For the originality comparison, [D26](related-work.md#d26) supplies the closest restricted-time bottleneck bound; [UHMG26](related-work.md#uhmg26) supplies the robustness–commutator framework, including multiple payload qubits. Merely invoking compression or changing architecture is not the claimed contribution. The additional statement is the matched extensive throughput law with fixed complete-operation error and returned preparation resources.
 
-The [verification guide](verification.md) maps those proofs to nine deterministic suites. Passing tests and source hashes establish reproducibility of the finite checks, not outside scientific endorsement. No external technical assessment is recorded by this map.
+The [verification guide](verification.md) maps those proofs to ten deterministic suites. Passing tests and source hashes establish reproducibility of the finite checks, not outside scientific endorsement. No external technical assessment is recorded by this map.
 
-## 7. Exposition structure
+## 7. Quantitative accuracy and resources
+
+[Accuracy and resources](accuracy-and-resources.md) supplies the approximate unknown-helper comparator for every helper size, exact integer finite-size time certificates, the synchronized-block list proof, polynomial approximate contact lists, and error composition for fresh-payload reuse. Its normalization analysis distinguishes a per-contact budget from a quadratic budget and a fixed sum of edge strengths. These are supporting quantitative statements, not a hardware implementation claim.
+
+## 8. Exposition structure
 
 A compact presentation can lead with the physical question and Theorem A, explain L1–L3 as the information-flow mechanism, and show U1–U3 as the matching realization. Result B fixes the exact endpoints. Result C explains why exact and approximate initialization differ and why general helper entropy is not a complete operational invariant. Keep the weighted-interface statement, support details, spectral certificates, and finite-control compilation available as supporting material rather than competing main stories.

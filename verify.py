@@ -23,6 +23,7 @@ SUITES = (
     ('verify_finite_control.py', 'finite_control_results.json'),
     ('verify_full_nine.py', 'verify_full_nine.json'),
     ('verify_mixed_helpers.py', 'verify_mixed_helpers.json'),
+    ('verify_scientific_closure.py', 'verify_scientific_closure.json'),
 )
 
 def main() -> None:
