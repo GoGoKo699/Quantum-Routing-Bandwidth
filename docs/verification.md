@@ -9,6 +9,7 @@ Use Python 3.13 with the pinned NumPy 2.3.5 and SciPy 1.17.0 dependencies:
 ```bash
 python -m pip install -r requirements.txt
 python check_repository.py
+python tools/test_release_checks.py
 python verify.py
 ```
 
@@ -41,4 +42,19 @@ The ensemble suite includes a selected collective state that violates an incorre
 
 ## Maintenance
 
-`check_repository.py` checks syntax, local links and citation anchors, math delimiters, bibliography keys, the contact paragraph, the original license, exact suite coverage, and all check-source hashes. CI runs both the repository checker and complete numerical suite. Update the tracked result file only from a successful associated run after changing scientific check sources. Keep full generated cases in the ignored build directory or export them as a verification bundle.
+`check_repository.py` checks syntax, local links and citation anchors, math delimiters, bibliography keys, the contact paragraph, the original license, the 30-milestone map, exact suite coverage, and all check-source hashes. The release checker additionally checks table-cell consistency across every reading page, duplicate equation tags, explicit success flags, and the digest of the tracked finite-size certificate file against its executed-output record. Seven regression tests exercise valid input and deliberately malformed material; these are structural tests, not extra scientific suites. CI runs these checks and the ten numerical suites. Update tracked scientific results only from a successful associated run after changing scientific check sources. Keep generated cases in the ignored build directory or export them as a verification bundle.
+
+
+## Hosted rendering
+
+The separate `Inspect hosted mathematics` workflow opens the actual public GitHub pages at an immutable commit in Chromium. It checks eight entrypoint, learning, and mathematical pages at desktop and mobile widths, verifies the expected mathematics has rendered, checks MathJax errors and table structure, and records page-level overflow. Screenshots and a JSON report are retained as workflow artifacts for 14 days. It needs network access and a separate Playwright installation; it is not a dependency of the offline scientific verifier.
+
+To invoke the same check in a network-enabled environment:
+
+```bash
+python -m pip install playwright==1.55.0
+python -m playwright install chromium
+python tools/inspect_hosted_render.py --ref COMMIT_SHA
+```
+
+Replace `COMMIT_SHA` with a full 40-character commit hash in this repository. The script uses no authentication and only reads this repository's public pages. A blocked host or unfinished render fails the check; it is not silently replaced by a local preview. A hosted-browser diagnostic and a screenshot review are different evidence from mathematical verification. Neither establishes independent scientific review or validates a different hosting renderer.

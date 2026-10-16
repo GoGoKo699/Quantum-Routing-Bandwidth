@@ -207,18 +207,18 @@ This uses no assumption that the control leaves the clean helpers pure at interm
 
 The converse would also hold if final helpers were allowed to change: an exactly unitary payload channel makes its Choi state pure and factorized from the remaining output. Its reference-assisted cut still carries at least 2n bits. Keeping the return requirement in the task makes the comparison and the constructive statement unambiguous.
 
-### 4.1 Fixed high-fidelity extension for 0<=s<=n
+### 4.1 Approximate routing
 
-Consider the entanglement fidelity F_e of the payload channel on the same Bell-reference test with initialized helpers and bus, after tracing out all remaining physical outputs. Suppose F_e>=1-epsilon. The global output is pure. Projecting it onto the ideal pure payload Choi vector gives an environmental vector, so the global output is within trace distance sqrt(epsilon) of a product of that ideal vector and some environmental pure state. The latter has cut entropy at least 2n.
+The fixed-error clean-helper law for every $s\ge0$ is the $p=0$ case of the [mixed-helper theorem](mixed-helpers.md#1-task-and-matching-law). Its converse uses a payload-sized mutual-information estimate, rather than a continuity penalty proportional to the number of helpers.
 
-The A Hilbert-space dimension is 2^{2n+s}. Entropy continuity therefore implies, for small epsilon,
+For the Bell-reference test above, let $F_e\ge1-\eta$ be the payload Choi overlap with the ideal pure target after all other outputs are traced out. The payload trace distance from that target is at most $e=\sqrt\eta$. Applying the [payload-sized endpoint argument](mixed-helpers.md#2-converse-an-entropy-budget-with-a-payload-sized-continuity-bound) gives
 
 $$
-S_A(T)\ge2n-\sqrt\epsilon(2n+s)-h_2(\sqrt\epsilon).
+S_A(T)\ge2n-4ne-\frac32h_2(e),\qquad e=\sqrt\eta.
 \tag{17}
 $$
 
-Replace the numerator 2n in the rate integration by this expression. At s<=n and fixed epsilon=0.01, it is at least 1.7n-h_2(0.1), preserving the asymptotic scaling in (1). This fidelity condition is not a worst-case diamond-error assertion. For s much larger than n, (17) alone need not be useful; no uniform approximate extension to that regime is asserted here.
+Replace the required entropy change $2n$ in the rate integration by this expression. For fixed sufficiently small $\eta$ it is proportional to $n$, uniformly in $s$. High Choi fidelity here supplies a necessary test of routing accuracy; it is not identified with a worst-case diamond guarantee. The exact construction satisfies the stronger complete-operation specification.
 
 ## 5. Matching exact construction with returned clean helpers
 
@@ -303,7 +303,14 @@ $$
 \tag{23}
 $$
 
-Equations (16),(22),(23) prove (1). The exact list contains 2^{n-1} joint spectator translations per Ising gate; this is independent of s because there are n-1 unknown spectators in the blocks. Its internal controls are still free. The no-helper polynomial-list approximation and the separately charged finite-control compiler are described in [Control models](control-models.md).
+Equations (16),(22),(23) prove (1). Synchronize the block translations using the same counter, restricted to the spectator bits of each block. Uniform marginal coverage of every block suffices because the contact is additive. The [exact synchronized schedule](accuracy-and-resources.md#3-short-exact-synchronized-block-schedules) uses
+
+$$
+K_{\mathrm{exact}}=2^{\max_i(b_i-1)}
+=2^{\lceil(n+s)/(s+1)\rceil-1}
+$$
+
+intervals per Ising gate. All conjugated contacts commute, so no short-time approximation is involved. At $s=0$ this reduces to $2^{n-1}$; with $s=\Theta(n)$ it is bounded independently of $n$. Internal controls are still free. Approximate-list guarantees are in [Accuracy and resources](accuracy-and-resources.md#4-polynomial-contact-lists-at-fixed-uniform-accuracy); finite gate-speed costs are separate in [Control models](control-models.md).
 
 ## 6. Unknown helpers on identical hardware
 
@@ -343,6 +350,6 @@ For s between zero and n, the exact optimal clean-helper interaction time has th
 
 The entries refer to ideal internal controls. In particular, the constant-time endpoint does not imply a constant-depth, bounded-strength implementation of the internal encodings or fanout.
 
-Equation (13) supplies a converse for arbitrary mixed physical states because I is a continuous entropy deficit. The matching construction and law (1), however, are for s exactly initialized pure helpers. No matching achievability theorem parameterized only by entropy is asserted for an arbitrary thermal or mixed helper state. Their spectrum and permitted error can matter. The exact-helper law is not a hardware noise-tolerance theorem.
+Equation (13) bounds arbitrary mixed physical states through their entropy deficit. The exact construction and law (1) use pure helpers. The [mixed-helper theorem](mixed-helpers.md) gives the matching fixed-error law for independent known product preparations, including their preparation references. The [correlated-state counterexample](mixed-helpers.md#7-why-the-product-state-assumption-cannot-be-dropped) explains why entropy alone does not determine achievable bandwidth for arbitrary helper states. Preparation robustness is distinct from ongoing dynamical noise.
 
 With bounded control strength, the displayed small-gate recursive implementation has linear total duration at a fixed internal/contact strength ratio G/J. That is a statement about a particular compiler, not a universal linear lower bound for all finite-speed protocols. The workspace law and this finite-control comparison use distinct resource models.
