@@ -2,7 +2,7 @@
 
 ## 1. Published conditional-variance bound
 
-Let rho_AB be an arbitrary finite-dimensional state. A may include arbitrarily many inaccessible reference systems. Let h act on AB, and let B have dimension d_B. Other Hamiltonian terms confined to A or to its complement do not contribute to dot S_A. Initially assume full rank; singular states are treated below.
+Let $`\rho_{AB}`$ be an arbitrary finite-dimensional state. A may include arbitrarily many inaccessible reference systems. Let h act on AB, and let B have dimension $`d_B`$. Other Hamiltonian terms confined to A or to its complement do not contribute to $`\dot S_A`$. Initially assume full rank; singular states are treated below.
 
 The contact contribution can be written
 
@@ -10,7 +10,7 @@ The contact contribution can be written
 \dot S_A=i\mathrm{Tr}\rho[h,\log_2\rho_A\otimes I_B],
 ```
 
-up to the irrelevant sign convention for the commutator. Since rho commutes with log rho, the same magnitude is obtained with the conditional modular difference K. Center both K and h, and apply Cauchy-Schwarz to the state-weighted inner product:
+up to the irrelevant sign convention for the commutator. Since $`\rho`$ commutes with $`\log\rho`$, the same magnitude is obtained with the conditional modular difference K. Center both K and h, and apply Cauchy-Schwarz to the state-weighted inner product:
 
 ```math
 |\dot S_A|
@@ -26,18 +26,18 @@ Using [DF19](../references/RELATED_WORK.md#df19), Corollary III.5, yields
 \qquad\text{(1)}
 ```
 
-For a bus qubit, the coefficient is c_DF=2 log_2 9. This combines the cited conditional-variance inequality with a state-weighted commutator estimate.
+For a bus qubit, the coefficient is $`c_{\mathrm{DF}}=2\log_2 9`$. This combines the cited conditional-variance inequality with a state-weighted commutator estimate.
 
 ## 2. Elementary qubit constant
 
-Use natural logarithms in this paragraph. Set sigma=rho_A tensor I_B and K=ln rho-ln sigma. Let r_i and s_j denote eigenvalues of rho and sigma, and use the spectral-overlap distribution
+Use natural logarithms in this paragraph. Set $`\sigma=\rho_A\otimes I_B`$ and $`K=\ln\rho-\ln\sigma`$. Let $`r_i`$ and $`s_j`$ denote eigenvalues of $`\rho`$ and $`\sigma`$, and use the spectral-overlap distribution
 
 ```math
 p_{ij}=r_i|\langle i|j\rangle|^2,
 \qquad X_{ij}=\ln r_i-\ln s_j,
 ```
 
-including only r_i>0 and s_j>0. Then E X^2=Tr rho K^2; this identity is valid even when the logarithms do not commute. The operator inequality rho<=d_B sigma follows, for example, by pinching in a basis of B and bounding each positive diagonal block by rho_A. Let B_0=sigma^{-1/2}rho sigma^{-1/2} on the support of sigma. Then
+including only $`r_i\gt0`$ and $`s_j\gt0`$. Then $`\mathbb E X^2=\mathrm{Tr}\rho K^2`$; this identity is valid even when the logarithms do not commute. The operator inequality $`\rho\le d_B\sigma`$ follows, for example, by pinching in a basis of B and bounding each positive diagonal block by $`\rho_A`$. Let $`B_0=\sigma^{-1/2}\rho\sigma^{-1/2}`$ on the support of $`\sigma`$. Then
 
 ```math
 \mathbb E e^X=\mathrm{Tr}\rho^2\sigma^{-1}
@@ -50,7 +50,7 @@ and
 \mathbb E e^{-X}=\mathrm{Tr}\Pi_\rho\sigma\le d_B.
 ```
 
-The scalar inequality x^2<=e^x+e^{-x}-2 gives
+The scalar inequality $`x^2\le e^x+e^{-x}-2`$ gives
 
 ```math
 \mathrm{Tr}\rho K^2\le2(d_B-1).
@@ -64,19 +64,19 @@ Centering can only decrease this second moment. Therefore for a bus qubit,
 \qquad\text{(2)}
 ```
 
-This is a sharper qubit coefficient than (1), but does not change the exponent. The d_B dependence of this elementary bound is worse for large d_B than the published logarithmic estimate, so it is not an improved general-dimensional SIE theorem.
+This is a sharper qubit coefficient than (1), but does not change the exponent. The $`d_B`$ dependence of this elementary bound is worse for large $`d_B`$ than the published logarithmic estimate, so it is not an improved general-dimensional SIE theorem.
 
 ## 3. Supports and admissible controls
 
-When rho is singular, one must not project log sigma onto supp rho before squaring. Off-support components of log sigma acting on supp rho contribute to Tr rho K^2. One may assign finite values to log rho on its kernel, compute the rho-weighted moments on the support of sigma, and take a regularized limit. The rank-deficient verification cases use this convention.
+When $`\rho`$ is singular, one must not project $`\log\sigma`$ onto $`\mathrm{supp}\rho`$ before squaring. Off-support components of $`\log\sigma`$ acting on $`\mathrm{supp}\rho`$ contribute to $`\mathrm{Tr}\rho K^2`$. One may assign finite values to $`\log\rho`$ on its kernel, compute the $`\rho`$-weighted moments on the support of $`\sigma`$, and take a regularized limit. The rank-deficient verification cases use this convention.
 
 For an integrated entropy inequality, regularize the entire finite physical/reference state by a small maximally mixed component, evolve it with the same unitary, prove the differential statement, integrate, and let the regularization vanish by entropy continuity. This avoids assuming differentiability at every rank-changing endpoint.
 
-Internal pulses do not change S_A. General bounded-contact controls follow by their well-defined propagators and continuity; no Trotter step count enters the rate proof. Unbounded internal Hamiltonians are not included in the contact second moment because their entropy contribution across the chosen cut is identically zero.
+Internal pulses do not change $`S_A`$. General bounded-contact controls follow by their well-defined propagators and continuity; no Trotter step count enters the rate proof. Unbounded internal Hamiltonians are not included in the contact second moment because their entropy contribution across the chosen cut is identically zero.
 
 ## 4. Weighted average-input entropy-flow theorem
 
-Let L be any set of physical qubits, R the other data region, and C a set of bus qubits. There is no direct L-R coupling. For each c in C, write the genuinely interacting part of all L-c edges as
+Let L be any set of physical qubits, R the other data region, and C a set of bus qubits. There is no direct L-R coupling. For each c in C, write the genuinely interacting part of all $`L\text{--}c`$ edges as
 
 ```math
 H_{Lc}^{\rm int}(t)
@@ -84,7 +84,7 @@ H_{Lc}^{\rm int}(t)
 \gamma_{jcab}(t)\sigma_j^a\sigma_c^b.
 ```
 
-Terms acting on only one side are absorbed into internal controls. If the original edge h_jc has operator norm at most J_jc(t), orthogonal projection onto its two-sided Pauli terms contracts its normalized Frobenius norm. Distinct j,c,a,b strings are orthogonal, so
+Terms acting on only one side are absorbed into internal controls. If the original edge $`h_{jc}`$ has operator norm at most $`J_{jc}(t)`$, orthogonal projection onto its two-sided Pauli terms contracts its normalized Frobenius norm. Distinct j,c,a,b strings are orthogonal, so
 
 ```math
 \|H_{Lc}^{\rm int}(t)\|_F^2
@@ -100,7 +100,7 @@ Consider a pure-state ensemble with
 \mathbb E_\psi |\psi\rangle\langle\psi|=I/D.
 ```
 
-Every input is acted on by the SAME input-independent controlled unitary. Its ensemble average remains I/D at all times, despite any correlations developed in individual members. Applying (2) separately to each c, averaging absolute values, and using Jensen gives
+Every input is acted on by the SAME input-independent controlled unitary. Its ensemble average remains $`I/D`$ at all times, despite any correlations developed in individual members. Applying (2) separately to each c, averaging absolute values, and using Jensen gives
 
 ```math
 \begin{aligned}
@@ -113,7 +113,7 @@ Every input is acted on by the SAME input-independent controlled unitary. Its en
 \qquad\text{(4)}
 ```
 
-The same theorem follows using published bound (1) with c_0 replaced by c_DF. Integrating proves
+The same theorem follows using published bound (1) with $`c_0`$ replaced by $`c_{\mathrm{DF}}`$. Integrating proves
 
 ```math
 \boxed{\mathbb E_\psi|S_L(\psi_T)-S_L(\psi_0)|
@@ -122,11 +122,11 @@ The same theorem follows using published bound (1) with c_0 replaced by c_DF. In
 \qquad\text{(5)}
 ```
 
-For uniform contacts, this is at most c_0 J |C| sqrt(|L|) T. There is no additive constant, factor n^delta, minimum segment length, or derivative condition. Compare the restricted-time-dependence average-input bound of [D26](../references/RELATED_WORK.md#d26).
+For uniform contacts, this is at most $`c_0J|C|\sqrt{|L|}\,T`$. There is no additive constant, factor $`n^\delta`$, minimum segment length, or derivative condition. Compare the restricted-time-dependence average-input bound of [D26](../references/RELATED_WORK.md#d26).
 
-This is not an input-uniform O(sqrt n) rate bound. For example, a GHZ logical qubit in the leaves under Z_C sum_j Z_j can have instantaneous entropy rate proportional to nJ. The proof neither assumes nor implies S(average rho)=average S(rho). It uses the linearity of the second moment and concavity of the square root. It also fails if the control schedule is selected using the unknown input's classical label: then the average evolved state need not stay maximally mixed.
+This is not an input-uniform $`O(\sqrt n)`$ rate bound. For example, a GHZ logical qubit in the leaves under $`Z_C\sum_j Z_j`$ can have instantaneous entropy rate proportional to $`nJ`$. The proof neither assumes nor implies $`S(\mathbb E\rho)=\mathbb E S(\rho)`$. It uses the linearity of the second moment and concavity of the square root. It also fails if the control schedule is selected using the unknown input's classical label: then the average evolved state need not stay maximally mixed.
 
-Additional known-initialized workspace is not free under this theorem. More generally, if an average physical state is bounded by kappa I/D, the same proof acquires sqrt(kappa). Unitary dynamics preserve that spectral domination. The entropy-deficit refinement and its matching workspace law are proved in [Initialization and routing bandwidth](bandwidth.md).
+Additional known-initialized workspace is not free under this theorem. More generally, if an average physical state is bounded by $`\kappa I/D`$, the same proof acquires $`\sqrt\kappa`$. Unitary dynamics preserve that spectral domination. The entropy-deficit refinement and its matching workspace law are proved in [Initialization and routing bandwidth](bandwidth.md).
 
 
 ## 5. No-helper converse and sequential comparator

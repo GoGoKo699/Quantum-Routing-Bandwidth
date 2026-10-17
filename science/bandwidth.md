@@ -2,16 +2,16 @@
 
 ## 1. Result, model, and comparison
 
-There are three internally controllable regions: two modules L and R and a single bus qubit C. Each module contains N=n+s qubits: n designated payload qubits and s helper qubits. Assume n>=1 and s>=0. There is no direct L-R interaction. A pair interaction between any module qubit j and C has operator norm at most J. All contacts may act simultaneously. Arbitrary unitaries confined to a module or to C take zero time. The contact Hamiltonian may have arbitrary time dependence with a well-defined propagator; no minimum switching interval is imposed. Set hbar=1.
+There are three internally controllable regions: two modules L and R and a single bus qubit C. Each module contains $`N=n+s`$ qubits: n designated payload qubits and s helper qubits. Assume $`n\ge1`$ and $`s\ge0`$. There is no direct L-R interaction. A pair interaction between any module qubit j and C has operator norm at most J. All contacts may act simultaneously. Arbitrary unitaries confined to a module or to C take zero time. The contact Hamiltonian may have arbitrary time dependence with a well-defined propagator; no minimum switching interval is imposed. Set hbar=1.
 
 The task is to exchange the two n-qubit payloads, including their correlations with arbitrary references. The construction returns C in its original arbitrary unknown state. Compare two helper specifications on **the same physical hardware and the same payload**:
 
-- Clean: the s helpers in each module initially occupy |0>^s and must return there.
+- Clean: the s helpers in each module initially occupy $`|0\rangle^{\otimes s}`$ and must return there.
 - Unknown: the s helpers contain arbitrary unknown quantum information, possibly entangled with references, and must be restored.
 
 There are no additional initialized degrees of freedom, measurements, resets, feedback, or input-dependent control sequences. No internal control connects different regions. In particular, the bus is not included in either freely controlled module.
 
-Let T_clean(n,s) and T_unknown(n,s) be the infimum interaction times for the respective exact tasks. The main laws are
+Let $`T_{\mathrm{clean}}(n,s)`$ and $`T_{\mathrm{unknown}}(n,s)`$ be the infimum interaction times for the respective exact tasks. The main laws are
 
 ```math
 \boxed{T_{\mathrm{clean}}(n,s)=\Theta\!\left(\frac{n}{J\sqrt{(n+s)(s+1)}}\right),}
@@ -23,24 +23,24 @@ Let T_clean(n,s) and T_unknown(n,s) be the infimum interaction times for the res
 \qquad\text{(2)}
 ```
 
-The constants in these comparisons do not depend on n or s. Thus the optimal times at fixed n and s differ by Theta(sqrt(s+1)). This is not a comparison that gives the clean case more physical contacts.
+The constants in these comparisons do not depend on n or s. Thus the optimal times at fixed n and s differ by $`\Theta(\sqrt{s+1})`$. This is not a comparison that gives the clean case more physical contacts.
 
 The bounds concern interaction time with free internal operations, not runtime with bounded local-gate speed. Preparation of the initial clean helpers is an assumed resource, not a charged operation. The bound is per contact, not a fixed total interaction-norm or control-work budget. Exact control lists can be exponentially long. These qualifications are part of the theorem, not implementation details to be omitted from it.
 
-For 0<=s<=n, (1) simplifies to Theta(sqrt(n/(s+1))/J). The full formula also covers s>n.
+For $`0\le s\le n`$, (1) simplifies to $`\Theta(\sqrt{n/(s+1)}/J)`$. The full formula also covers $`s\gt n`$.
 
 ## 2. Entropy deficit controls contact second moments
 
 The converse controls concentration in the contact spectrum through a conserved entropy deficit.
 
-For a physical density operator omega on a D-dimensional Hilbert space, write
+For a physical density operator $`\omega`$ on a D-dimensional Hilbert space, write
 
 ```math
 \mathcal I(\omega)=\log_2D-S(\omega).
 \qquad\text{(3)}
 ```
 
-This is an entropy deficit in bits. It is invariant under any unitary on the physical system. It is not the quadratic purity Tr omega^2 and is not an energy, work, or temperature.
+This is an entropy deficit in bits. It is invariant under any unitary on the physical system. It is not the quadratic purity $`\mathrm{Tr}\omega^2`$ and is not an energy, work, or temperature.
 
 ### 2.1 Remove only cut-local terms
 
@@ -58,7 +58,7 @@ Terms acting on only one side do not contribute to the entropy derivative and ar
 v_\mu^2=\sum_{j,a}c_{ja\mu}^2,\qquad v^2=\sum_\mu v_\mu^2.
 ```
 
-Orthogonal projection onto the two-sided Pauli coefficients contracts the normalized Frobenius norm. If the original edge has norm at most J_j, its normalized Frobenius norm is at most J_j. Therefore
+Orthogonal projection onto the two-sided Pauli coefficients contracts the normalized Frobenius norm. If the original edge has norm at most $`J_j`$, its normalized Frobenius norm is at most $`J_j`$. Therefore
 
 ```math
 v^2\le\sum_jJ_j^2.
@@ -69,7 +69,7 @@ This does NOT assume that subtracting the cut-local terms contracts the operator
 
 ### 2.2 A Gaussian bound on each collective coefficient
 
-For fixed mu, the summands on distinct sites commute. With normalized trace tau and v_mu>0,
+For fixed mu, the summands on distinct sites commute. With normalized trace tau and $`v_\mu\gt0`$,
 
 ```math
 \tau(e^{uA_\mu})
@@ -78,7 +78,7 @@ For fixed mu, the summands on distinct sites commute. With normalized trace tau 
 \qquad\text{(6)}
 ```
 
-The scalar Gaussian integral identity e^{tx^2}=E_G exp(sqrt(2t)Gx), G standard normal, implies
+The scalar Gaussian integral identity $`e^{tx^2}=\mathbb E_G e^{\sqrt{2t}Gx}`$, G standard normal, implies
 
 ```math
 \tau(e^{tA_\mu^2})\le(1-2tv_\mu^2)^{-1/2},
@@ -86,11 +86,11 @@ The scalar Gaussian integral identity e^{tx^2}=E_G exp(sqrt(2t)Gx), G standard n
 \qquad\text{(7)}
 ```
 
-These expressions are unchanged when A_mu is tensored with identities on the remaining physical qubits.
+These expressions are unchanged when $`A_\mu`$ is tensored with identities on the remaining physical qubits.
 
 ### 2.3 Gibbs variational estimate at a fixed entropy deficit
 
-Apply nonnegativity of relative entropy to omega and the normalized state exp(t A_mu^2)/Tr exp(t A_mu^2). Expanding this inequality, with natural logarithms in this calculation, gives
+Apply nonnegativity of relative entropy to $`\omega`$ and the normalized state $`e^{tA_\mu^2}/\mathrm{Tr}(e^{tA_\mu^2})`$. Expanding this inequality, with natural logarithms in this calculation, gives
 
 ```math
 t\mathrm{Tr}(\omega A_\mu^2)
@@ -98,7 +98,7 @@ t\mathrm{Tr}(\omega A_\mu^2)
 \qquad\text{(8)}
 ```
 
-No commutation between omega and A_mu is required. Choose t=1/(4v_mu^2). Equations (7)-(8) yield
+No commutation between $`\omega`$ and $`A_\mu`$ is required. Choose $`t=1/(4v_\mu^2)`$. Equations (7)-(8) yield
 
 ```math
 \mathrm{Tr}(\omega A_\mu^2)
@@ -106,15 +106,15 @@ No commutation between omega and A_mu is required. Choose t=1/(4v_mu^2). Equatio
 \qquad\text{(9)}
 ```
 
-The v_mu=0 case is trivial.
+The $`v_\mu=0`$ case is trivial.
 
-For Hermitian X_1,X_2,X_3, the operator inequality
+For Hermitian $`X_1,X_2,X_3`$, the operator inequality
 
 ```math
 (X_1+X_2+X_3)^2\preceq3(X_1^2+X_2^2+X_3^2)
 ```
 
-follows because the difference is the sum over i<j of (X_i-X_j)^2. Apply it to X_mu=A_mu tensor sigma_C^mu. Thus
+follows because the difference is the sum over $`i\lt j`$ of $`(X_i-X_j)^2`$. Apply it to $`X_\mu=A_\mu\otimes\sigma_C^\mu`$. Thus
 
 ```math
 \boxed{\mathrm{Tr}(\omega H_{\mathrm{int}}^2)
@@ -122,7 +122,7 @@ follows because the difference is the sum over i<j of (X_i-X_j)^2. Apply it to X
 \qquad\text{(10)}
 ```
 
-This is a state-dependent estimate. It interpolates between root-mean-square strength O(sqrt(sum J_j^2)) for bounded entropy deficit and a potentially collective O(sum J_j) strength when the deficit is extensive. No false input-uniform square-root limit is being asserted.
+This is a state-dependent estimate. It interpolates between root-mean-square strength $`O(\sqrt{\sum_jJ_j^2})`$ for bounded entropy deficit and a potentially collective $`O(\sum_jJ_j)`$ strength when the deficit is extensive. No false input-uniform square-root limit is being asserted.
 
 ## 3. From the second moment to information flow
 
@@ -134,7 +134,7 @@ Let A include a module and any local inaccessible references, and let B=C be the
 \qquad\text{(11)}
 ```
 
-Only the physical part of A is acted on by h; hence its second moment is the same when evaluated in the accessible physical density operator omega.
+Only the physical part of A is acted on by h; hence its second moment is the same when evaluated in the accessible physical density operator $`\omega`$.
 
 ### 3.1 Published foundation and attribution
 
@@ -144,7 +144,7 @@ Dupuis and Fawzi [DF19](../references/RELATED_WORK.md#df19), Corollary III.5, es
 V(C|A)_\rho\le\log_2^2(2d_C^2+1).
 ```
 
-Centering the conditional logarithm K=log_2 rho_AC-log_2(rho_A tensor I_C), expressing the entropy derivative as a commutator, and applying weighted Cauchy-Schwarz gives
+Centering the conditional logarithm $`K=\log_2\rho_{AC}-\log_2(\rho_A\otimes I_C)`$, expressing the entropy derivative as a commutator, and applying weighted Cauchy-Schwarz gives
 
 ```math
 |\dot S_A|\le2\sqrt{V(C|A)_\rho}\,\Delta_\rho h
@@ -154,7 +154,7 @@ Centering the conditional logarithm K=log_2 rho_AC-log_2(rho_A tensor I_C), expr
 
 This published-lemma route gives the same n,s exponents with a different numerical constant.
 
-For the smaller constant c_0, the elementary argument in [Entropy flow](entropy-flow.md) uses rho_AC <= d_C(rho_A tensor I_C). In the spectral-overlap distribution of rho and sigma=rho_A tensor I_C, X=ln r_i-ln s_j satisfies E exp(X)<=d_C and E exp(-X)<=d_C. The scalar inequality X^2<=exp(X)+exp(-X)-2 then yields Tr rho(ln rho-ln sigma)^2<=2(d_C-1). At d_C=2 the commutator estimate gives (11). Noncommuting logarithms are handled through the overlap distribution, not by assuming simultaneous diagonalizability. For singular rho, off-support contributions of log sigma must not be discarded before squaring; the support treatment is given in [Entropy flow](entropy-flow.md).
+For the smaller constant $`c_0`$, the elementary argument in [Entropy flow](entropy-flow.md) uses $`\rho_{AC}\le d_C(\rho_A\otimes I_C)`$. In the spectral-overlap distribution of $`\rho`$ and $`\sigma=\rho_A\otimes I_C`$, $`X=\ln r_i-\ln s_j`$ satisfies $`\mathbb E e^X\le d_C`$ and $`\mathbb E e^{-X}\le d_C`$. The scalar inequality $`X^2\le e^X+e^{-X}-2`$ then yields $`\mathrm{Tr}\rho(\ln\rho-\ln\sigma)^2\le2(d_C-1)`$. At $`d_C=2`$ the commutator estimate gives (11). Noncommuting logarithms are handled through the overlap distribution, not by assuming simultaneous diagonalizability. For singular $`\rho`$, off-support contributions of $`\log\sigma`$ must not be discarded before squaring; the support treatment is given in [Entropy flow](entropy-flow.md).
 
 Conditional-variance and entropy-fluctuation ingredients have prior precedents [DF19](../references/RELATED_WORK.md#df19), [GP22](../references/RELATED_WORK.md#gp22). Their role here is the combination with (10), the specified physical initialization budget, and a matching routing construction.
 
@@ -171,7 +171,7 @@ Combining (10)-(11) gives
 
 All entropy units are bits. Internal Hamiltonians have zero entropy contribution across the chosen cut and preserve I. They may have arbitrary norm; they need not be estimated by (13). For singular reference tests, regularize the complete state, apply the differential bound, integrate, and take the limit using entropy continuity. Instantaneous internal pulses do not change cut entropy. More general controls follow by their well-defined propagators and continuity.
 
-For several bus qubits, apply the estimate to each bus-site term and sum. For an input ensemble whose mean physical density operator is bar omega, Jensen's inequality on the second moments similarly yields
+For several bus qubits, apply the estimate to each bus-site term and sum. For an input ensemble whose mean physical density operator is $`\bar\omega`$, Jensen's inequality on the second moments similarly yields
 
 ```math
 \mathbb E|\dot S_L|
@@ -180,11 +180,11 @@ For several bus qubits, apply the estimate to each bus-site term and sum. For an
 \qquad\text{(14)}
 ```
 
-The same unitary must act on every possible input. Otherwise bar omega need not evolve unitarily. At I=0, the sharper one-design constant in [Entropy flow](entropy-flow.md) applies, but (14) supplies a broader entropy-deficit dependence.
+The same unitary must act on every possible input. Otherwise $`\bar\omega`$ need not evolve unitarily. At $`\mathcal I=0`$, the sharper one-design constant in [Entropy flow](entropy-flow.md) applies, but (14) supplies a broader entropy-deficit dependence.
 
 ## 4. Clean-helper lower bound
 
-Prepare each payload qubit maximally entangled with a reference on its own side. Prepare all 2s physical helpers and C pure. The reference test is pure globally, but its **accessible physical** density operator omega has entropy 2n bits in dimension D=2^{2(n+s)+1}. Therefore
+Prepare each payload qubit maximally entangled with a reference on its own side. Prepare all 2s physical helpers and C pure. The reference test is pure globally, but its **accessible physical** density operator $`\omega`$ has entropy 2n bits in dimension $`D=2^{2(n+s)+1}`$. Therefore
 
 ```math
 \mathcal I(\omega(t))=2s+1
@@ -193,7 +193,7 @@ Prepare each payload qubit maximally entangled with a reference on its own side.
 
 at all times, despite intermediate correlations, purity concentration, or mixing inside the modules.
 
-Take A to be all physical L qubits together with the n local payload references. Initially S_A=0. An exact payload exchange with the stated helper return produces S_A=2n. Its left cut has N=n+s norm-J contacts. Integrating (13) gives
+Take A to be all physical L qubits together with the n local payload references. Initially $`S_A`$=0. An exact payload exchange with the stated helper return produces $`S_A`$=2n. Its left cut has $`N=n+s`$ norm-J contacts. Integrating (13) gives
 
 ```math
 T\ge\frac{\sqrt{\ln2}}{2\sqrt6}
@@ -222,7 +222,7 @@ Replace the required entropy change $`2n`$ in the rate integration by this expre
 
 ## 5. Matching exact construction with returned clean helpers
 
-Let m=s+1. Divide the N physical qubits of one module into m balanced blocks of sizes b_1,...,b_m, with each size either floor(N/m) or ceil(N/m). Choose as leaders the current payload target q_0 and the s clean helpers q_1,...,q_s. All remaining n-1 payload qubits are distributed as spectators across the blocks.
+Let $`m=s+1`$. Divide the N physical qubits of one module into m balanced blocks of sizes $`b_1,\ldots,b_m`$, with each size either floor(N/m) or ceil(N/m). Choose as leaders the current payload target $`q_0`$ and the s clean helpers $`q_1,\ldots,q_s`$. All remaining $`n-1`$ payload qubits are distributed as spectators across the blocks.
 
 ### 5.1 An occupied-data block
 
@@ -236,7 +236,7 @@ J\mu_b Z_{q_i}Z_C\otimes I_{\mathrm{spectators}},
 \qquad\text{(18)}
 ```
 
-Each epsilon_j is an independent uniform sign. Here identity on spectators is a full operator identity, not an average channel on random spectator inputs. To recall the encoding explicitly, write a block basis label as (q,r), with spectator Hamming weight w. Set f=1 if 2w>b and f=0 otherwise; output leader q'=q xor f and output spectators r'=r xor q'. The collective magnetization of the output is (-1)^q |b-2w|. Thus a reversible permutation E obeys E^dagger(sum Z_j)E=Z_q D_b. Averaging all spectator XOR translations gives the scalar mean mu_b.
+Each $`\epsilon_j`$ is an independent uniform sign. Here identity on spectators is a full operator identity, not an average channel on random spectator inputs. To recall the encoding explicitly, write a block basis label as (q,r), with spectator Hamming weight w. Set $`f=1`$ if $`2w\gt b`$ and $`f=0`$ otherwise; output leader $`q'=q\oplus f`$ and output spectators $`r'=r\oplus q'`$. The collective magnetization of the output is $`(-1)^q|b-2w|`$. Thus a reversible permutation E obeys $`E^\dagger(\sum_jZ_j)E=Z_qD_b`$. Averaging all spectator XOR translations gives the scalar mean $`\mu_b`$.
 
 All conjugated diagonal interactions commute. Equal-duration intervals therefore implement the averaged Hamiltonian **exactly**, with no vanishing-interval limit. Applying the block simulations simultaneously yields
 
@@ -255,7 +255,7 @@ Before (19), perform the module-internal fanout
 F=\prod_{i=1}^{s}\mathrm{CNOT}_{q_0\to q_i},
 ```
 
-and undo F afterward. On inputs with the helpers in |0>^s,
+and undo F afterward. On inputs with the helpers in $`|0\rangle^{\otimes s}`$,
 
 ```math
 F^\dagger e^{-itH_{\mathrm{block}}}F
@@ -277,13 +277,13 @@ The fanout creates and later removes correlations; it does not clone an unknown 
 
 ### 5.3 Uniform gain estimate
 
-For the sign sum S_b, E S_b^2=b and E S_b^4=3b^2-2b. Interpolation between its first, second, and fourth moments gives
+For the sign sum $`S_b`$, $`\mathbb E S_b^2=b`$ and $`\mathbb E S_b^4=3b^2-2b`$. Interpolation between its first, second, and fourth moments gives
 
 ```math
 \sqrt{b/3}\le\mathbb E|S_b|=\mu_b\le\sqrt b.
 ```
 
-Balanced block sizes obey b_i>=N/(2m). Cauchy-Schwarz supplies the upper bound. Hence
+Balanced block sizes obey $`b_i\ge N/(2m)`$. Cauchy-Schwarz supplies the upper bound. Hence
 
 ```math
 \boxed{\sqrt{(n+s)(s+1)/6}\le\gamma_{n,s}\le\sqrt{(n+s)(s+1)}.}
@@ -294,9 +294,9 @@ No optimal prefactor is claimed. The explicit block grouping need not maximize t
 
 ### 5.4 Full payload exchange
 
-Rotate the target and bus bases to realize the XX, YY, and ZZ versions of (20). The three angle-pi/4 operations commute on the target-bus subsystem and give SWAP up to a fixed global phase in time 3pi/(4J gamma_n,s).
+Rotate the target and bus bases to realize the XX, YY, and ZZ versions of (20). The three $`\pi/4`$ operations commute on the target-bus subsystem and give SWAP up to a fixed global phase in time $`3\pi/(4J\gamma_{n,s})`$.
 
-A buffered sequence uses 2n+1 target-bus SWAPs. For j=1,...,n, swap L_j with C, then R_j with C. Finally swap L_1 with C and rotate only the L payload labels left by one position. The output is precisely the payload exchange with the bus restored; all helpers were restored after each elementary gate. Therefore
+A buffered sequence uses 2n+1 target-bus SWAPs. For j=1,...,n, swap $`L_j`$ with C, then $`R_j`$ with C. Finally swap $`L_1`$ with C and rotate only the L payload labels left by one position. The output is precisely the payload exchange with the bus restored; all helpers were restored after each elementary gate. Therefore
 
 ```math
 \boxed{T_{\mathrm{clean}}(n,s)\le\frac{3\pi(2n+1)}{4J\gamma_{n,s}}.}
@@ -314,7 +314,7 @@ intervals per Ising gate. All conjugated contacts commute, so no short-time appr
 
 ## 6. Unknown helpers on identical hardware
 
-For the unknown-helper task, put every physical module qubit, including the s helpers, in a Bell pair with its own inaccessible reference. The bus can be fixed pure for the lower bound. The physical density matrix always obeys omega<=2I/D. Orthogonality of the pair-contact Pauli coefficients gives
+For the unknown-helper task, put every physical module qubit, including the s helpers, in a Bell pair with its own inaccessible reference. The bus can be fixed pure for the lower bound. The physical density matrix always obeys $`\omega\le2I/D`$. Orthogonality of the pair-contact Pauli coefficients gives
 
 ```math
 \mathrm{Tr}\omega H_{\mathrm{int}}^2\le2(n+s)J^2.
@@ -327,7 +327,7 @@ T_{\mathrm{unknown}}(n,s)\ge\frac{\ln2}{2J}\frac{n}{\sqrt{n+s}}.
 \qquad\text{(24)}
 ```
 
-For the upper bound, use all N=n+s qubits in the occupied-data block amplifier. Its spectators, including the unknown helpers, are returned after each target-bus operation. Exchange only the n payload labels in the same buffered sequence:
+For the upper bound, use all $`N=n+s`$ qubits in the occupied-data block amplifier. Its spectators, including the unknown helpers, are returned after each target-bus operation. Exchange only the n payload labels in the same buffered sequence:
 
 ```math
 T_{\mathrm{unknown}}(n,s)
@@ -335,7 +335,7 @@ T_{\mathrm{unknown}}(n,s)
 \qquad\text{(25)}
 ```
 
-Since sqrt((n+s)/3)<=mu_(n+s)<=sqrt(n+s), (24)-(25) prove (2). Both cases have identical numbers and strengths of bus contacts, identical payloads, free internal controls, and helper return. The only altered promise is the initial helper state.
+Since $`\sqrt{(n+s)/3}\le\mu_{n+s}\le\sqrt{n+s}`$, (24)-(25) prove (2). Both cases have identical numbers and strengths of bus contacts, identical payloads, free internal controls, and helper return. The only altered promise is the initial helper state.
 
 ## 7. Consequences and scope
 
@@ -343,10 +343,10 @@ For s between zero and n, the exact optimal clean-helper interaction time has th
 
 | Clean helpers per module | Interaction time |
 |---|---|
-| 0 or a fixed number | Theta(sqrt(n)/J) |
-| Theta(log n) | Theta(sqrt(n/log n)/J) |
-| Theta(sqrt n) | Theta(n^(1/4)/J) |
-| Theta(n) | Theta(1/J) |
+| 0 or a fixed number | $`\Theta(\sqrt n/J)`$ |
+| $`\Theta(\log n)`$ | $`\Theta(\sqrt{n/\log n}/J)`$ |
+| $`\Theta(\sqrt n)`$ | $`\Theta(n^{1/4}/J)`$ |
+| $`\Theta(n)`$ | $`\Theta(1/J)`$ |
 
 The entries refer to ideal internal controls. In particular, the constant-time endpoint does not imply a constant-depth, bounded-strength implementation of the internal encodings or fanout.
 
