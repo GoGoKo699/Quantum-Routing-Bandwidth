@@ -1,0 +1,33 @@
+name: Apply authorized repository layout
+on:
+  push:
+    branches: ['refurnish/current-guidance-20261017']
+    paths: ['.github/refurnish.py']
+permissions:
+  contents: write
+jobs:
+  migrate:
+    if: github.repository == 'GoGoKo699/Quantum-Routing-Bandwidth' && github.ref == 'refs/heads/refurnish/current-guidance-20261017'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python .github/refurnish.py
+      - run: python -m pip install -r verification/requirements.txt
+      - run: python verification/run_all.py
+      - name: Record the executed sources and check the complete tree
+        run: |
+          cp build/verification/summary.json verification/results/verification.json
+          python check_repository.py
+          python verification/tools/test_structure.py
+      - name: Commit only to the authorized working branch
+        run: |
+          rm .github/refurnish.py
+          git add -A
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Organize science, shared learning, references, and verification'
+          git push origin HEAD:refs/heads/refurnish/current-guidance-20261017
