@@ -2,5 +2,5 @@ __pycache__/
 *.py[cod]
 .venv/
 build/
-checks/*.json
+verification/checks/*.json
 .pytest_cache/

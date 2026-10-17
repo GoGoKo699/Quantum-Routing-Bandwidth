@@ -66,7 +66,7 @@ This entropy deficit is conserved by every admissible physical unitary, even whi
 \qquad\text{(4)}
 ```
 
-where $`A`$ includes the entire physical left module, its payload references, and its helper-preparation references. Initially $`S_A=0`$. The underlying conditional entropy-rate estimate may equivalently use the published conditional-variance bound [DF19](related-work.md#df19), changing only a universal constant.
+where $`A`$ includes the entire physical left module, its payload references, and its helper-preparation references. Initially $`S_A=0`$. The underlying conditional entropy-rate estimate may equivalently use the published conditional-variance bound [DF19](../references/RELATED_WORK.md#df19), changing only a universal constant.
 
 It is unnecessary to pay an error-continuity factor proportional to the helper dimension. Let $`a`$ consist of the left payload and its original payload references, and let $`b`$ be the corresponding right subsystem. Each has dimension $`2^{2n}`$. The ideal exchanged-payload Choi vector is maximally entangled across $`a:b`$, so its mutual information is $`4n`$ bits.
 
@@ -246,7 +246,7 @@ T_{0,p}(n,s)=\Theta\!\left(\frac{n}{J\sqrt{n+s}}\right),
 \qquad\text{(16)}
 ```
 
-This exact/full-rank obstruction is already explicitly noted in the Outlook of [UHMG26](related-work.md#uhmg26), which identifies approximate transfer with thermal ancillas as a further direction. Equation (2) supplies a matched answer for this modular routing problem, not a claim to have first noticed the obstruction.
+This exact/full-rank obstruction is already explicitly noted in the Outlook of [UHMG26](../references/RELATED_WORK.md#uhmg26), which identifies approximate transfer with thermal ancillas as a further direction. Equation (2) supplies a matched answer for this modular routing problem, not a claim to have first noticed the obstruction.
 
 For any fixed allowed error and fixed $`p\lt 1/2`$, increasing $`s`$ supplies a growing advantage. For zero error, no positive full-rank bias alone changes the unknown-helper exponent. The two statements are compatible because the constants and the tolerated rare input sectors change with the error requirement.
 
@@ -256,7 +256,7 @@ For $`n=s=256`$, $`p=0.1`$, and complete-operation half diamond budget $`\epsilo
 
 These large-size figures are calculations of spectral probabilities and proven timing formulas, not simulation of a 1,025-qubit circuit. The compressed prefix has high **joint** zero probability; it is not a set of independent perfectly clean qubits.
 
-The executable check [verify_mixed_helpers.py](../checks/verify_mixed_helpers.py) compares exact shell sums against complete spectra, checks the uniform concentration estimates, and propagates all helper sectors and payload/bus columns for small systems using the existing raw-contact implementation. Its largest full physical system has 11 qubits. For the purification-inclusive error, it evaluates the exact Gram operator
+The executable check [verify_mixed_helpers.py](../verification/checks/verify_mixed_helpers.py) compares exact shell sums against complete spectra, checks the uniform concentration estimates, and propagates all helper sectors and payload/bus columns for small systems using the existing raw-contact implementation. Its largest full physical system has 11 qubits. For the purification-inclusive error, it evaluates the exact Gram operator
 
 ```math
 \sum_x q_x(V_x-U_{\ast})^\dagger(V_x-U_{\ast}),
@@ -285,7 +285,7 @@ Thus a fixed low-weight pure spike plus a large maximally mixed component can ha
 
 ## 8. Relation to existing work
 
-[UHMG26](related-work.md#uhmg26) proves a general relationship between exact robust-subspace transfer and commutator Schatten norms, includes multiple transferred qubits, and gives a symmetric-subspace compression construction. Compression before transfer and mixed states supported in a favorable subspace therefore are not new mechanisms here. Its stated exact theorem and power-law light cones do not themselves supply an extensive full-register throughput bound or an iid full-rank fixed-error optimal-time law for the three-region bounded-bus model. The direct entropy budget and its matched coherent construction supply those additional steps.
+[UHMG26](../references/RELATED_WORK.md#uhmg26) proves a general relationship between exact robust-subspace transfer and commutator Schatten norms, includes multiple transferred qubits, and gives a symmetric-subspace compression construction. Compression before transfer and mixed states supported in a favorable subspace therefore are not new mechanisms here. Its stated exact theorem and power-law light cones do not themselves supply an extensive full-register throughput bound or an iid full-rank fixed-error optimal-time law for the three-region bounded-bus model. The direct entropy budget and its matched coherent construction supply those additional steps.
 
 The arXiv PDF's Outlook explicitly identifies approximate transfer with thermal ancillas as a further direction. The comparison refers to those theorem statements and that Outlook, rather than asserting the absence of related work elsewhere.
 

@@ -1,6 +1,6 @@
 """Adversarial finite-dimensional checks of the entropy-deficit moment bound.
 
-The universal claims rest on the analytical proof in docs/bandwidth.md.
+The universal claims rest on the analytical proof in science/bandwidth.md.
 Tests include exact maximization over fixed-spectrum unitary orbits, Gibbs
 states of H^2 (entropy-constrained moment maximizers), and noncommuting states.
 """

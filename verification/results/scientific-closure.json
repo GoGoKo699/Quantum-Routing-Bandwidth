@@ -289,7 +289,7 @@
       "p": 0.01,
       "payload_bus_input_columns": 32,
       "helper_sectors": 64,
-      "purified_isometry_operator_error": 0.04228054853002728,
+      "purified_isometry_operator_error": 0.042280548530027266,
       "same_preparation_bound": 0.04882258477385236
     },
     {
@@ -309,69 +309,69 @@
       "p": 0.4,
       "payload_bus_input_columns": 32,
       "helper_sectors": 64,
-      "purified_isometry_operator_error": 1.2713709136204083,
+      "purified_isometry_operator_error": 1.2713709136204088,
       "same_preparation_bound": 1.523280670132724
     }
   ],
   "perturbation_checks": [
     {
       "time": 0.6413895334877393,
-      "operator_error": 0.017068530294159712,
+      "operator_error": 0.017068530294159705,
       "Duhamel_upper": 0.02112885840578925
     },
     {
       "time": 0.07384639959688252,
-      "operator_error": 0.002085233770911831,
+      "operator_error": 0.0020852337709118315,
       "Duhamel_upper": 0.002088518438619112
     },
     {
       "time": 1.7129631722724368,
-      "operator_error": 0.02938512320997811,
+      "operator_error": 0.029385123209977822,
       "Duhamel_upper": 0.05033711297919295
     },
     {
       "time": 1.5264082231101628,
-      "operator_error": 0.036816320350972216,
+      "operator_error": 0.036816320350972195,
       "Duhamel_upper": 0.042710437623595596
     },
     {
       "time": 1.6182812521287437,
-      "operator_error": 0.02917270209243977,
+      "operator_error": 0.029172702092439995,
       "Duhamel_upper": 0.04645824983778291
     },
     {
       "time": 1.4308817167826757,
-      "operator_error": 0.02997651091563912,
+      "operator_error": 0.02997651091563916,
       "Duhamel_upper": 0.04652593781143633
     },
     {
       "time": 1.540247490272937,
-      "operator_error": 0.03446275926605976,
-      "Duhamel_upper": 0.04462872453184362
+      "operator_error": 0.034462759266059816,
+      "Duhamel_upper": 0.044628724531843626
     },
     {
       "time": 0.8742319016315779,
-      "operator_error": 0.018621709484664777,
+      "operator_error": 0.01862170948466487,
       "Duhamel_upper": 0.021696219045081004
     },
     {
       "time": 1.5731952035922157,
-      "operator_error": 0.024368602975132006,
+      "operator_error": 0.024368602975131957,
       "Duhamel_upper": 0.040608811947598515
     },
     {
       "time": 0.2032475488523221,
-      "operator_error": 0.009520774279861224,
-      "Duhamel_upper": 0.009539615448033403
+      "operator_error": 0.009520774279861244,
+      "Duhamel_upper": 0.009539615448033402
     },
     {
       "time": 1.8671045194284732,
-      "operator_error": 0.0352720059424501,
+      "operator_error": 0.035272005942450384,
       "Duhamel_upper": 0.06537201088549645
     },
     {
       "time": 0.7856828169294799,
-      "operator_error": 0.028901618543840157,
+      "operator_error": 0.028901618543840293,
       "Duhamel_upper": 0.03632336699100447
     }
   ],

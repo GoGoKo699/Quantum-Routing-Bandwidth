@@ -1,37 +1,35 @@
-# Guidance for research assistants
+# Research repository guidance
 
-## Scope and canonical material
+## Scope and authoritative account
 
-Modify only `GoGoKo699/Quantum-Routing-Bandwidth`. Read the README, `docs/theorem-map.md`, and `docs/related-work.md` before changing a scientific claim. Canonical statements are in `docs/bandwidth.md`, `docs/mixed-helpers.md`, `docs/entropy-flow.md`, and `docs/accuracy-and-resources.md`; control-cost results are in `docs/control-models.md`. Keep one canonical proof per statement and link to it.
+Modify only `GoGoKo699/Quantum-Routing-Bandwidth` under the current project's grant. Read the root README, `science/README.md`, `science/theorem-map.md`, and `references/RELATED_WORK.md` before altering a scientific claim. The topic pages in `science/` own the definitions, theorems, proofs, constructions, examples, and physical interpretation. Give each result one canonical proof and cross-link it rather than maintaining a second full account.
 
-The scientific core is the matched independent-helper fixed-error law, its exact clean/unknown endpoints, the full-rank zero-error boundary, and the correlated-helper counterexample. Furnishing improves navigation, teaching, attribution, and display; it does not authorize new models, altered claims, or a manuscript. Retain the MIT license and exact README purpose/contact paragraph. Do not copy private cross-project records into this public repository.
+Keep the scientific presentation focused on its question and contribution. Preserve motivation, assumptions, quantifiers, imported theorem attribution, proof domains, and reproduction pointers. Exclude publication planning, development diaries, and private cross-project records. Bibliographic source titles and references to an author's manuscript edition remain accurate source descriptions.
 
-## Scientific invariants
+## Essential scientific distinctions
 
-- Both module–bus interfaces are bounded. The bus belongs to neither freely controlled module. The main norm budget is per physical two-qubit contact, not a fixed global norm. Changed aggregate budgets must be labeled.
-- Payload and bus inputs may have arbitrary reference entanglement. Exact unknown-helper identities hold on arbitrary helpers and references; clean-helper identities hold on their initialized subspace.
-- For independent mixed helpers, distinguish exact physical helper marginal return in the construction from approximate joint/reference restoration and bus accuracy. The error is a half diamond distance with fixed inserted helper purifications, not arbitrary replacement helper inputs.
-- Preparations are known and independent of payload/bus. There is no measurement, reset, input-dependent control, or unlisted clean workspace. Compression is reversible; all entropy-bearing qubits remain in the device.
-- The fixed-error law holds for all nonnegative helper counts and fixed error between zero and 0.1, uniformly in the stated iid bias. Constants may deteriorate as error tends to zero. The older direct full-cut continuity estimate is not a restriction of the stronger law.
-- Free internal controls define the matching interaction-time result. The bounded-strength compiler is a separate construction, not a universal finite-speed lower bound. Preparation cost, contact count, contact time, and total time differ.
-- Entropy deficit is lack of entropy relative to the maximally mixed state, not work or quadratic purity. The converse is general; saturation from entropy alone is false for arbitrary correlated helpers.
-- The one-design argument uses a common input-independent unitary. It is not a bound on every selected collective state. High process fidelity is not equivalent to worst-case diamond accuracy.
-- Nonaccumulating preparation error under ideal reuse comes from one invariant favorable sector. New synthesis and dynamical errors generally accumulate. A finite numerical certificate is not a large-circuit simulation or hardware validation.
+- Both module–bus interfaces are bounded; the bus belongs to neither freely controlled module. The main budget is per physical two-qubit contact. Label every changed aggregate-strength convention.
+- Payload and bus inputs can have arbitrary reference entanglement. The exact unknown-helper task covers arbitrary helpers; the clean-helper identity has an initialized input subspace.
+- The mixed-helper law uses known independent product preparations and a half diamond distance with their fixed inserted purifications. Exact physical helper marginal return in the construction is distinct from approximate joint/reference restoration and bus accuracy.
+- Compression is reversible and retains entropy-bearing qubits as occupied spectators. There is no measurement, reset, input-dependent control, or extra clean workspace.
+- The fixed-error theorem holds for all nonnegative helper counts, uniformly in the preparation bias at fixed error between zero and 0.1. Its constants may deteriorate in the zero-error limit. Full rank and correlated preparation have the separately stated consequences.
+- Entropy deficit is relative entropy to the maximally mixed state, not work or quadratic purity. The general converse does not imply entropy-only achievability for arbitrary helper spectra.
+- The one-design bound requires a common input-independent unitary. It does not bound every specially prepared state. High Choi fidelity is not a dimension-independent worst-case channel guarantee.
+- Contact count, contact time, and finite-control runtime are distinct. The displayed compiler's linear duration at fixed strength ratio is not a universal finite-speed impossibility theorem.
+- Nonaccumulation under ideal reuse concerns one invariant preparation sector. New synthesis and dynamical errors generally accumulate. Finite certificates evaluate proved bounds; they are not large-register circuit simulations or experimental data.
 
-## Learning and coaching
+## Shared learning and attribution
 
-John Watrous, *The Theory of Quantum Information* (2018), is the single educational anchor. Use `docs/learning.md` for sections, errata, and notation, and `docs/learning-bridges.md` for the project-specific examples. Research citations remain essential but are not extra prerequisite textbooks. Supply explanations in the conversation instead of assigning prerequisite cover-to-cover reading. Do not redistribute the linked manuscript.
+John Watrous, *The Theory of Quantum Information* (2018), remains the sole educational anchor. `learning/WATROUS_BRIDGE.md` owns its section pointers, errata, and notation. `learning/WORKED_EXAMPLES.md` supplies complete local examples. Primary research citations are not additional prerequisite courses.
 
-The canonical common map is `docs/milestones.md`: QRB-W18-30-v1, exactly 30 milestones, with 14 background and 16 narrative targets. It describes the project, not a learner's self-assessment. Adapt teaching inside milestones, not the count or targets. Keep attempts and progress out of the public scientific files.
+`learning/MILESTONES.md` is QRB-W18-30-v1: exactly 30 project-defined targets, with 14 background and 16 narrative milestones. Preserve their stable IDs, earlier dependencies, conceptual connections, and final synthesis. This public map contains no personal assessment procedure or learner state. Personal coaching instructions, answers, and progress remain outside the research repository; do not copy private guidance into public learning files or require readers to access a private source.
 
-Follow `docs/coaching.md` as the single protocol. Every round has Revise → Learn → Test. Each milestone starts with a two-question challenge; all answers in one attempt must be correct. After a failed challenge, give 1–3 targeted learning rounds with one-question tests and immediate feedback. Only failed challenges increase the next challenge size, capped at six. Challenge feedback follows the full-attempt rule. Prefer genuine answer-selection controls; ordinary links or expandable answer panels are not quiz submissions. Do not launch coaching during maintenance or infer passes from approval messages. Passing M01–M30 completes the conceptual tutorial, not independent proof review.
+Preserve the MIT license and exact purpose/contact paragraph. Add a foundational source to both `references/RELATED_WORK.md` and `references/references.bib`. Keep imported tools distinct from the contribution and numerical checks distinct from proof or independent review.
 
-## Attribution, presentation, and verification
+## Verification and display
 
-Credit conditional variance, entropy-fluctuation speed limits, Hamiltonian averaging, reversible compression, concentration inequalities, and prior routing/initialization work. Add foundational sources to both `docs/related-work.md` and `references.bib`. Keep journal-target judgments and development diaries out of reader-facing science. Preserve assumptions, proof domains, source provenance, and load-bearing limitations when removing redundancy.
+From the root, run `python check_repository.py`, `python verification/tools/test_structure.py`, and `python verification/run_all.py`. Scientific programs and pinned requirements are under `verification/`; detailed generated outputs go to the ignored `build/verification/`. Update tracked source provenance only from an executed run when paths or programs change. Preserve deterministic certificate bytes when the calculations are unchanged.
 
-Run `python check_repository.py`, `python tools/test_release_checks.py`, and `python verify.py`. The repository checker includes `tools/check_learning.py`, which validates the map, dependencies, source links, and learning entrypoints. Release checks also validate reading-page tables, equation tags, and tracked certificate integrity. The ten numerical suites remain separate. Replace tracked numerical results only after a relevant executed source change; furnishing alone does not justify new scientific provenance. Passing checks is not outside endorsement.
+Use protected GitHub inline mathematics and fenced `math` blocks. Preserve equation labels as ordinary `\qquad\text{(n)}` content, not legacy `\tag{n}` output that can produce unsupported native MathML rows. Keep table pipes unambiguous and starred subscripts explicitly braced. These are repository-hosting precautions, not universal TeX restrictions.
 
-For mathematical pages, prefer GitHub fenced math blocks and its backtick-protected inline math syntax, with blank lines around display blocks and no displays inside tables. Use supported upright commands such as `\mathrm{Tr}` and brace starred subscripts as `_{\ast}`. This repository's hosted checks exposed Markdown consumption of backslashes and a rejected `\operatorname` macro; local MathJax success alone is insufficient. These are hosting-specific precautions, not universal restrictions on TeX. The [official syntax](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions) describes protected forms.
-
-Inspect rendered README, learning pages, and representative math-heavy science pages for macro errors, missing subscripts, bra–ket rendering, and overflow. Use the separate `Inspect hosted mathematics` workflow to check actual GitHub at a pinned commit and retain screenshots. A local MathJax preview is local, not hosting verification. Report which checks actually ran; blocked access or unfinished rendering is not a pass.
+The separate hosted-render workflow reads the current immutable commit and checks root, science, learning, reference, and verification pages at desktop/mobile widths. Retain source hashes, diagnostics, and screenshots. Visually inspect representative pages; a parser-ready expression can still have broken layout. A local preview or a blocked request is not an actual-host pass. Do not broaden the checks into a claim of independent scientific validation.

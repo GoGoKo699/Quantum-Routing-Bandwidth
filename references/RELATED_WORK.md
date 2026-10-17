@@ -1,6 +1,6 @@
 # Related work and attribution
 
-The contribution is a matched full-register bandwidth characterization, including fixed-error independent mixed helpers, under a specified internal-control model. Existing results already connect initialization, collective interactions, and transfer speed. The source comparisons delimit the claim rather than certify the absence of all prior work. The [theorem map](theorem-map.md) identifies how these ingredients enter the central proof.
+The contribution is a matched full-register bandwidth characterization, including fixed-error independent mixed helpers, under a specified internal-control model. Existing results already connect initialization, collective interactions, and transfer speed. The source comparisons delimit the claim rather than certify the absence of all prior work. The [theorem map](../science/theorem-map.md) identifies how these ingredients enter the central proof.
 
 ## D26
 
@@ -8,7 +8,7 @@ D. Devulapalli, C. Yin, A. Y. Guo, E. Schoute, A. M. Childs, A. V. Gorshkov, and
 
 In the final published paper, Section V, Theorem 5, Equation (48), printed page 010310-13, bounds average entanglement with a minimum segment width, an additive term, and a small exponent loss. Section VI discusses restrictions on time dependence and internal terms. The matching square-root construction concerns free particles. Our direct conditional-rate proof permits arbitrary well-defined switching and internal control for pairwise qubit contacts. Its matching qubit construction uses filled, internally controllable modules, not a bare star with unavailable leaf-to-leaf gates.
 
-The final paper's own per-edge norm convention is explicit in Section II A. The different [normalizations analyzed here](accuracy-and-resources.md#6-what-changes-under-a-different-interaction-budget) prevent a per-edge result from being read as a fixed-total-strength advantage.
+The final paper's own per-edge norm convention is explicit in Section II A. The different [normalizations analyzed here](../science/accuracy-and-resources.md#6-what-changes-under-a-different-interaction-budget) prevent a per-edge result from being read as a fixed-total-strength advantage.
 
 ## UHMG26
 
@@ -18,13 +18,13 @@ Theorem 1 on page 3 relates exact robust-subspace transfer to commutator Schatte
 
 Applying a separate necessary commutator condition to each payload qubit gives simultaneous conditions, not an additive transfer-time requirement. An extensive throughput conclusion needs an additional aggregate information-flow argument; the $2n$-bit reference-assisted entropy requirement supplies that step here. This is not a proof that no alternative derivation from existing tools is possible.
 
-Neither initialization-assisted transfer, compression before transfer, nor the full-rank obstruction is a novelty claim. The distinct statement is the matched extensive fixed-error time on two bounded interfaces, with complete preparation-reference restoration accuracy and a same-hardware unknown-helper comparator. The [mixed-helper proof](mixed-helpers.md) addresses this model, not all power-law thermal transfer. The source's theorem and Outlook were checked directly; no unpublished version or private correspondence is relied on.
+Neither initialization-assisted transfer, compression before transfer, nor the full-rank obstruction is a novelty claim. The distinct statement is the matched extensive fixed-error time on two bounded interfaces, with complete preparation-reference restoration accuracy and a same-hardware unknown-helper comparator. The [mixed-helper proof](../science/mixed-helpers.md) addresses this model, not all power-law thermal transfer. The source's theorem and Outlook were checked directly; no unpublished version or private correspondence is relied on.
 
 ## DF19
 
 F. Dupuis and O. Fawzi, **Entropy accumulation with improved second-order term**, *IEEE Transactions on Information Theory* **65**(11), 7596–7612 (2019). [DOI](https://doi.org/10.1109/TIT.2019.2929564) · [arXiv:1805.11652v2](https://arxiv.org/abs/1805.11652v2).
 
-Corollary III.5 on page 6 bounds conditional entropy variance. Relabeling its small subsystem as the bus gives $V(C|A)\le\log_2^2(2d_C^2+1)$ independent of register/reference dimension. This published ingredient suffices for the bandwidth exponents. Its equation and definitions were checked, including the rendered corollary. The [elementary qubit alternative](entropy-flow.md#2-elementary-qubit-constant) improves a constant, not the general-dimensional variance theorem.
+Corollary III.5 on page 6 bounds conditional entropy variance. Relabeling its small subsystem as the bus gives $V(C|A)\le\log_2^2(2d_C^2+1)$ independent of register/reference dimension. This published ingredient suffices for the bandwidth exponents. Its equation and definitions were checked, including the rendered corollary. The [elementary qubit alternative](../science/entropy-flow.md#2-elementary-qubit-constant) improves a constant, not the general-dimensional variance theorem.
 
 ## GP22
 
@@ -48,7 +48,7 @@ Hamiltonian routing, initialized storage ancillas, and fast internal operations 
 
 G. Vidal and J. I. Cirac, **Optimal simulation of nonlocal Hamiltonians using local operations and classical communication**, *Physical Review A* **66**, 022315 (2002). [DOI](https://doi.org/10.1103/PhysRevA.66.022315) · [arXiv:quant-ph/0108076v2](https://arxiv.org/abs/quant-ph/0108076v2).
 
-Local-unitary Hamiltonian simulation, majorization, and local ancilla resources are established. The [trace-norm argument](control-models.md#5-optimal-gain-within-a-specified-averaging-class) proves optimal gain only inside a specified averaging class, not arbitrary optimal control of the router. Synchronized averaging exploits additive block structure; no new general averaging theorem is claimed.
+Local-unitary Hamiltonian simulation, majorization, and local ancilla resources are established. The [trace-norm argument](../science/control-models.md#5-optimal-gain-within-a-specified-averaging-class) proves optimal gain only inside a specified averaging class, not arbitrary optimal control of the router. Synchronized averaging exploits additive block structure; no new general averaging theorem is claimed.
 
 ## K07
 
@@ -60,7 +60,7 @@ Reversible three-bit majority compression and recursive small compression gates 
 
 L. J. Schulman and U. Vazirani, **Scalable NMR Quantum Computation**, [arXiv:quant-ph/9804060v1](https://arxiv.org/abs/quant-ph/9804060v1) (1998).
 
-Section 2 and Theorem 1 develop reversible polarization concentration without initially available clean workspace. This is the compression precedent for [Mixed helpers, Section 3](mixed-helpers.md#3-reversible-concentration-at-finite-error). We retain entropy-bearing qubits as occupied spectators and control the complete compression–route–decompression isometry. An efficient implementation result for another compression method is not silently transferred to our global encoding.
+Section 2 and Theorem 1 develop reversible polarization concentration without initially available clean workspace. This is the compression precedent for [Mixed helpers, Section 3](../science/mixed-helpers.md#3-reversible-concentration-at-finite-error). We retain entropy-bearing qubits as occupied spectators and control the complete compression–route–decompression isometry. An efficient implementation result for another compression method is not silently transferred to our global encoding.
 
 ## A07
 

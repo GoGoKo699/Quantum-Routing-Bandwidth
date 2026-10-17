@@ -1,15 +1,14 @@
 # Learning from Watrous to routing bandwidth
 
-**Educational anchor: John Watrous, *The Theory of Quantum Information* (Cambridge University Press, 2018).** This is the single textbook foundation. The primary papers in [Related work](related-work.md) remain research citations, not additional prerequisite courses.
+**Educational anchor: John Watrous, *The Theory of Quantum Information* (Cambridge University Press, 2018).** This is the single textbook foundation. The primary papers in [Related work](../references/RELATED_WORK.md) remain research citations, not additional prerequisite courses.
 
 | Purpose | Route |
 |---|---|
-| Understand the project as a whole | [30 milestones](milestones.md), from local objects to the full result |
-| Connect the textbook to the mechanism | [Three worked bridges](learning-bridges.md) |
-| Receive guided instruction | [Coaching protocol](coaching.md), following the same milestone map |
-| Read the research directly | [Theorem map](theorem-map.md) → linked canonical proofs |
+| Understand the project as a whole | [30 milestones](MILESTONES.md), from local objects to the full result |
+| Connect the textbook to the mechanism | [Three worked bridges](WORKED_EXAMPLES.md) |
+| Read the research directly | [Theorem map](../science/theorem-map.md) → linked canonical proofs |
 
-The map is project-defined, not a judgment about a learner's current knowledge. A tutor supplies explanations in the conversation; reading an entire chapter is not an admission requirement. Adapt the explanation, examples, and remediation, not the number of milestones. Learning the project's conceptual story is distinct from checking every specialist lemma.
+The map organizes the scientific dependencies for any reader. The selected sections provide a targeted route into the work; specialist details remain in the linked scientific proofs.
 
 ## Anchor and access
 
@@ -76,6 +75,6 @@ On the right $`D(\cdot\|\cdot)`$ is relative entropy; inside $`I/D`$, $`D`$ is t
 
 ## From foundations to the project
 
-The [worked bridges](learning-bridges.md) connect (i) references to the information-flow requirement, (ii) reversible rearrangement to spectator-preserving contact amplification, and (iii) compression to complete-operation preparation error. The [milestone map](milestones.md) integrates them with the theorem's boundaries and resource budgets. The [specialist map](theorem-map.md) retains the exact proof chain and primary attribution.
+The [worked bridges](WORKED_EXAMPLES.md) connect (i) references to the information-flow requirement, (ii) reversible rearrangement to spectator-preserving contact amplification, and (iii) compression to complete-operation preparation error. The [milestone map](MILESTONES.md) integrates them with the theorem's boundaries and resource budgets. The [specialist map](../science/theorem-map.md) retains the exact proof chain and primary attribution.
 
-Progress and attempted answers belong to the learner's session, not these public source files. Merely reading or opening this guide does not pass a milestone.
+The [physical interpretation](../science/interpretation.md) combines the three bridges into the resource comparison. The proofs, rather than these examples, establish the universal statements.
