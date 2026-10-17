@@ -1,6 +1,6 @@
 # Quantum Routing Bandwidth
 
-**How much reusable initialization increases the amount of unknown quantum information that can pass through a one-qubit interface?** Two internally controllable modules exchange complete registers through a shared bus. Occupied qubits can assist a selected contact without losing their data; independently polarized helpers provide a further improvement even when their preparation is imperfect.
+**How much does reusable initialization increase the amount of unknown quantum information that can pass through a one-qubit interface?** Two internally controllable modules exchange complete registers through a shared bus. Occupied qubits can assist a selected contact without losing their data; independently polarized helpers provide a further improvement even when their preparation is imperfect.
 
 Each module has $`n\ge1`$ payload qubits and $`s\ge0`$ helpers. Both module–bus interfaces are bounded: every pairwise contact has operator norm at most $`J`$, and contacts may operate simultaneously. Internal module operations and bus-only rotations have zero charged duration. There are no measurements, resets, or extra initialized qubits.
 

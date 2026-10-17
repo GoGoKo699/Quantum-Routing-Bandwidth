@@ -12,7 +12,8 @@ import sys
 import tempfile
 import time
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
+CHECKS = ROOT/'verification'/'checks'
 SUITES = (
     ('verify_workspace_construction.py', 'verify_workspace_construction.json'),
     ('verify_entropy_budget.py', 'verify_entropy_budget.json'),
@@ -33,19 +34,19 @@ def main() -> None:
     if not __debug__ or os.environ.get('PYTHONOPTIMIZE'):
         parser.error('Assertions are part of verification; do not enable Python optimization.')
     output = args.output.resolve()
-    if output == ROOT or output == ROOT/'checks':
+    if output == ROOT or output == CHECKS:
         parser.error('Use a dedicated output directory.')
     output.mkdir(parents=True, exist_ok=True)
     env = dict(os.environ, OPENBLAS_NUM_THREADS='1', OMP_NUM_THREADS='1', MKL_NUM_THREADS='1')
     report = {'scope': 'Deterministic numerical consistency checks; not independent proof review or hardware data.',
               'python': platform.python_version(), 'platform': platform.platform(), 'suites': [],
               'source_sha256': {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
-                                for p in sorted((ROOT/'checks').glob('*.py'))}}
+                                for p in sorted((CHECKS).glob('*.py'))}}
     for package in ('numpy', 'scipy'):
         report[package] = __import__(package).__version__
     with tempfile.TemporaryDirectory(prefix='qrb-checks-') as temporary:
         work = Path(temporary)
-        for p in (ROOT/'checks').glob('*.py'):
+        for p in (CHECKS).glob('*.py'):
             shutil.copy2(p, work/p.name)
         for script, filename in SUITES:
             print(f'Running {script}', flush=True)

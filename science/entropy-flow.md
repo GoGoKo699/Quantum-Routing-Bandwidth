@@ -17,7 +17,7 @@ up to the irrelevant sign convention for the commutator. Since rho commutes with
 \le 2\sqrt{V(B|A)_\rho}\,\Delta_\rho h.
 ```
 
-Using [DF19](related-work.md#df19), Corollary III.5, yields
+Using [DF19](../references/RELATED_WORK.md#df19), Corollary III.5, yields
 
 ```math
 \boxed{|\dot S_A|\le
@@ -122,7 +122,7 @@ The same theorem follows using published bound (1) with c_0 replaced by c_DF. In
 \qquad\text{(5)}
 ```
 
-For uniform contacts, this is at most c_0 J |C| sqrt(|L|) T. There is no additive constant, factor n^delta, minimum segment length, or derivative condition. Compare the restricted-time-dependence average-input bound of [D26](related-work.md#d26).
+For uniform contacts, this is at most c_0 J |C| sqrt(|L|) T. There is no additive constant, factor n^delta, minimum segment length, or derivative condition. Compare the restricted-time-dependence average-input bound of [D26](../references/RELATED_WORK.md#d26).
 
 This is not an input-uniform O(sqrt n) rate bound. For example, a GHZ logical qubit in the leaves under Z_C sum_j Z_j can have instantaneous entropy rate proportional to nJ. The proof neither assumes nor implies S(average rho)=average S(rho). It uses the linearity of the second moment and concavity of the square root. It also fails if the control schedule is selected using the unknown input's classical label: then the average evolved state need not stay maximally mixed.
 

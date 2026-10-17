@@ -1,12 +1,12 @@
 {
   "scope": "Deterministic numerical consistency checks; not independent proof review or hardware data.",
-  "python": "3.13.5",
-  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "python": "3.13.16",
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
   "suites": [
     {
       "script": "verify_workspace_construction.py",
-      "elapsed_seconds": 1.23,
-      "output_sha256": "1732f227f519b6f47eccfee696b9a8ffbc8c59e589acd9af8d97c72a620706f1",
+      "elapsed_seconds": 0.963,
+      "output_sha256": "bcf2d5dea4711dd1d3da5c41b91fee2ae77fb0cf4a9056cacf3fbdc059e83b41",
       "summary": {
         "model": "Free internal controls, J=1 per contact, s initialized helpers per module, arbitrary bus",
         "all_passed": true,
@@ -14,8 +14,8 @@
         "gate_count": 12,
         "route_count": 8,
         "scaling_count": 16,
-        "max_swap_isometry_error": 1.3071221847431714e-15,
-        "max_route_isometry_error": 8.99933488754697e-15,
+        "max_swap_isometry_error": 1.3063632377895411e-15,
+        "max_route_isometry_error": 8.858715569395616e-15,
         "largest_route": {
           "n": 3,
           "s": 2,
@@ -23,7 +23,7 @@
           "input_columns": 128,
           "bus_swaps": 7,
           "time": 5.497787143782138,
-          "isometry_operator_error": 5.5857234926833385e-15,
+          "isometry_operator_error": 5.59366902760566e-15,
           "full_data_and_bus_process_fidelity": 0.9999999999999905,
           "helpers_returned": true
         }
@@ -31,8 +31,8 @@
     },
     {
       "script": "verify_entropy_budget.py",
-      "elapsed_seconds": 1.359,
-      "output_sha256": "c3353e0598cce58e22ad2a65423ebece6bb07073b5ca18794fb8b505f8002098",
+      "elapsed_seconds": 1.689,
+      "output_sha256": "73d6a7a7b571d704f2c7c91c7279c3db8ea65365ef1d54a6421d4eaab3936477",
       "summary": {
         "seed": 2026101607,
         "group_scaling_tests": 16512,
@@ -43,7 +43,7 @@
           "scalar_mgfs": 54,
           "balanced_partitions": 16512,
           "min_operator_square_difference_eigenvalue": 0.0,
-          "max_conditional_rate_ratio": 0.20993163216153346,
+          "max_conditional_rate_ratio": 0.2099316321615335,
           "all_passed": true
         },
         "gibbs_tests_count": 120,
@@ -54,16 +54,16 @@
     },
     {
       "script": "audit_conditional_rate.py",
-      "elapsed_seconds": 0.945,
-      "output_sha256": "5aa826199704fad562539b276d5a9526c9249a8fed329738e84fff8c11687c5a",
+      "elapsed_seconds": 0.422,
+      "output_sha256": "fd209cd43acf84c7fb8af2a5afc0c0ca905a355124c4e8c8f0a517a0e9597fe8",
       "summary": {
         "all_assertions_passed": true,
         "states_tested": 204,
         "qubit_bus_states_tested": 114,
-        "max_qubit_bus_optimized_rate_nats": 1.6151941802831211,
-        "max_ratio_to_elementary_bound": 0.5710573789056209,
-        "max_spectral_formula_residual": 3.419486915845482e-14,
-        "max_dual_optimum_residual": 1.887379141862766e-15,
+        "max_qubit_bus_optimized_rate_nats": 1.6151941802831218,
+        "max_ratio_to_elementary_bound": 0.5710573789056211,
+        "max_spectral_formula_residual": 7.238654120556021e-14,
+        "max_dual_optimum_residual": 1.9984014443252818e-15,
         "scope": "For every sampled state, optimize over all Hermitian h with Tr(rho h^2)=1. Not a global state optimization.",
         "seed": 2026101601,
         "cases_count": 204
@@ -71,15 +71,15 @@
     },
     {
       "script": "audit_ensemble_cut.py",
-      "elapsed_seconds": 1.225,
-      "output_sha256": "f964a263505649b72ef5ea5ba827de56cef7e8a49f09dd0111f0969a705f651d",
+      "elapsed_seconds": 0.922,
+      "output_sha256": "ff82a5c9d1a0593ab6cf6492796f52ad7cef06df3d1aa449ebb4ff0db100e218",
       "summary": {
         "all_assertions_passed": true,
         "segments": 18,
         "pure_states_checked": 1152,
-        "maximum_finite_difference_residual": 1.554406963227839e-06,
-        "maximum_flat_moment_residual": 6.661338147750939e-16,
-        "maximum_observed_bound_ratio": 0.08755567546472029,
+        "maximum_finite_difference_residual": 1.7497813687532282e-06,
+        "maximum_flat_moment_residual": 7.771561172376096e-16,
+        "maximum_observed_bound_ratio": 0.08755567546472015,
         "selected_GHZ_state": {
           "n": 64,
           "p": 0.1,
@@ -94,7 +94,7 @@
     },
     {
       "script": "audit_translation_approximation.py",
-      "elapsed_seconds": 0.694,
+      "elapsed_seconds": 0.132,
       "output_sha256": "9de84e02911247a9ab54a736d0a98c5562396ac8e839ed823703262af94b26c5",
       "summary": {
         "all_assertions_passed": true,
@@ -110,7 +110,7 @@
     },
     {
       "script": "recursive_three.py",
-      "elapsed_seconds": 0.682,
+      "elapsed_seconds": 0.099,
       "output_sha256": "4000ad570b792060da3a22050aef5cfd4e524ad056237aefb60268ce688629de",
       "summary": {
         "all_passed": true,
@@ -121,7 +121,7 @@
     },
     {
       "script": "verify_finite_control.py",
-      "elapsed_seconds": 0.793,
+      "elapsed_seconds": 0.28,
       "output_sha256": "f664a6fea3ef22ff7b2f415474330578f97a4fd3593820d1fef5618c5ee1ded2",
       "summary": {
         "all_passed": true,
@@ -140,23 +140,23 @@
     },
     {
       "script": "verify_full_nine.py",
-      "elapsed_seconds": 2.956,
-      "output_sha256": "479dffb9c24d659344c2b34c36b9afa35a594a73b8d452ae62f6b3af4c06a01e",
+      "elapsed_seconds": 3.579,
+      "output_sha256": "c0e58ab769999a61849d242bc163452dcd5637e1d395490c6320930b375e3d36",
       "summary": {
         "data_qubits": 9,
         "bus_qubits": 1,
         "full_input_columns": 1024,
         "explicit_two_qubit_control_gates": 390,
-        "operator_error_upper_bound_by_unnormalized_Frobenius": 6.639096555949766e-15,
-        "maximum_entry_error": 3.510833468576701e-16,
-        "runtime_seconds": 2.3003544910000073,
+        "operator_error_upper_bound_by_unnormalized_Frobenius": 8.273281641021161e-15,
+        "maximum_entry_error": 8.326672684688674e-16,
+        "runtime_seconds": 3.474018029,
         "all_passed": true
       }
     },
     {
       "script": "verify_mixed_helpers.py",
-      "elapsed_seconds": 2.118,
-      "output_sha256": "b9043d5748f4b025c0cb5d127543e599891b2b5184cbe5af576091fcfffcf1d5",
+      "elapsed_seconds": 2.202,
+      "output_sha256": "264dfc2e5e5e1770950242c2629f2d6c72be8e666598383ea45f963c4f2a439a",
       "summary": {
         "all_passed": true,
         "scope": "Analytical spectral sums and full helper-block operator checks; not physical noise simulation or independent proof review.",
@@ -166,14 +166,14 @@
         "complete_routes_count": 6,
         "finite_examples_count": 9,
         "same_entropy_counterexamples_count": 3,
-        "max_good_subspace_error": 9.154722157333965e-15,
+        "max_good_subspace_error": 9.119947107586788e-15,
         "max_helper_block_leakage": 0.0
       }
     },
     {
       "script": "verify_scientific_closure.py",
-      "elapsed_seconds": 1.57,
-      "output_sha256": "1069745656f8c44f6d30b12457df83babd566e9d7fcdc73124939af12e136d3e",
+      "elapsed_seconds": 1.141,
+      "output_sha256": "ce3cecc0796037897ae0855c0fb11362e50df58aab7d45c1f22f9f1aa4e51f1c",
       "summary": {
         "all_passed": true,
         "scope": "Exact rational spectral certification, finite operator checks and analytical timing bounds; no external review or hardware performance claim.",
@@ -187,17 +187,17 @@
     }
   ],
   "source_sha256": {
-    "checks/audit_conditional_rate.py": "e855c858fd9074c0565d3b51e6a8fc1177e31b2ee737e5fd3e3619c155c953e7",
-    "checks/audit_ensemble_cut.py": "cc562292fb567f23285e622d930b5a382996a6128e9bf6f612d14b7c568cadd5",
-    "checks/audit_translation_approximation.py": "9eecaf60ef95dd145020bb4bf7b6256d1b85748ddd98f0c5c5b4951cedf828aa",
-    "checks/finite_control.py": "d2dd789a8172b3fbd1b1fb7641e0fcdd5a87fe5b182992a3a984a5e16a550226",
-    "checks/recursive_three.py": "f4577aca7fad831b5e3628c662a13d0c75caec6759a10effec4f68143e180149",
-    "checks/verify_entropy_budget.py": "6e6d514c73822f88f8c34f1ffa7d797d616b6706ac353492a625fbd8b80db7a5",
-    "checks/verify_finite_control.py": "a51ecda7a4433bab18931ece1932e7fa6274c49bc4b6c02e1e4b6a9bf2806642",
-    "checks/verify_full_nine.py": "5921e758407b8ca5e10329b9b5136853aa4f4b7a354f660a800cb0cde341c362",
-    "checks/verify_mixed_helpers.py": "106277889eeacc211804b4a233e32d35aa7a9aa768d9adc480ed2f892a5e31a1",
-    "checks/verify_scientific_closure.py": "7836c6a751d9a07eb9462ce9d5eea12a979f47b60b7035fca7923de8923bc4d9",
-    "checks/verify_workspace_construction.py": "7553585f54782505ec513df840c1ed6d8b3a1c359dc6b8bfa239ce6b120c3698"
+    "verification/checks/audit_conditional_rate.py": "e855c858fd9074c0565d3b51e6a8fc1177e31b2ee737e5fd3e3619c155c953e7",
+    "verification/checks/audit_ensemble_cut.py": "cc562292fb567f23285e622d930b5a382996a6128e9bf6f612d14b7c568cadd5",
+    "verification/checks/audit_translation_approximation.py": "9eecaf60ef95dd145020bb4bf7b6256d1b85748ddd98f0c5c5b4951cedf828aa",
+    "verification/checks/finite_control.py": "d2dd789a8172b3fbd1b1fb7641e0fcdd5a87fe5b182992a3a984a5e16a550226",
+    "verification/checks/recursive_three.py": "f4577aca7fad831b5e3628c662a13d0c75caec6759a10effec4f68143e180149",
+    "verification/checks/verify_entropy_budget.py": "ea88ff42d5afe902432befb66a79fd0c1cd921ccee6b8b00cc9a80ef8d5110ea",
+    "verification/checks/verify_finite_control.py": "a51ecda7a4433bab18931ece1932e7fa6274c49bc4b6c02e1e4b6a9bf2806642",
+    "verification/checks/verify_full_nine.py": "5921e758407b8ca5e10329b9b5136853aa4f4b7a354f660a800cb0cde341c362",
+    "verification/checks/verify_mixed_helpers.py": "106277889eeacc211804b4a233e32d35aa7a9aa768d9adc480ed2f892a5e31a1",
+    "verification/checks/verify_scientific_closure.py": "7836c6a751d9a07eb9462ce9d5eea12a979f47b60b7035fca7923de8923bc4d9",
+    "verification/checks/verify_workspace_construction.py": "7553585f54782505ec513df840c1ed6d8b3a1c359dc6b8bfa239ce6b120c3698"
   },
   "numpy": "2.3.5",
   "scipy": "1.17.0",

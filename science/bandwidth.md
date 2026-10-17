@@ -138,7 +138,7 @@ Only the physical part of A is acted on by h; hence its second moment is the sam
 
 ### 3.1 Published foundation and attribution
 
-Dupuis and Fawzi [DF19](related-work.md#df19), Corollary III.5, established
+Dupuis and Fawzi [DF19](../references/RELATED_WORK.md#df19), Corollary III.5, established
 
 ```math
 V(C|A)_\rho\le\log_2^2(2d_C^2+1).
@@ -156,7 +156,7 @@ This published-lemma route gives the same n,s exponents with a different numeric
 
 For the smaller constant c_0, the elementary argument in [Entropy flow](entropy-flow.md) uses rho_AC <= d_C(rho_A tensor I_C). In the spectral-overlap distribution of rho and sigma=rho_A tensor I_C, X=ln r_i-ln s_j satisfies E exp(X)<=d_C and E exp(-X)<=d_C. The scalar inequality X^2<=exp(X)+exp(-X)-2 then yields Tr rho(ln rho-ln sigma)^2<=2(d_C-1). At d_C=2 the commutator estimate gives (11). Noncommuting logarithms are handled through the overlap distribution, not by assuming simultaneous diagonalizability. For singular rho, off-support contributions of log sigma must not be discarded before squaring; the support treatment is given in [Entropy flow](entropy-flow.md).
 
-Conditional-variance and entropy-fluctuation ingredients have prior precedents [DF19](related-work.md#df19), [GP22](related-work.md#gp22). Their role here is the combination with (10), the specified physical initialization budget, and a matching routing construction.
+Conditional-variance and entropy-fluctuation ingredients have prior precedents [DF19](../references/RELATED_WORK.md#df19), [GP22](../references/RELATED_WORK.md#gp22). Their role here is the combination with (10), the specified physical initialization budget, and a matching routing construction.
 
 ### 3.2 Entropy-deficit cut rate
 

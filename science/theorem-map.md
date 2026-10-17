@@ -58,7 +58,7 @@ For a register/reference subsystem $`A`$ and a qubit bus $`C`$, the contact cont
 |\dot S_A|\le c\sqrt{\mathrm{Tr}(\omega H_{\mathrm{int}}^2)}.
 ```
 
-A published conditional-variance inequality, [DF19, Corollary III.5](related-work.md#df19), suffices with $`c=2\log_2 9`$. The [elementary qubit argument](entropy-flow.md#2-elementary-qubit-constant) improves the constant to $`2\sqrt2/\ln2`$ without changing the scaling. The two routes are alternatives, not successive assumptions. The conditional logarithms need not commute, and the support treatment matters for reference tests. See [Entropy flow, Sections 1–3](entropy-flow.md#1-published-conditional-variance-bound).
+A published conditional-variance inequality, [DF19, Corollary III.5](../references/RELATED_WORK.md#df19), suffices with $`c=2\log_2 9`$. The [elementary qubit argument](entropy-flow.md#2-elementary-qubit-constant) improves the constant to $`2\sqrt2/\ln2`$ without changing the scaling. The two routes are alternatives, not successive assumptions. The conditional logarithms need not commute, and the support treatment matters for reference tests. See [Entropy flow, Sections 1–3](entropy-flow.md#1-published-conditional-variance-bound).
 
 ### L2. Geometry and conserved initialization budget
 
@@ -95,7 +95,7 @@ A fixed helper-basis permutation puts probability at least $`1-\delta`$ into a z
 r+1\ge c_\delta[1+s\,d(p)].
 ```
 
-The remaining entropy stays in the other helper qubits. Reversible polarization concentration is established prior machinery [SV98](related-work.md#sv98); no measurement or purity creation is being asserted. See [Mixed helpers, Section 3](mixed-helpers.md#3-reversible-concentration-at-finite-error).
+The remaining entropy stays in the other helper qubits. Reversible polarization concentration is established prior machinery [SV98](../references/RELATED_WORK.md#sv98); no measurement or purity creation is being asserted. See [Mixed helpers, Section 3](mixed-helpers.md#3-reversible-concentration-at-finite-error).
 
 ### U2. Use occupied spectators and compressed leaders
 
@@ -115,7 +115,7 @@ This is not a per-gate error estimate. Exact helper marginal return follows from
 
 ## 5. Boundaries that belong beside the main result
 
-**Exact versus approximate.** For $`0\lt p\le1/2`$, full rank and exact preparation-reference return force the full unknown-helper operation. Thus the exact law has no polarization enhancement. This obstruction is already identified in the Outlook of [UHMG26](related-work.md#uhmg26); A is a matched fixed-error answer in the present architecture.
+**Exact versus approximate.** For $`0\lt p\le1/2`$, full rank and exact preparation-reference return force the full unknown-helper operation. Thus the exact law has no polarization enhancement. This obstruction is already identified in the Outlook of [UHMG26](../references/RELATED_WORK.md#uhmg26); A is a matched fixed-error answer in the present architecture.
 
 **Entropy versus spectral concentration.** A correlated helper state $`(1-a)I/2^s+a|0^s\rangle\langle0^s|`$ can have extensive entropy deficit while retaining a substantial maximally mixed component. At small fixed error it obeys the unknown-helper routing scale. The converse is entropy-based, but its saturation requires more than entropy alone. See [Mixed helpers, Section 7](mixed-helpers.md#7-why-the-product-state-assumption-cannot-be-dropped).
 
@@ -127,13 +127,13 @@ This is not a per-gate error estimate. Exact helper marginal return follows from
 
 A focused technical reading can proceed from the [main task](mixed-helpers.md#1-task-and-matching-law), through L1–L3 and U1–U3, to the scope boundaries above. The potentially consequential proof checks are the noncommuting conditional-log estimate, the removal of local terms without an invalid norm claim, the payload-sized continuity argument, and the one common good-sector phase needed for complete reference preservation. Every dependency has a canonical proof location rather than a separate duplicate derivation here.
 
-For the originality comparison, [D26](related-work.md#d26) supplies the closest restricted-time bottleneck bound; [UHMG26](related-work.md#uhmg26) supplies the robustness–commutator framework, including multiple payload qubits. Merely invoking compression or changing architecture is not the claimed contribution. The additional statement is the matched extensive throughput law with fixed complete-operation error and returned preparation resources.
+For the originality comparison, [D26](../references/RELATED_WORK.md#d26) supplies the closest restricted-time bottleneck bound; [UHMG26](../references/RELATED_WORK.md#uhmg26) supplies the robustness–commutator framework, including multiple payload qubits. Merely invoking compression or changing architecture is not the claimed contribution. The additional statement is the matched extensive throughput law with fixed complete-operation error and returned preparation resources.
 
-The [verification guide](verification.md) maps those proofs to ten deterministic suites. Passing tests and source hashes establish reproducibility of the finite checks, not outside scientific endorsement. No external technical assessment is recorded by this map.
+The [verification guide](../verification/README.md) maps those proofs to ten deterministic suites. Passing tests and source hashes establish reproducibility of the finite checks, not outside scientific endorsement. No external technical assessment is recorded by this map.
 
-## 7. Exposition structure
+## 7. Physical synthesis
 
-A compact presentation can lead with the physical question and Theorem A, explain L1–L3 as the information-flow mechanism, and show U1–U3 as the matching realization. Result B fixes the exact endpoints. Result C explains why exact and approximate initialization differ and why general helper entropy is not a complete operational invariant. Keep the weighted-interface statement, support details, spectral certificates, and finite-control compilation available as supporting material rather than competing main stories.
+The [interpretation](interpretation.md) connects the interface geometry, reusable initialization, and complete-operation error to the exact endpoints and resource-budget comparisons. It separates achievable bandwidth from finite-control runtime.
 
 ## 8. Quantitative accuracy and resource guarantees
 
